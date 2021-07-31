@@ -9,7 +9,7 @@ namespace PerfectSound.Database
     {
         public Person()
         {
-            SongAndPodcastPeople = new HashSet<SongAndPodcastPerson>();
+            SongAndPodcastPerson = new HashSet<SongAndPodcastPerson>();
         }
 
         public int PersonId { get; set; }
@@ -23,6 +23,6 @@ namespace PerfectSound.Database
         public int? GenderId { get; set; }
 
         public virtual Gender Gender { get; set; }
-        public virtual ICollection<SongAndPodcastPerson> SongAndPodcastPeople { get; set; }
+        public virtual ICollection<SongAndPodcastPerson> SongAndPodcastPerson { get; set; }
     }
 }

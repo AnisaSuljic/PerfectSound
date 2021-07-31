@@ -14,7 +14,7 @@ namespace PerfectSound.Database
             Quotes = new HashSet<Quote>();
             Ratings = new HashSet<Rating>();
             SongAndPodcastGenres = new HashSet<SongAndPodcastGenre>();
-            SongAndPodcastPeople = new HashSet<SongAndPodcastPerson>();
+            SongAndPodcastPerson = new HashSet<SongAndPodcastPerson>();
         }
 
         public int SongAndPodcastId { get; set; }
@@ -33,6 +33,6 @@ namespace PerfectSound.Database
         public virtual ICollection<Quote> Quotes { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }
         public virtual ICollection<SongAndPodcastGenre> SongAndPodcastGenres { get; set; }
-        public virtual ICollection<SongAndPodcastPerson> SongAndPodcastPeople { get; set; }
+        public virtual ICollection<SongAndPodcastPerson> SongAndPodcastPerson { get; set; }
     }
 }

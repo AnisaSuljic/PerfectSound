@@ -9,12 +9,12 @@ namespace PerfectSound.Database
     {
         public Gender()
         {
-            People = new HashSet<Person>();
+            Person = new HashSet<Person>();
         }
 
         public int GenderId { get; set; }
         public string GenderName { get; set; }
 
-        public virtual ICollection<Person> People { get; set; }
+        public virtual ICollection<Person> Person { get; set; }
     }
 }

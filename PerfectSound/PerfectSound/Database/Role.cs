@@ -9,12 +9,12 @@ namespace PerfectSound.Database
     {
         public Role()
         {
-            SongAndPodcastPeople = new HashSet<SongAndPodcastPerson>();
+            SongAndPodcastPerson = new HashSet<SongAndPodcastPerson>();
         }
 
         public int RoleId { get; set; }
         public string RoleName { get; set; }
 
-        public virtual ICollection<SongAndPodcastPerson> SongAndPodcastPeople { get; set; }
+        public virtual ICollection<SongAndPodcastPerson> SongAndPodcastPerson { get; set; }
     }
 }

@@ -19,8 +19,5 @@
    * Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
 
 -Database diagram
-![Diagram](./PerfectSoundSQL Database/Database Diagram.png)
 
-
-
-
+![DatabaseDiagram](https://user-images.githubusercontent.com/62303675/127744429-606246cf-d183-4b08-ac4e-363453408532.JPG)

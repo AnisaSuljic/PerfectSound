@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PerfectSound.WinUI")]
+[assembly: AssemblyTitle("PerfectSound.WinForms")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PerfectSound.WinUI")]
+[assembly: AssemblyProduct("PerfectSound.WinForms")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c728c694-f9cf-4a5d-8632-a238cc78492d")]
+[assembly: Guid("5d2b778e-768d-4608-826d-5bcc3e6b530a")]
 
 // Version information for an assembly consists of the following four values:
 //

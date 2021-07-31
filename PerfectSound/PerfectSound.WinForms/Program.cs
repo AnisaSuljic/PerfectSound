@@ -1,10 +1,11 @@
-﻿using System;
+﻿using PerfectSound.WinForms.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PerfectSound.WinUI
+namespace PerfectSound.WinForms
 {
     static class Program
     {
@@ -16,7 +17,7 @@ namespace PerfectSound.WinUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new SongAndPodcastAdd());
         }
     }
 }

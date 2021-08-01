@@ -17,7 +17,7 @@ namespace PerfectSound.WinForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SongAndPodcastAdd());
+            Application.Run(new frmHome());
         }
     }
 }

@@ -59,16 +59,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIService.cs" />
-    <Compile Include="Forms\SongAndPodcastAdd.cs">
+    <Compile Include="Forms\frmIndexHome.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SongAndPodcastAdd.Designer.cs">
-      <DependentUpon>SongAndPodcastAdd.cs</DependentUpon>
+    <Compile Include="Forms\frmIndexHome.Designer.cs">
+      <DependentUpon>frmIndexHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmSongAndPodcastAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSongAndPodcastAdd.Designer.cs">
+      <DependentUpon>frmSongAndPodcastAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmHome.Designer.cs">
+      <DependentUpon>frmHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ErrorHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\SongAndPodcastAdd.resx">
-      <DependentUpon>SongAndPodcastAdd.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmIndexHome.resx">
+      <DependentUpon>frmIndexHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSongAndPodcastAdd.resx">
+      <DependentUpon>frmSongAndPodcastAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmHome.resx">
+      <DependentUpon>frmHome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,6 +119,8 @@
       <Name>PerfectSound.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Logo1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

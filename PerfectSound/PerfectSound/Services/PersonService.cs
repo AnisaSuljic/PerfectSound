@@ -16,7 +16,7 @@ namespace PerfectSound.Services
         }
         public override List<Person> Get(PersonSearchRequest search)
         {
-           var _searchSet = _context.Person.AsQueryable();
+           var _searchSet = _context.People.AsQueryable();
 
             if(!string.IsNullOrWhiteSpace(search.FirstName))
             {

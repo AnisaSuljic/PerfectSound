@@ -14,5 +14,8 @@ namespace PerfectSound.Model.Requests.SongAndPodcast
         public decimal? Budget { get; set; }
         public byte[] Poster { get; set; }
         public int? ProductionCompanyId { get; set; }
+        public bool? IsPodcast { get; set; }
+        public List<int> GenreIDList { get; set; } = new List<int>();
+
     }
 }

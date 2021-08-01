@@ -16,7 +16,7 @@ namespace PerfectSound.Services
         }
         public override List<SongAndPodcastPerson> Get(SongAndPodcastPersonSearchRequest search)
         {
-            var _searchSet = _context.SongAndPodcastPerson.AsQueryable();
+            var _searchSet = _context.SongAndPodcastPeople.AsQueryable();
 
             if (search?.PersonId!=null && search.PersonId != 0)
             {

@@ -21,7 +21,7 @@ namespace PerfectSound.Database
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<News> News { get; set; }
-        public virtual DbSet<Person> Person { get; set; }
+        public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<PodcastSeason> PodcastSeasons { get; set; }
         public virtual DbSet<PodcastSeasonEpisode> PodcastSeasonEpisodes { get; set; }
         public virtual DbSet<ProductionCompany> ProductionCompanies { get; set; }
@@ -30,7 +30,7 @@ namespace PerfectSound.Database
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<SongAndPodcast> SongAndPodcasts { get; set; }
         public virtual DbSet<SongAndPodcastGenre> SongAndPodcastGenres { get; set; }
-        public virtual DbSet<SongAndPodcastPerson> SongAndPodcastPerson { get; set; }
+        public virtual DbSet<SongAndPodcastPerson> SongAndPodcastPeople { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
 
@@ -103,7 +103,7 @@ namespace PerfectSound.Database
                 entity.Property(e => e.GenderId).HasColumnName("GenderID");
 
                 entity.HasOne(d => d.Gender)
-                    .WithMany(p => p.Person)
+                    .WithMany(p => p.People)
                     .HasForeignKey(d => d.GenderId)
                     .HasConstraintName("Person_Gender");
             });
@@ -193,8 +193,6 @@ namespace PerfectSound.Database
 
                 entity.Property(e => e.Budget).HasColumnType("money");
 
-                entity.Property(e => e.Poster).HasMaxLength(1);
-
                 entity.Property(e => e.ProductionCompanyId).HasColumnName("ProductionCompanyID");
 
                 entity.HasOne(d => d.ProductionCompany)
@@ -237,17 +235,17 @@ namespace PerfectSound.Database
                 entity.Property(e => e.SongAndPodcastId).HasColumnName("SongAndPodcastID");
 
                 entity.HasOne(d => d.Person)
-                    .WithMany(p => p.SongAndPodcastPerson)
+                    .WithMany(p => p.SongAndPodcastPeople)
                     .HasForeignKey(d => d.PersonId)
                     .HasConstraintName("SongAndPodcastPerson_Person");
 
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.SongAndPodcastPerson)
+                    .WithMany(p => p.SongAndPodcastPeople)
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("SongAndPodcastPerson_Role");
 
                 entity.HasOne(d => d.SongAndPodcast)
-                    .WithMany(p => p.SongAndPodcastPerson)
+                    .WithMany(p => p.SongAndPodcastPeople)
                     .HasForeignKey(d => d.SongAndPodcastId)
                     .HasConstraintName("SongAndPodcastPerson_SongAndPodcast");
             });

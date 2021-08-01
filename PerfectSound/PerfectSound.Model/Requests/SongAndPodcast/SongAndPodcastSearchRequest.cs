@@ -8,6 +8,7 @@ namespace PerfectSound.Model.Requests.SongAndPodcast
     {
         public string Title { get; set; }
         public int GenreId { get; set; }
+        public bool? IsPodcast { get; set; }
 
         public DateTime? ReleaseDate { get; set; }
 

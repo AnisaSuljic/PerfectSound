@@ -18,28 +18,22 @@ namespace PerfectSound.Services
         {
 
         }
-        //public override List<Quote> Get(object search=null)
+
+        //public Quote GetRandom()
         //{
-        //    var list = _context.Set<Database.Quote>().ToList();
-
-        //    return _mapper.Map<List<Quote>>(list);
+        //    return GenerateRandomQuote();
         //}
+        //public Quote GenerateRandomQuote()
+        //{
+        //    List<Database.Quote> list = _context.Quotes.Include(x => x.SongAndPodcast).ToList();
+        //    int[] listOfIds = list.Select(x => x.QuoteId).ToArray();
 
-        public Quote GetRandom()
-        {
-            return GenerateRandomQuote();
-        }
-        public Quote GenerateRandomQuote()
-        {
-            List<Database.Quote> list = _context.Quotes.Include(x => x.SongAndPodcast).ToList();
-            int[] listOfIds = list.Select(x => x.QuoteId).ToArray();
+        //    Random random = new Random();
+        //    int position = random.Next(0, listOfIds.Count());
 
-            Random random = new Random();
-            int position = random.Next(0, listOfIds.Count());
+        //    _quoteOfTheDay = _mapper.Map<Quote>(list[position]);
 
-            _quoteOfTheDay = _mapper.Map<Quote>(list[position]);
-
-            return _quoteOfTheDay;
-        }
+        //    return _quoteOfTheDay;
+        //}
     }
 }

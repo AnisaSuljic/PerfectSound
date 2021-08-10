@@ -13,7 +13,7 @@ namespace PerfectSound.Model.Model
         public string Biography { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string PlaceOfBirth { get; set; }
-        public string DateOfDeath { get; set; }
+        public DateTime? DateOfDeath { get; set; }
         public int? GenderId { get; set; }
     }
 }

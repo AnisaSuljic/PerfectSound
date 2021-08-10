@@ -19,22 +19,26 @@ namespace PerfectSound.WinForms.Forms
         APIService _GenreService = new APIService("Genre");
         APIService _ProductionCompanyService = new APIService("ProductionCompany");
         APIService _SongAndPodcastService = new APIService("SongAndPodcast");
+        APIService _SongPodcastGenreService = new APIService("SongAndPodcastGenre");
 
-        SongAndPodcastUpsertRequest _upsertRequest=new SongAndPodcastUpsertRequest();
+
+        SongAndPodcastUpsertRequest _upsertRequest =new SongAndPodcastUpsertRequest();
         private SongAndPodcast _songpodcast;
         bool isChecked;
         bool isEdit;
         int GenreListOfID = 0;
         System.Byte[] file;
-        public frmSongAndPodcastAdd()
+        public frmSongAndPodcastAdd(SongAndPodcast SAP=null)
         {
             InitializeComponent();
-            isEdit = false;
-        }
-        public frmSongAndPodcastAdd(SongAndPodcast songpodcast):this()
-        {
-            _songpodcast = songpodcast;
-            isEdit = true;
+            if (SAP != null)
+            {
+                isEdit = true;
+                _songpodcast = SAP;
+                btnSaveSongPodcast.Text = "Update";
+            }
+            else
+                isEdit = false;
         }
         private async void SongAndPodcastAdd_LoadAsync(object sender, EventArgs e)
         {
@@ -47,7 +51,27 @@ namespace PerfectSound.WinForms.Forms
             }
             else
             {
-                //drugacije ce se dobavljat podaci u boxove
+                await LoadGenersAsync();
+                await LoadProdCompanyAsync();
+                txtTitle.Text = _songpodcast.Title;
+                txtBudget.Text = _songpodcast.Budget.ToString();
+                dtpReleaseDate.Value = _songpodcast.ReleaseDate.Value;
+                txtRunningTime.Text = _songpodcast.RunningTime;
+                cbProdCompany.SelectedValue = (int)_songpodcast.ProductionCompanyId;
+
+                if (_songpodcast.Poster != null && _songpodcast.Poster.Length > 15)
+                {
+                    pbPoster.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pbPoster.Image = Helper.ImageConverterFunction.FromByteToImage(_songpodcast.Poster);
+                }
+                podcastBtn.Checked = _songpodcast.IsPodcast.Value;
+                if(podcastBtn.Checked)
+                {
+                    txtRunningTime.Enabled = false;
+                    richtxtSong.Enabled = false;
+                }
+                richtxtSong.Text = _songpodcast.Text;
+
             }
         }
 
@@ -64,6 +88,7 @@ namespace PerfectSound.WinForms.Forms
             var genreList = await _GenreService.GetAll<List<Genre>>();
             clbGenre.DataSource = genreList;
             clbGenre.DisplayMember = "GenreName";
+            clbGenre.ValueMember = "GenreId";
         }
         private void podcastBtn_MouseClick(object sender, MouseEventArgs e)
         {
@@ -114,7 +139,6 @@ namespace PerfectSound.WinForms.Forms
                         _upsertRequest.IsPodcast = true;
                     else
                         _upsertRequest.IsPodcast = false;
-
                     try
                     {
                         if (isEdit == false)
@@ -127,7 +151,7 @@ namespace PerfectSound.WinForms.Forms
                         else
                         {
                             await _SongAndPodcastService.Update<SongAndPodcast>(_songpodcast.SongAndPodcastId, _upsertRequest);
-                            MessageBox.Show("Successfully edited.");
+                            MessageBox.Show("Successfully updated.");
                             DialogResult = DialogResult.OK;
                             Close();
                         }
@@ -184,5 +208,6 @@ namespace PerfectSound.WinForms.Forms
             return true;
             
         }
+
     }
 }

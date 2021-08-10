@@ -100,5 +100,56 @@ namespace PerfectSound.WinForms.Forms
             frmIndexHome.MdiParent = this;
             frmIndexHome.Show();
         }
+
+        public static class isPodcastOrSong
+        {
+            public static bool isPodcast;
+        }
+        private void songsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isPodcastOrSong.isPodcast = false;
+            ShowSongAndPodcastSearch();
+        }
+
+        private void podcastsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isPodcastOrSong.isPodcast = true;
+            ShowSongAndPodcastSearch();
+        }
+
+        private void ShowSongAndPodcastSearch()
+        {
+            frmSongAndPodcastSearch frmSAPSearch = new frmSongAndPodcastSearch();
+            frmSAPSearch.MdiParent = this;
+            frmSAPSearch.Show();
+        }
+
+        private void allArtistsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPersonSearch frmPerSearch = new frmPersonSearch();
+            frmPerSearch.MdiParent = this;
+            frmPerSearch.Show();
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPersonAdd frmPerAdd = new frmPersonAdd();
+            frmPerAdd.MdiParent = this;
+            frmPerAdd.Show();
+        }
+
+        private void addToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmUserAdd frmUsrAdd = new frmUserAdd();
+            frmUsrAdd.MdiParent = this;
+            frmUsrAdd.Show();
+        }
+
+        private void allUsersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUserSearch _frmUserSearch = new frmUserSearch();
+            _frmUserSearch.MdiParent = this;
+            _frmUserSearch.Show();
+        }
     }
 }

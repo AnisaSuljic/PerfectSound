@@ -138,14 +138,14 @@ namespace PerfectSound.WinForms.Forms
             // allUsersToolStripMenuItem
             // 
             this.allUsersToolStripMenuItem.Name = "allUsersToolStripMenuItem";
-            this.allUsersToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.allUsersToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.allUsersToolStripMenuItem.Text = "All users";
             this.allUsersToolStripMenuItem.Click += new System.EventHandler(this.allUsersToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(147, 26);
             this.addToolStripMenuItem1.Text = "Add";
             this.addToolStripMenuItem1.Click += new System.EventHandler(this.addToolStripMenuItem1_Click);
             // 
@@ -161,14 +161,15 @@ namespace PerfectSound.WinForms.Forms
             // allNewsToolStripMenuItem
             // 
             this.allNewsToolStripMenuItem.Name = "allNewsToolStripMenuItem";
-            this.allNewsToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.allNewsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.allNewsToolStripMenuItem.Text = "All news";
             // 
             // addToolStripMenuItem2
             // 
             this.addToolStripMenuItem2.Name = "addToolStripMenuItem2";
-            this.addToolStripMenuItem2.Size = new System.Drawing.Size(147, 26);
+            this.addToolStripMenuItem2.Size = new System.Drawing.Size(224, 26);
             this.addToolStripMenuItem2.Text = "Add";
+            this.addToolStripMenuItem2.Click += new System.EventHandler(this.addToolStripMenuItem2_Click);
             // 
             // frmHome
             // 

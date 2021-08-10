@@ -11,6 +11,7 @@ namespace PerfectSound.Model.Requests.User
         public string LastName { get; set; }
         public string UserName { get; set; }
         [EmailAddress()]
+        [Required(ErrorMessage = "Book name is required")]
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Password{ get; set; }

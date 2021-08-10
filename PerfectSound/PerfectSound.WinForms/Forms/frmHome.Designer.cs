@@ -46,11 +46,8 @@ namespace PerfectSound.WinForms.Forms
             this.newsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allNewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -90,12 +87,14 @@ namespace PerfectSound.WinForms.Forms
             this.songsToolStripMenuItem.Name = "songsToolStripMenuItem";
             this.songsToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.songsToolStripMenuItem.Text = "All songs";
+            this.songsToolStripMenuItem.Click += new System.EventHandler(this.songsToolStripMenuItem_Click);
             // 
             // podcastsToolStripMenuItem
             // 
             this.podcastsToolStripMenuItem.Name = "podcastsToolStripMenuItem";
             this.podcastsToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.podcastsToolStripMenuItem.Text = "All podcasts";
+            this.podcastsToolStripMenuItem.Click += new System.EventHandler(this.podcastsToolStripMenuItem_Click);
             // 
             // addEditSoundpodcastToolStripMenuItem
             // 
@@ -118,12 +117,14 @@ namespace PerfectSound.WinForms.Forms
             this.allArtistsToolStripMenuItem.Name = "allArtistsToolStripMenuItem";
             this.allArtistsToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.allArtistsToolStripMenuItem.Text = "All artists";
+            this.allArtistsToolStripMenuItem.Click += new System.EventHandler(this.allArtistsToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.addToolStripMenuItem.Text = "Add";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // usersToolStripMenuItem
             // 
@@ -137,14 +138,16 @@ namespace PerfectSound.WinForms.Forms
             // allUsersToolStripMenuItem
             // 
             this.allUsersToolStripMenuItem.Name = "allUsersToolStripMenuItem";
-            this.allUsersToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.allUsersToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.allUsersToolStripMenuItem.Text = "All users";
+            this.allUsersToolStripMenuItem.Click += new System.EventHandler(this.allUsersToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(147, 26);
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.addToolStripMenuItem1.Text = "Add";
+            this.addToolStripMenuItem1.Click += new System.EventHandler(this.addToolStripMenuItem1_Click);
             // 
             // newsToolStripMenuItem
             // 
@@ -167,24 +170,6 @@ namespace PerfectSound.WinForms.Forms
             this.addToolStripMenuItem2.Size = new System.Drawing.Size(147, 26);
             this.addToolStripMenuItem2.Text = "Add";
             // 
-            // statusStrip
-            // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 532);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip.Size = new System.Drawing.Size(843, 26);
-            this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "StatusStrip";
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(49, 20);
-            this.toolStripStatusLabel.Text = "Status";
-            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -192,7 +177,6 @@ namespace PerfectSound.WinForms.Forms
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(843, 558);
-            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -204,8 +188,6 @@ namespace PerfectSound.WinForms.Forms
             this.Load += new System.EventHandler(this.frmHome_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,8 +196,6 @@ namespace PerfectSound.WinForms.Forms
 
 
         private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem soundAndPodcastsToolStripMenuItem;

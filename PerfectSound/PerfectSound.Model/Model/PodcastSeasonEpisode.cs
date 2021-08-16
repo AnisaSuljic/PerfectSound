@@ -10,5 +10,10 @@ namespace PerfectSound.Model.Model
         public int? PodcastSeasonId { get; set; }
         public string EpisodeName { get; set; }
         public int? EpisodeNumber { get; set; }
+
+        public static implicit operator PodcastSeasonEpisode(List<PodcastSeasonEpisode> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

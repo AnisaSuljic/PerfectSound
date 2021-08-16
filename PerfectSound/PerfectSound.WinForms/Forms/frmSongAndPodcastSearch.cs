@@ -133,6 +133,7 @@ namespace PerfectSound.WinForms.Forms
             var SAP = await _SongAndPodcastService.GetById<SongAndPodcast>((item as frmSongOrPodcastVM).Id);
             frmSongAndPodcastAdd frm = new frmSongAndPodcastAdd(SAP);
             frm.WindowState = FormWindowState.Normal;
+            frm.MdiParent = frmHome.ActiveForm;
             frm.Show();
         }
     }

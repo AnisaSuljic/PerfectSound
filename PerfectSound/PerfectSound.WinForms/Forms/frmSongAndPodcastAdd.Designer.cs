@@ -53,6 +53,8 @@ namespace PerfectSound.WinForms.Forms
             this.ofdOpenPoster = new System.Windows.Forms.OpenFileDialog();
             this.ErrorSoundAndPodcastAdd = new System.Windows.Forms.ErrorProvider(this.components);
             this.label8 = new System.Windows.Forms.Label();
+            this.btnSeasonEpisodeSetting = new System.Windows.Forms.Button();
+            this.btnArtists = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorSoundAndPodcastAdd)).BeginInit();
             this.SuspendLayout();
@@ -206,7 +208,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnSaveSongPodcast.BackColor = System.Drawing.Color.SlateBlue;
             this.btnSaveSongPodcast.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnSaveSongPodcast.Location = new System.Drawing.Point(726, 389);
+            this.btnSaveSongPodcast.Location = new System.Drawing.Point(726, 471);
             this.btnSaveSongPodcast.Name = "btnSaveSongPodcast";
             this.btnSaveSongPodcast.Size = new System.Drawing.Size(166, 35);
             this.btnSaveSongPodcast.TabIndex = 18;
@@ -248,6 +250,30 @@ namespace PerfectSound.WinForms.Forms
             this.label8.TabIndex = 21;
             this.label8.Text = "(format: 00:00:00)";
             // 
+            // btnSeasonEpisodeSetting
+            // 
+            this.btnSeasonEpisodeSetting.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnSeasonEpisodeSetting.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnSeasonEpisodeSetting.Location = new System.Drawing.Point(726, 389);
+            this.btnSeasonEpisodeSetting.Name = "btnSeasonEpisodeSetting";
+            this.btnSeasonEpisodeSetting.Size = new System.Drawing.Size(166, 35);
+            this.btnSeasonEpisodeSetting.TabIndex = 22;
+            this.btnSeasonEpisodeSetting.Text = "Seasons/Episodes";
+            this.btnSeasonEpisodeSetting.UseVisualStyleBackColor = false;
+            this.btnSeasonEpisodeSetting.Click += new System.EventHandler(this.btnSeasonEpisodeSetting_Click);
+            // 
+            // btnArtists
+            // 
+            this.btnArtists.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnArtists.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnArtists.Location = new System.Drawing.Point(726, 430);
+            this.btnArtists.Name = "btnArtists";
+            this.btnArtists.Size = new System.Drawing.Size(166, 35);
+            this.btnArtists.TabIndex = 23;
+            this.btnArtists.Text = "Artists";
+            this.btnArtists.UseVisualStyleBackColor = false;
+            this.btnArtists.Click += new System.EventHandler(this.btnArtists_Click);
+            // 
             // frmSongAndPodcastAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -255,6 +281,8 @@ namespace PerfectSound.WinForms.Forms
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(968, 535);
+            this.Controls.Add(this.btnArtists);
+            this.Controls.Add(this.btnSeasonEpisodeSetting);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.podcastBtn);
             this.Controls.Add(this.clbGenre);
@@ -311,5 +339,7 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.OpenFileDialog ofdOpenPoster;
         private System.Windows.Forms.ErrorProvider ErrorSoundAndPodcastAdd;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnSeasonEpisodeSetting;
+        private System.Windows.Forms.Button btnArtists;
     }
 }

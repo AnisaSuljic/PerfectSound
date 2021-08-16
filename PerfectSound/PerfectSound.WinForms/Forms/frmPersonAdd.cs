@@ -23,8 +23,9 @@ namespace PerfectSound.WinForms.Forms
         System.Byte[] file;
         bool isEdit;
         private Person _person;
+        SongAndPodcast _frm;
 
-        public frmPersonAdd(Person P=null)
+        public frmPersonAdd(Person P=null, SongAndPodcast frm =null)
         {
 
             InitializeComponent();
@@ -39,6 +40,10 @@ namespace PerfectSound.WinForms.Forms
                 isEdit = false;
                 dtpDateOfDeath.Enabled = false;
                 Radiodeath.Checked = false;
+            }
+            if(frm!=null)
+            {
+                _frm = frm;
             }
         }
 
@@ -68,7 +73,7 @@ namespace PerfectSound.WinForms.Forms
                 dtpDateOfDeath.Enabled = true;
                 Radiodeath.Checked = true;
             }
-            cbGender.SelectedIndex = _person.GenderId.Value;
+            cbGender.SelectedValue = _person.GenderId.Value;
             if (_person.Photo != null && _person.Photo.Length > 15)
             {
                 pbProfilePic.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -79,7 +84,7 @@ namespace PerfectSound.WinForms.Forms
         private async Task LoadGenderAsync()
         {
             var genderList = await _GenderService.GetAll<List<Gender>>();
-            genderList.Insert(0, new Gender());
+
             cbGender.DataSource = genderList;
             cbGender.DisplayMember = "GenderName";
             cbGender.ValueMember = "GenderId";
@@ -104,9 +109,19 @@ namespace PerfectSound.WinForms.Forms
                         if (isEdit == false)
                         {
                             await _PersonService.Insert<Person>(_upsertRequest);
-                            MessageBox.Show("Successfully added.");
-                            DialogResult = DialogResult.OK;
-                            Close();
+                            MessageBox.Show("Successfully added.");                        
+                            if (_frm == null)
+                            {
+                                frmPersonSearch frm = new frmPersonSearch();
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
+                            else
+                            {
+                                frmSongAndPodcastPersonAdd frm = new frmSongAndPodcastPersonAdd(_frm);
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
                         }
                         else
                         {
@@ -114,6 +129,10 @@ namespace PerfectSound.WinForms.Forms
                             MessageBox.Show("Successfully updated.");
                             DialogResult = DialogResult.OK;
                             Close();
+                            frmPersonSearch frm = new frmPersonSearch();
+                            frm.MdiParent = frmHome.ActiveForm;
+                            frm.Show();
+                            
                         }
 
 

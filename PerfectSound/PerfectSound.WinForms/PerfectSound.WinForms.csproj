@@ -63,6 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIService.cs" />
+    <Compile Include="Forms\frmSongAndPodcastPersonAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSongAndPodcastPersonAdd.Designer.cs">
+      <DependentUpon>frmSongAndPodcastPersonAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmNewsAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,12 @@
     <Compile Include="Forms\frmIndexHome.Designer.cs">
       <DependentUpon>frmIndexHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmNewsSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmNewsSearch.Designer.cs">
+      <DependentUpon>frmNewsSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmPersonAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +98,12 @@
     </Compile>
     <Compile Include="Forms\frmPersonSearch.Designer.cs">
       <DependentUpon>frmPersonSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSeasonEpisodeAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSeasonEpisodeAdd.Designer.cs">
+      <DependentUpon>frmSeasonEpisodeAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmSongAndPodcastAdd.cs">
       <SubType>Form</SubType>
@@ -127,17 +145,26 @@
     <EmbeddedResource Include="Forms\frmNewsAdd.resx">
       <DependentUpon>frmNewsAdd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNewsSearch.resx">
+      <DependentUpon>frmNewsSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPersonAdd.resx">
       <DependentUpon>frmPersonAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPersonSearch.resx">
       <DependentUpon>frmPersonSearch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSeasonEpisodeAdd.resx">
+      <DependentUpon>frmSeasonEpisodeAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSongAndPodcastAdd.resx">
       <DependentUpon>frmSongAndPodcastAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSongAndPodcastPersonAdd.resx">
+      <DependentUpon>frmSongAndPodcastPersonAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSongAndPodcastSearch.resx">
       <DependentUpon>frmSongAndPodcastSearch.cs</DependentUpon>

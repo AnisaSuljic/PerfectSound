@@ -47,6 +47,7 @@ namespace PerfectSound.WinForms.Forms
             this.allNewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +59,8 @@ namespace PerfectSound.WinForms.Forms
             this.soundAndPodcastsToolStripMenuItem,
             this.artistsToolStripMenuItem,
             this.usersToolStripMenuItem,
-            this.newsToolStripMenuItem});
+            this.newsToolStripMenuItem,
+            this.testToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(843, 28);
@@ -161,15 +163,18 @@ namespace PerfectSound.WinForms.Forms
             // allNewsToolStripMenuItem
             // 
             this.allNewsToolStripMenuItem.Name = "allNewsToolStripMenuItem";
-            this.allNewsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.allNewsToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.allNewsToolStripMenuItem.Text = "All news";
+            this.allNewsToolStripMenuItem.Click += new System.EventHandler(this.allNewsToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem2
             // 
             this.addToolStripMenuItem2.Name = "addToolStripMenuItem2";
-            this.addToolStripMenuItem2.Size = new System.Drawing.Size(224, 26);
+            this.addToolStripMenuItem2.Size = new System.Drawing.Size(147, 26);
             this.addToolStripMenuItem2.Text = "Add";
             this.addToolStripMenuItem2.Click += new System.EventHandler(this.addToolStripMenuItem2_Click);
+            // 
+           
             // 
             // frmHome
             // 
@@ -212,6 +217,7 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.ToolStripMenuItem newsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allNewsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
     }
 }
 

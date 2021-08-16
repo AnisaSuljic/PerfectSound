@@ -29,6 +29,7 @@ namespace PerfectSound.WinForms.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNewsAdd));
             this.pbNewsPoster = new System.Windows.Forms.PictureBox();
             this.btnAddNewsPoster = new System.Windows.Forms.Button();
@@ -36,12 +37,15 @@ namespace PerfectSound.WinForms.Forms
             this.label1 = new System.Windows.Forms.Label();
             this.Subtitle = new System.Windows.Forms.Label();
             this.txtSubTitleNews = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtContent = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpPublication = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSaveNews = new System.Windows.Forms.Button();
+            this.coverPhoto = new System.Windows.Forms.OpenFileDialog();
+            this.errorNews = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbNewsPoster)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorNews)).BeginInit();
             this.SuspendLayout();
             // 
             // pbNewsPoster
@@ -64,6 +68,7 @@ namespace PerfectSound.WinForms.Forms
             this.btnAddNewsPoster.TabIndex = 25;
             this.btnAddNewsPoster.Text = "Add news picture";
             this.btnAddNewsPoster.UseVisualStyleBackColor = false;
+            this.btnAddNewsPoster.Click += new System.EventHandler(this.btnAddNewsPoster_Click);
             // 
             // txtTitleNews
             // 
@@ -98,13 +103,13 @@ namespace PerfectSound.WinForms.Forms
             this.txtSubTitleNews.Size = new System.Drawing.Size(484, 22);
             this.txtSubTitleNews.TabIndex = 28;
             // 
-            // textBox1
+            // txtContent
             // 
-            this.textBox1.Location = new System.Drawing.Point(367, 257);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(484, 259);
-            this.textBox1.TabIndex = 30;
+            this.txtContent.Location = new System.Drawing.Point(367, 257);
+            this.txtContent.Multiline = true;
+            this.txtContent.Name = "txtContent";
+            this.txtContent.Size = new System.Drawing.Size(484, 259);
+            this.txtContent.TabIndex = 30;
             // 
             // label2
             // 
@@ -115,12 +120,12 @@ namespace PerfectSound.WinForms.Forms
             this.label2.TabIndex = 31;
             this.label2.Text = "Content";
             // 
-            // dateTimePicker1
+            // dtpPublication
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(367, 190);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(484, 22);
-            this.dateTimePicker1.TabIndex = 32;
+            this.dtpPublication.Location = new System.Drawing.Point(367, 190);
+            this.dtpPublication.Name = "dtpPublication";
+            this.dtpPublication.Size = new System.Drawing.Size(484, 22);
+            this.dtpPublication.TabIndex = 32;
             // 
             // label3
             // 
@@ -141,6 +146,15 @@ namespace PerfectSound.WinForms.Forms
             this.btnSaveNews.TabIndex = 34;
             this.btnSaveNews.Text = "Save news";
             this.btnSaveNews.UseVisualStyleBackColor = false;
+            this.btnSaveNews.Click += new System.EventHandler(this.btnSaveNews_Click);
+            // 
+            // coverPhoto
+            // 
+            this.coverPhoto.FileName = "coverPhoto";
+            // 
+            // errorNews
+            // 
+            this.errorNews.ContainerControl = this;
             // 
             // frmNewsAdd
             // 
@@ -150,9 +164,9 @@ namespace PerfectSound.WinForms.Forms
             this.ClientSize = new System.Drawing.Size(899, 607);
             this.Controls.Add(this.btnSaveNews);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpPublication);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtContent);
             this.Controls.Add(this.Subtitle);
             this.Controls.Add(this.txtSubTitleNews);
             this.Controls.Add(this.label1);
@@ -161,9 +175,9 @@ namespace PerfectSound.WinForms.Forms
             this.Controls.Add(this.pbNewsPoster);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmNewsAdd";
-            this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmNewsAdd_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbNewsPoster)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorNews)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,10 +191,12 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Subtitle;
         private System.Windows.Forms.TextBox txtSubTitleNews;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtContent;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpPublication;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSaveNews;
+        private System.Windows.Forms.OpenFileDialog coverPhoto;
+        private System.Windows.Forms.ErrorProvider errorNews;
     }
 }

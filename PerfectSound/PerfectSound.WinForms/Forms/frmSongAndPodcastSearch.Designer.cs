@@ -169,6 +169,7 @@ namespace PerfectSound.WinForms.Forms
             this.dgwData.ReadOnly = true;
             this.dgwData.RowHeadersWidth = 51;
             this.dgwData.RowTemplate.Height = 24;
+            this.dgwData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwData.Size = new System.Drawing.Size(921, 265);
             this.dgwData.TabIndex = 1;
             this.dgwData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwData_CellDoubleClick);
@@ -229,7 +230,6 @@ namespace PerfectSound.WinForms.Forms
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSongAndPodcastSearch";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = " ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmSongAndPodcastSearch_Load);

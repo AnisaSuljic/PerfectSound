@@ -37,7 +37,6 @@ namespace PerfectSound.WinForms.Forms
         private async Task LoadGenderAsync()
         {
             var genderList = await _GenderService.GetAll<List<Gender>>();
-            genderList.Insert(0, new Gender());
             cbGenderSearch.DataSource = genderList;
             cbGenderSearch.DisplayMember = "GenderName";
             cbGenderSearch.ValueMember = "GenderId";
@@ -85,7 +84,7 @@ namespace PerfectSound.WinForms.Forms
             if ((int)cbGenderSearch.SelectedValue != 0 || cbGenderSearch != null)
                 SearchRequest.GenderId = (int)cbGenderSearch.SelectedValue;
             
-            SearchRequest.FirstName = txtUsernameSearch.Text;
+            SearchRequest.FirstName = txtFirstnameSearch.Text;
             SearchRequest.LastName = txtLastnameSearch.Text;
 
             await LoadDGVData(SearchRequest);
@@ -93,7 +92,7 @@ namespace PerfectSound.WinForms.Forms
 
         private async void btnClearFilter_Click(object sender, EventArgs e)
         {
-            txtUsernameSearch.Text = "";
+            txtFirstnameSearch.Text = "";
             txtLastnameSearch.Text = "";
             await LoadDataAsync();
         }

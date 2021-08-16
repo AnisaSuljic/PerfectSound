@@ -36,6 +36,11 @@ namespace PerfectSound.WinForms.Forms
                 isEdit = true;
                 _songpodcast = SAP;
                 btnSaveSongPodcast.Text = "Update";
+                if(SAP.IsPodcast==true)
+                    btnSeasonEpisodeSetting.Visible = true;
+                else
+                    btnSeasonEpisodeSetting.Visible = false;
+
             }
             else
                 isEdit = false;
@@ -89,6 +94,7 @@ namespace PerfectSound.WinForms.Forms
             clbGenre.DataSource = genreList;
             clbGenre.DisplayMember = "GenreName";
             clbGenre.ValueMember = "GenreId";
+            
         }
         private void podcastBtn_MouseClick(object sender, MouseEventArgs e)
         {
@@ -147,6 +153,10 @@ namespace PerfectSound.WinForms.Forms
                             MessageBox.Show("Successfully added.");
                             DialogResult = DialogResult.OK;
                             Close();
+                            frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd();
+                            frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;
+                            frmAddSeasonEpisode.Show();
+
                         }
                         else
                         {
@@ -155,7 +165,6 @@ namespace PerfectSound.WinForms.Forms
                             DialogResult = DialogResult.OK;
                             Close();
                         }
-
                     }
                     catch
                     {
@@ -208,6 +217,18 @@ namespace PerfectSound.WinForms.Forms
             return true;
             
         }
+        private void btnSeasonEpisodeSetting_Click(object sender, EventArgs e)
+        {
+            frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd(_songpodcast);
+            frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;
+            frmAddSeasonEpisode.Show();
+        }
 
+        private void btnArtists_Click(object sender, EventArgs e)
+        {
+            frmSongAndPodcastPersonAdd frmSongAndPodcastPerson = new frmSongAndPodcastPersonAdd(_songpodcast);
+            frmSongAndPodcastPerson.MdiParent = frmHome.ActiveForm;
+            frmSongAndPodcastPerson.Show();
+        }
     }
 }

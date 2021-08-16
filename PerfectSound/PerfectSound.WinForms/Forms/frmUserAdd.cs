@@ -96,6 +96,9 @@ namespace PerfectSound.WinForms.Forms
                             MessageBox.Show("Successfully added.");
                             DialogResult = DialogResult.OK;
                             Close();
+                            frmUserSearch frm = new frmUserSearch();
+                            frm.MdiParent = frmHome.ActiveForm;
+                            frm.Show();
                         }
                         else
                         {
@@ -103,6 +106,9 @@ namespace PerfectSound.WinForms.Forms
                             MessageBox.Show("Successfully updated.");
                             DialogResult = DialogResult.OK;
                             Close();
+                            frmUserSearch frm = new frmUserSearch();
+                            frm.MdiParent = frmHome.ActiveForm;
+                            frm.Show();
                         }
                     }
                     catch

@@ -29,6 +29,7 @@ namespace PerfectSound.WinForms.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUserSearch));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnClearFilter = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -134,6 +135,7 @@ namespace PerfectSound.WinForms.Forms
             this.dgwUser.Name = "dgwUser";
             this.dgwUser.RowHeadersWidth = 51;
             this.dgwUser.RowTemplate.Height = 24;
+            this.dgwUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwUser.Size = new System.Drawing.Size(918, 271);
             this.dgwUser.TabIndex = 1;
             this.dgwUser.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwUser_CellDoubleClick);
@@ -194,6 +196,7 @@ namespace PerfectSound.WinForms.Forms
             this.ClientSize = new System.Drawing.Size(941, 517);
             this.Controls.Add(this.dgwUser);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmUserSearch";
             this.Load += new System.EventHandler(this.frmUserSearch_Load);
             this.groupBox1.ResumeLayout(false);

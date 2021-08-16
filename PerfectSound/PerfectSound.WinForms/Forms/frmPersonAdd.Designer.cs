@@ -30,6 +30,7 @@ namespace PerfectSound.WinForms.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPersonAdd));
             this.btnAddPerson = new System.Windows.Forms.Button();
             this.dtpDateOfBirth = new System.Windows.Forms.DateTimePicker();
             this.txtPlaceOfBirth = new System.Windows.Forms.TextBox();
@@ -247,6 +248,7 @@ namespace PerfectSound.WinForms.Forms
             this.Controls.Add(this.richtxtBiography);
             this.Controls.Add(this.btnAddProfilePic);
             this.Controls.Add(this.pbProfilePic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPersonAdd";
             this.Load += new System.EventHandler(this.frmPersonAdd_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).EndInit();

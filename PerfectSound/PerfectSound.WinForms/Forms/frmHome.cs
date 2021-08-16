@@ -158,5 +158,14 @@ namespace PerfectSound.WinForms.Forms
             _frmNewsAdd.MdiParent = this;
             _frmNewsAdd.Show();
         }
+
+        private void allNewsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmNewsSearch _frmNewsSearch = new frmNewsSearch();
+            _frmNewsSearch.MdiParent = this;
+            _frmNewsSearch.Show();
+        }
+
+        
     }
 }

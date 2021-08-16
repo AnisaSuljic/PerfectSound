@@ -29,6 +29,7 @@ namespace PerfectSound.WinForms.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPersonSearch));
             this.dgwPersonData = new System.Windows.Forms.DataGridView();
             this.Firstname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lastname = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,7 +44,7 @@ namespace PerfectSound.WinForms.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.cbGenderSearch = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtUsernameSearch = new System.Windows.Forms.TextBox();
+            this.txtFirstnameSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgwPersonData)).BeginInit();
             this.Filters.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +65,7 @@ namespace PerfectSound.WinForms.Forms
             this.dgwPersonData.ReadOnly = true;
             this.dgwPersonData.RowHeadersWidth = 51;
             this.dgwPersonData.RowTemplate.Height = 24;
+            this.dgwPersonData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwPersonData.Size = new System.Drawing.Size(921, 265);
             this.dgwPersonData.TabIndex = 3;
             this.dgwPersonData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwPersonData_CellDoubleClick);
@@ -122,7 +124,7 @@ namespace PerfectSound.WinForms.Forms
             this.Filters.Controls.Add(this.label2);
             this.Filters.Controls.Add(this.cbGenderSearch);
             this.Filters.Controls.Add(this.label1);
-            this.Filters.Controls.Add(this.txtUsernameSearch);
+            this.Filters.Controls.Add(this.txtFirstnameSearch);
             this.Filters.Location = new System.Drawing.Point(22, 13);
             this.Filters.Name = "Filters";
             this.Filters.Size = new System.Drawing.Size(921, 260);
@@ -192,16 +194,16 @@ namespace PerfectSound.WinForms.Forms
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(309, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 17);
+            this.label1.Size = new System.Drawing.Size(70, 17);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Username";
+            this.label1.Text = "Firstname";
             // 
-            // txtUsernameSearch
+            // txtFirstnameSearch
             // 
-            this.txtUsernameSearch.Location = new System.Drawing.Point(312, 40);
-            this.txtUsernameSearch.Name = "txtUsernameSearch";
-            this.txtUsernameSearch.Size = new System.Drawing.Size(288, 22);
-            this.txtUsernameSearch.TabIndex = 0;
+            this.txtFirstnameSearch.Location = new System.Drawing.Point(312, 40);
+            this.txtFirstnameSearch.Name = "txtFirstnameSearch";
+            this.txtFirstnameSearch.Size = new System.Drawing.Size(288, 22);
+            this.txtFirstnameSearch.TabIndex = 0;
             // 
             // frmPersonSearch
             // 
@@ -210,6 +212,7 @@ namespace PerfectSound.WinForms.Forms
             this.ClientSize = new System.Drawing.Size(966, 554);
             this.Controls.Add(this.dgwPersonData);
             this.Controls.Add(this.Filters);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPersonSearch";
             this.Load += new System.EventHandler(this.frmPersonSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgwPersonData)).EndInit();
@@ -228,7 +231,7 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbGenderSearch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtUsernameSearch;
+        private System.Windows.Forms.TextBox txtFirstnameSearch;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtLastnameSearch;
         private System.Windows.Forms.DataGridViewTextBoxColumn Firstname;

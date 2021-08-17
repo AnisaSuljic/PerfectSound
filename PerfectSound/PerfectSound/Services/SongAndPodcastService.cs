@@ -17,7 +17,11 @@ namespace PerfectSound.Services
         }
         public override List<SongAndPodcast> Get(SongAndPodcastSearchRequest search)
         {
-            var _searchSet = _context.SongAndPodcasts.AsQueryable();
+            var _searchSet = _context.SongAndPodcasts
+                .Include(x=>x.ProductionCompany)
+                .Include(x=>x.SongAndPodcastGenres)
+                .ThenInclude(x=>x.Genre)
+                .AsQueryable();
 
             if (search.GenreId != 0)
             {
@@ -36,7 +40,7 @@ namespace PerfectSound.Services
             {
                 _searchSet = _searchSet.Where(x => x.IsPodcast == search.IsPodcast);
             }
-
+            
             return _mapper.Map<List<SongAndPodcast>>(_searchSet.ToList());
         }
 

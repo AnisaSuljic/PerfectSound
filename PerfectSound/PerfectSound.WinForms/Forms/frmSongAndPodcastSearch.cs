@@ -72,8 +72,8 @@ namespace PerfectSound.WinForms.Forms
                     ReleaseDate =item.ReleaseDate.Value.ToString("dd.MM.yyyy."),
                     RunningTime = item.RunningTime,
                     Budget = item.Budget.ToString()+"  €",
-                    ProductionCompanyName=company,
-                    Genre="//"
+                    ProductionCompanyName=company,//item.ProductionCompany.ProductionCompanyName
+                    Genre ="//"
                 };
                 //viewmodel.Genre += "| ";
                 //foreach (var genre in item.SongAndPodcastGenre)

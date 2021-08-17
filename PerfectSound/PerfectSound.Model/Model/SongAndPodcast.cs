@@ -15,6 +15,7 @@ namespace PerfectSound.Model.Model
         public byte[] Poster { get; set; }
         public int? NumberOfRatings { get; set; }
         public int? ProductionCompanyId { get; set; }
+        public ProductionCompany ProductionCompany { get; set; }
         public bool? IsPodcast { get; set; }
         public ICollection<SongAndPodcastGenre> SongAndPodcastGenre { get; set; }
         public ICollection<PodcastSeason> PodcastSeason { get; set; }

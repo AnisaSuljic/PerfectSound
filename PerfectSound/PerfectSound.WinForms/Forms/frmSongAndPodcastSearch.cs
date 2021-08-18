@@ -72,12 +72,17 @@ namespace PerfectSound.WinForms.Forms
                     ReleaseDate =item.ReleaseDate.Value.ToString("dd.MM.yyyy."),
                     RunningTime = item.RunningTime,
                     Budget = item.Budget.ToString()+"  €",
-                    ProductionCompanyName=company,//item.ProductionCompany.ProductionCompanyName
-                    Genre ="//"
+                    ProductionCompanyName=item.ProductionCompany.ProductionCompanyName
                 };
-                //viewmodel.Genre += "| ";
-                //foreach (var genre in item.SongAndPodcastGenre)
-                //    viewmodel.Genre += genre.Genre.GenreName.ToString() + " | ";
+
+                var x = item.SongAndPodcastGenre;
+                var y = item.Genre;
+                string lista="| ";
+                foreach (var i in item.Genre)
+                {
+                    lista +=i.GenreName+" | ";
+                }
+                viewmodel.Genre = lista;
                 vm.Add(viewmodel);
             }
             dgwData.DataSource = vm;

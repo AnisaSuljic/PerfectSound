@@ -86,11 +86,15 @@ namespace PerfectSound.WinForms.Forms
 
         private async Task LoadDGVSearchAsync(SongAndPodcastPersonSearchRequest search=null)
         {
+            List<SongAndPodcastPerson> list1 = new List<SongAndPodcastPerson>();
             List<SongAndPodcastPerson> list = new List<SongAndPodcastPerson>();
-            if (search==null)
-                list= await _SongAndPodcastPersonService.GetAll<List<SongAndPodcastPerson>>();
+            if (search == null)
+                list1= await _SongAndPodcastPersonService.GetAll<List<SongAndPodcastPerson>>();
+
             if (search != null)
-                list = await _SongAndPodcastPersonService.GetAll<List<SongAndPodcastPerson>>(search);
+                list1 = await _SongAndPodcastPersonService.GetAll<List<SongAndPodcastPerson>>(search);
+
+            list = list1.Where(x => x.SongAndPodcastId == _sap.SongAndPodcastId).ToList();
 
             List<frmSongAndPodcastPersonVM> vm = new List<frmSongAndPodcastPersonVM>();
             foreach (var item in list)

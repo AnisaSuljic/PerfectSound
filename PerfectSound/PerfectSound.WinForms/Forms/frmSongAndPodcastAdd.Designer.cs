@@ -55,6 +55,7 @@ namespace PerfectSound.WinForms.Forms
             this.label8 = new System.Windows.Forms.Label();
             this.btnSeasonEpisodeSetting = new System.Windows.Forms.Button();
             this.btnArtists = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorSoundAndPodcastAdd)).BeginInit();
             this.SuspendLayout();
@@ -274,6 +275,19 @@ namespace PerfectSound.WinForms.Forms
             this.btnArtists.UseVisualStyleBackColor = false;
             this.btnArtists.Click += new System.EventHandler(this.btnArtists_Click);
             // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnBack.Location = new System.Drawing.Point(54, 471);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(42, 35);
+            this.btnBack.TabIndex = 50;
+            this.btnBack.Text = "←";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // frmSongAndPodcastAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -281,6 +295,7 @@ namespace PerfectSound.WinForms.Forms
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(968, 535);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnArtists);
             this.Controls.Add(this.btnSeasonEpisodeSetting);
             this.Controls.Add(this.label8);
@@ -341,5 +356,6 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnSeasonEpisodeSetting;
         private System.Windows.Forms.Button btnArtists;
+        private System.Windows.Forms.Button btnBack;
     }
 }

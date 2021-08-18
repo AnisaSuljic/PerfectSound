@@ -40,8 +40,16 @@ namespace PerfectSound.Services
             {
                 _searchSet = _searchSet.Where(x => x.IsPodcast == search.IsPodcast);
             }
-            
-            return _mapper.Map<List<SongAndPodcast>>(_searchSet.ToList());
+
+            var _searchSetList = _mapper.Map<List<SongAndPodcast>>(_searchSet);
+
+            foreach (var item in _searchSetList)
+            {
+                item.SongAndPodcastGenre = _mapper.Map <List< SongAndPodcastGenre >> (_context.SongAndPodcastGenres.Where(y => y.SongAndPodcastId == item.SongAndPodcastId));
+                item.Genre = _mapper.Map<List<Genre>>(_context.SongAndPodcastGenres.Include(x => x.Genre).Where(y => y.SongAndPodcastId == item.SongAndPodcastId).Select(z => z.Genre));
+                item.PodcastSeason = _mapper.Map <List< PodcastSeason >> (_context.PodcastSeasons.Where(y => y.SongAndPodcastId == item.SongAndPodcastId));
+            }
+            return _searchSetList;
         }
 
         public override SongAndPodcast Insert(SongAndPodcastUpsertRequest request)
@@ -61,5 +69,7 @@ namespace PerfectSound.Services
             _context.SaveChanges();
             return _mapper.Map<SongAndPodcast> (entity);
         }
+
+
     }
 }

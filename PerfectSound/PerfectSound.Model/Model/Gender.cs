@@ -8,5 +8,10 @@ namespace PerfectSound.Model.Model
     {
         public int GenderId { get; set; }
         public string GenderName { get; set; }
+
+        public override string ToString()
+        {
+            return GenderName;
+        }
     }
 }

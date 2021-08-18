@@ -55,7 +55,7 @@ namespace PerfectSound.WinForms.Forms
                     FirstName = item.FirstName,
                     LastName = item.LastName,
                     DateOfBirth = item.DateOfBirth.Value.ToString("dd.MM.yyyy."),
-                    Gender = "//"
+                    Gender = item.Gender.GenderName
                 };
 
                 if (item.DateOfDeath == null)

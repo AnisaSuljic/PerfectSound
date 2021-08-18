@@ -8,5 +8,10 @@ namespace PerfectSound.Model.Model
     {
         public int ProductionCompanyId { get; set; }
         public string ProductionCompanyName { get; set; }
+
+        public override string ToString()
+        {
+            return ProductionCompanyName;
+        }
     }
 }

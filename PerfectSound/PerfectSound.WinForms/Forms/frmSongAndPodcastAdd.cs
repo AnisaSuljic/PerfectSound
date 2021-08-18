@@ -36,14 +36,22 @@ namespace PerfectSound.WinForms.Forms
                 isEdit = true;
                 _songpodcast = SAP;
                 btnSaveSongPodcast.Text = "Update";
-                if(SAP.IsPodcast==true)
+                clbGenre.Enabled = false;
+                file = _songpodcast.Poster;
+                podcastBtn.Enabled = false;
+
+                btnBack.Visible = true;
+                if (SAP.IsPodcast == true)
                     btnSeasonEpisodeSetting.Visible = true;
                 else
                     btnSeasonEpisodeSetting.Visible = false;
 
             }
             else
+            {
                 isEdit = false;
+                btnBack.Visible = false;
+            }
         }
         private async void SongAndPodcastAdd_LoadAsync(object sender, EventArgs e)
         {
@@ -121,66 +129,162 @@ namespace PerfectSound.WinForms.Forms
             var genreIdList = genreList.Select(x => x.GenreId).ToList();
             return genreIdList;
         }
-       
+
         private async void btnSaveSongPodcast_Click(object sender, EventArgs e)
         {
             if (this.ValidateChildren())
             {
                 var genreIdList = GenreListCount();
 
-                if (ErrorCheck()==true)
+                if (podcastBtn.Checked == false)//pjesma je
                 {
-                    _upsertRequest.Title = txtTitle.Text;
-                    _upsertRequest.Text = richtxtSong.Text;
-                    _upsertRequest.RunningTime = txtRunningTime.Text;
-                    _upsertRequest.ReleaseDate = dtpReleaseDate.Value;
-                    if (txtBudget.Text == "")
-                        txtBudget.Text = "0";
-                    _upsertRequest.Budget = decimal.Parse(txtBudget.Text);
-                    _upsertRequest.Poster = file;
-                    _upsertRequest.GenreIDList = genreIdList;
-                    _upsertRequest.ProductionCompanyId = Convert.ToInt32(cbProdCompany.SelectedValue);
-
-                    if (podcastBtn.Checked == true)
-                        _upsertRequest.IsPodcast = true;
-                    else
-                        _upsertRequest.IsPodcast = false;
-                    try
+                    if (isEdit == false)//dodavanje pjesme
                     {
-                        if (isEdit == false)
+                        if (ErrorCheck(isEdit))//provjera required fields
                         {
-                            await _SongAndPodcastService.Insert<SongAndPodcast>(_upsertRequest);
-                            MessageBox.Show("Successfully added.");
-                            DialogResult = DialogResult.OK;
-                            Close();
-                            frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd();
-                            frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;
-                            frmAddSeasonEpisode.Show();
+                            _upsertRequest.Title = txtTitle.Text;
+                            _upsertRequest.Text = richtxtSong.Text;
+                            _upsertRequest.RunningTime = txtRunningTime.Text;
+                            _upsertRequest.ReleaseDate = dtpReleaseDate.Value;
+                            if (txtBudget.Text == "")
+                                txtBudget.Text = "0";
+                            _upsertRequest.Budget = decimal.Parse(txtBudget.Text);
+                            _upsertRequest.Poster = file;
+                            _upsertRequest.GenreIDList = genreIdList;
+                            _upsertRequest.ProductionCompanyId = Convert.ToInt32(cbProdCompany.SelectedValue);
+                            _upsertRequest.IsPodcast = false;
+                            try
+                            {
+                                await _SongAndPodcastService.Insert<SongAndPodcast>(_upsertRequest);
+                                MessageBox.Show("Successfully added.");
 
-                        }
-                        else
-                        {
-                            await _SongAndPodcastService.Update<SongAndPodcast>(_songpodcast.SongAndPodcastId, _upsertRequest);
-                            MessageBox.Show("Successfully updated.");
-                            DialogResult = DialogResult.OK;
-                            Close();
+                                SongAndPodcast obj = await _SongAndPodcastService.GetById<SongAndPodcast>(_songpodcast.SongAndPodcastId);
+
+                                frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd(obj);
+                                frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;
+                                frmAddSeasonEpisode.Show();
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Adding was not successfully. Please try again.");
+                                frmSongAndPodcastAdd frm = new frmSongAndPodcastAdd();
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
                         }
                     }
-                    catch
+                    else//uredjivanje pjesme
                     {
-                        if (isEdit == false)
+                        if (ErrorCheck(isEdit))//provjera required fields
                         {
-                            MessageBox.Show("Adding was not successfully. Please try again.");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Editing was not successfully. Please try again.");
+                            _upsertRequest.Title = txtTitle.Text;
+                            _upsertRequest.Text = richtxtSong.Text;
+                            _upsertRequest.RunningTime = txtRunningTime.Text;
+                            _upsertRequest.ReleaseDate = dtpReleaseDate.Value;
+                            if (txtBudget.Text == "")
+                                txtBudget.Text = "0";
+                            _upsertRequest.Budget = decimal.Parse(txtBudget.Text);
+                            _upsertRequest.Poster = file;
+                            _upsertRequest.ProductionCompanyId = Convert.ToInt32(cbProdCompany.SelectedValue);
+                            _upsertRequest.IsPodcast = false;
+
+                            try
+                            {
+                                await _SongAndPodcastService.Update<SongAndPodcast>(_songpodcast.SongAndPodcastId,_upsertRequest);
+                                MessageBox.Show("Successfully updated.");
+
+                                SongAndPodcast obj = await _SongAndPodcastService.GetById<SongAndPodcast>(_songpodcast.SongAndPodcastId);
+
+                                frmSongAndPodcastAdd frm = new frmSongAndPodcastAdd(obj);
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Update was not successfully. Please try again.");
+                                frmSongAndPodcastAdd frm = new frmSongAndPodcastAdd(_songpodcast);
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
                         }
                     }
-                }  
+                }
+                else//podcast je
+                {
+                    if (isEdit == false)//dodavanje pocasta
+                    {
+                        if (ErrorCheck(isEdit))//provjera required fields
+                        {
+                            _upsertRequest.Title = txtTitle.Text;
+                            _upsertRequest.ReleaseDate = dtpReleaseDate.Value;
+                            if (txtBudget.Text == "")
+                                txtBudget.Text = "0";
+                            _upsertRequest.Budget = decimal.Parse(txtBudget.Text);
+                            _upsertRequest.Poster = file;
+                            _upsertRequest.GenreIDList = genreIdList;
+                            _upsertRequest.ProductionCompanyId = Convert.ToInt32(cbProdCompany.SelectedValue);
+                            _upsertRequest.IsPodcast = true;
+                            try
+                            {
+                                await _SongAndPodcastService.Insert<SongAndPodcast>(_upsertRequest);
+                                MessageBox.Show("Successfully added.");
+
+                                List<SongAndPodcast> allpodcasts = await _SongAndPodcastService.GetAll<List<SongAndPodcast>>();
+                                var id = allpodcasts[allpodcasts.Count-1].SongAndPodcastId;
+                                var obj= await _SongAndPodcastService.GetById<SongAndPodcast>(id);
+
+                                frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd(obj);
+                                frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;
+                                frmAddSeasonEpisode.Show();
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Adding was not successfully. Please try again.");
+                                frmSongAndPodcastAdd frm = new frmSongAndPodcastAdd(_songpodcast);
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
+                        }
+                    }
+                    else//uredjivanje podcasta
+                    {
+                        if (ErrorCheck(isEdit))//provjera required fields
+                        {
+                            _upsertRequest.Title = txtTitle.Text;
+                            _upsertRequest.ReleaseDate = dtpReleaseDate.Value;
+                            if (txtBudget.Text == "")
+                                txtBudget.Text = "0";
+                            _upsertRequest.Budget = decimal.Parse(txtBudget.Text);
+                            _upsertRequest.Poster = file;
+                            _upsertRequest.ProductionCompanyId = Convert.ToInt32(cbProdCompany.SelectedValue);
+                            _upsertRequest.IsPodcast = true;
+
+                            try
+                            {
+                                await _SongAndPodcastService.Update<SongAndPodcast>(_songpodcast.SongAndPodcastId, _upsertRequest);
+                                MessageBox.Show("Successfully updated.");
+
+                                SongAndPodcast obj = await _SongAndPodcastService.GetById<SongAndPodcast>(_songpodcast.SongAndPodcastId);
+
+                                frmSongAndPodcastAdd frm = new frmSongAndPodcastAdd(obj);
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Update was not successfully. Please try again.");
+                                frmSongAndPodcastAdd frm = new frmSongAndPodcastAdd(_songpodcast);
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
+                        }
+                    }
+                }
+               
+                
             }
-        }
 
+        }
 
         private void btnAddPoster_Click(object sender, EventArgs e)
         {
@@ -196,22 +300,31 @@ namespace PerfectSound.WinForms.Forms
                 pbPoster.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
-        private bool ErrorCheck()
+        private bool ErrorCheck(bool edit)
         {
-            if (!ErrorHandler.RequiredFiled(pbPoster, ErrorSoundAndPodcastAdd) ||
+            if(edit!=true)
+            {
+                if (!ErrorHandler.RequiredFiled(pbPoster, ErrorSoundAndPodcastAdd) ||
                 !ErrorHandler.RequiredFiled(txtTitle, ErrorSoundAndPodcastAdd))
-                return false;
-            if (isChecked != true)
-            {
-                if (!ErrorHandler.RequiredFiled(txtRunningTime, ErrorSoundAndPodcastAdd)||
-                    !ErrorHandler.CheckFormatOfRunningTime(txtRunningTime,ErrorSoundAndPodcastAdd,ErrorHandler.FormatChecker)||
-                    !ErrorHandler.RequiredFiled(richtxtSong, ErrorSoundAndPodcastAdd))
                     return false;
+                if (isChecked != true || podcastBtn.Checked==false)
+                {
+                    if (!ErrorHandler.RequiredFiled(txtRunningTime, ErrorSoundAndPodcastAdd) ||
+                        !ErrorHandler.CheckFormatOfRunningTime(txtRunningTime, ErrorSoundAndPodcastAdd, ErrorHandler.FormatChecker) ||
+                        !ErrorHandler.RequiredFiled(richtxtSong, ErrorSoundAndPodcastAdd))
+                        return false;
+                }
+                GenreListOfID = GenreListCount().Count;
+                if (GenreListOfID == 0)
+                {
+                    if (!ErrorHandler.RequiredFiled(clbGenre, ErrorSoundAndPodcastAdd, ErrorHandler.CheckedListBoxfield))
+                        return false;
+                }
             }
-            GenreListOfID = GenreListCount().Count;
-            if (GenreListOfID == 0)
+            else
             {
-                if (!ErrorHandler.RequiredFiled(clbGenre, ErrorSoundAndPodcastAdd, ErrorHandler.CheckedListBoxfield))
+                if (!ErrorHandler.RequiredFiled(pbPoster, ErrorSoundAndPodcastAdd) ||
+                !ErrorHandler.RequiredFiled(txtTitle, ErrorSoundAndPodcastAdd))
                     return false;
             }
             return true;
@@ -229,6 +342,14 @@ namespace PerfectSound.WinForms.Forms
             frmSongAndPodcastPersonAdd frmSongAndPodcastPerson = new frmSongAndPodcastPersonAdd(_songpodcast);
             frmSongAndPodcastPerson.MdiParent = frmHome.ActiveForm;
             frmSongAndPodcastPerson.Show();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            frmHome.isPodcastOrSong.isPodcast = (bool)_songpodcast.IsPodcast;
+            frmSongAndPodcastSearch frm = new frmSongAndPodcastSearch();
+            frm.MdiParent = frmHome.ActiveForm;
+            frm.Show();
         }
     }
 }

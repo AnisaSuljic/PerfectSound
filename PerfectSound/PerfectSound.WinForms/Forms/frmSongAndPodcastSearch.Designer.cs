@@ -186,7 +186,7 @@ namespace PerfectSound.WinForms.Forms
             // Genre
             // 
             this.Genre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Genre.DataPropertyName = "Genre.GenreName";
+            this.Genre.DataPropertyName = "Genre";
             this.Genre.HeaderText = "Genre";
             this.Genre.MinimumWidth = 6;
             this.Genre.Name = "Genre";

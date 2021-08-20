@@ -44,6 +44,7 @@ namespace PerfectSound.WinForms.Forms
             this.btnSaveNews = new System.Windows.Forms.Button();
             this.coverPhoto = new System.Windows.Forms.OpenFileDialog();
             this.errorNews = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbNewsPoster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorNews)).BeginInit();
             this.SuspendLayout();
@@ -156,12 +157,26 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.errorNews.ContainerControl = this;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.Firebrick;
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.Location = new System.Drawing.Point(49, 548);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(149, 35);
+            this.btnDelete.TabIndex = 35;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Visible = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // frmNewsAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(899, 607);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnSaveNews);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtpPublication);
@@ -198,5 +213,6 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.Button btnSaveNews;
         private System.Windows.Forms.OpenFileDialog coverPhoto;
         private System.Windows.Forms.ErrorProvider errorNews;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

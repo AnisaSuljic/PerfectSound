@@ -13,5 +13,6 @@ namespace PerfectSound.Model.Model
         public string Email { get; set; }
         public string Phone { get; set; }
         public int? UserTypeId { get; set; }
+        public UserType UserType { get; set; }
     }
 }

@@ -169,5 +169,26 @@ namespace PerfectSound.WinForms.Forms
             txtPassword.Text = guid;
             txtPasswordConfirm.Text = guid;
         }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var U = await _UserService.Delete<User>(_user.UserId);
+                MessageBox.Show("Successfully deleted.");
+                this.Hide();
+                frmUserSearch frm = new frmUserSearch();
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Deleting was not successful.");
+                this.Hide();
+                frmUserSearch frm = new frmUserSearch();
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+        }
     }
 }

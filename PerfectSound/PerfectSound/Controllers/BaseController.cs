@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PerfectSound.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace PerfectSound.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class BaseController<TModel, TSearch> : ControllerBase
     {
         protected readonly IService<TModel, TSearch> _service;

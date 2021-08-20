@@ -166,6 +166,11 @@ namespace PerfectSound.WinForms.Forms
             _frmNewsSearch.Show();
         }
 
-        
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmLogin frmlogin = new frmLogin();
+            frmlogin.Show();
+        }
     }
 }

@@ -51,6 +51,7 @@ namespace PerfectSound.WinForms.Forms
             this.ofdProfilPhoto = new System.Windows.Forms.OpenFileDialog();
             this.Radiodeath = new System.Windows.Forms.RadioButton();
             this.errorPerson = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbProfilePic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorPerson)).BeginInit();
             this.SuspendLayout();
@@ -225,11 +226,25 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.errorPerson.ContainerControl = this;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.Firebrick;
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.Location = new System.Drawing.Point(53, 417);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(149, 35);
+            this.btnDelete.TabIndex = 44;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Visible = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // frmPersonAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 521);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.Radiodeath);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cbGender);
@@ -279,5 +294,6 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.OpenFileDialog ofdProfilPhoto;
         private System.Windows.Forms.RadioButton Radiodeath;
         private System.Windows.Forms.ErrorProvider errorPerson;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

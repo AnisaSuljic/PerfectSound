@@ -29,6 +29,7 @@ namespace PerfectSound.WinForms.Forms
             InitializeComponent();
             _sap = SAP;
             dgwEpisodes.AutoGenerateColumns = false;
+            dgvSeasons.AutoGenerateColumns = false;
             if (SAP != null)
                 isEdit = true;
             else
@@ -43,10 +44,21 @@ namespace PerfectSound.WinForms.Forms
         private async Task LoadDataAsync()
         {
             await LoadSeasonsAsync();
-            await LoadDGW();
+            await LoadDGWEpisodes();
+            await LoadDGWSeason();
         }
 
-        private async Task LoadDGW(PodcastSeason season=null)
+        private async Task LoadDGWSeason()
+        {
+            var SeasonList = await _SeasonService.GetAll<List<PodcastSeason>>();
+            List<PodcastSeason> finalList = new List<PodcastSeason>();
+            if (isEdit == true)
+                finalList = SeasonList.Where(s => s.SongAndPodcastId == _sap.SongAndPodcastId).ToList();
+
+            dgvSeasons.DataSource = finalList;
+        }
+
+        private async Task LoadDGWEpisodes(PodcastSeason season=null)
         {
             //lista svih epizoda iz baze
             var list = await _EpisodeService.GetAll<List<PodcastSeasonEpisode>>();
@@ -87,7 +99,7 @@ namespace PerfectSound.WinForms.Forms
                     }
                 }
             }
-            finalList = EpisodeList.ToList();
+            finalList = EpisodeList.OrderBy(e=>e.EpisodeNumber).ToList();
 
             List<frmEpisodesVM> vm = new List<frmEpisodesVM>();
 
@@ -109,23 +121,29 @@ namespace PerfectSound.WinForms.Forms
         {
             var SeasonList = await _SeasonService.GetAll<List<PodcastSeason>>();
             List<PodcastSeason> finalList = new List<PodcastSeason>();
-            if (isEdit==true)
+            List<PodcastSeason> finalList1 = new List<PodcastSeason>();
+            if (isEdit == true)
+            {
                 finalList = SeasonList.Where(s => s.SongAndPodcastId == _sap.SongAndPodcastId).ToList();
+                finalList1 = SeasonList.Where(s => s.SongAndPodcastId == _sap.SongAndPodcastId).ToList();
+            }
 
             cbSeason.DataSource = finalList;
             cbSeason.DisplayMember = "SeasonName";
             cbSeason.ValueMember = "PodcastSeasonId";
 
-            cbSeasonSearch.DataSource = finalList;
+            cbSeasonSearch.DataSource = finalList1;
             cbSeasonSearch.DisplayMember = "SeasonName";
             cbSeasonSearch.ValueMember = "PodcastSeasonId";
+
+
         }
 
         private async void cbSeasonSearch_SelectionChangeCommitted(object sender, EventArgs e)
         {
             var seasonID = cbSeasonSearch.SelectedValue;
             var season = await _SeasonService.GetById<PodcastSeason>(seasonID);
-            await LoadDGW(season);
+            await LoadDGWEpisodes(season);
         }
 
         private async void btnAddSeason_Click(object sender, EventArgs e)
@@ -212,6 +230,56 @@ namespace PerfectSound.WinForms.Forms
             frmSongAndPodcastAdd frmSongAndPodcastAdd = new frmSongAndPodcastAdd(_sap);
             frmSongAndPodcastAdd.MdiParent = frmHome.ActiveForm;
             frmSongAndPodcastAdd.Show();
+        }
+
+
+        private async void dgvSeasons_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                var item = dgvSeasons.SelectedRows[0].DataBoundItem;
+                var S = await _SeasonService.Delete<PodcastSeason>((item as PodcastSeason).PodcastSeasonId);
+                MessageBox.Show("Successfully deleted.");
+                this.Hide();
+                frmSeasonEpisodeAdd frm = new frmSeasonEpisodeAdd(_sap);
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Deleting was not successful.");
+                this.Hide();
+                frmSeasonEpisodeAdd frm = new frmSeasonEpisodeAdd(_sap);
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+        }
+
+        private void dgvSeasons_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private async void dgwEpisodes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                var item = dgwEpisodes.SelectedRows[0].DataBoundItem;
+                var E = await _EpisodeService.Delete<PodcastSeasonEpisode>((item as PodcastSeasonEpisode).PodcastSeasonEpisodeId);
+                MessageBox.Show("Successfully deleted.");
+                this.Hide();
+                frmSeasonEpisodeAdd frm = new frmSeasonEpisodeAdd(_sap);
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Deleting was not successful.");
+                this.Hide();
+                frmSeasonEpisodeAdd frm = new frmSeasonEpisodeAdd(_sap);
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
         }
     }
 }

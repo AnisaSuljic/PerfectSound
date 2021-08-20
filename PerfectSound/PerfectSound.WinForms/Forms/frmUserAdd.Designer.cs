@@ -54,6 +54,7 @@ namespace PerfectSound.WinForms.Forms
             this.checkPasswordConfirm = new System.Windows.Forms.CheckBox();
             this.lblGeneratePass = new System.Windows.Forms.LinkLabel();
             this.errorUser = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorUser)).BeginInit();
@@ -258,11 +259,25 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.errorUser.ContainerControl = this;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.Firebrick;
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.Location = new System.Drawing.Point(63, 529);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(149, 35);
+            this.btnDelete.TabIndex = 45;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Visible = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // frmUserAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 604);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblGeneratePass);
             this.Controls.Add(this.checkPasswordConfirm);
             this.Controls.Add(this.checkPassword);
@@ -321,5 +336,6 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.CheckBox checkPasswordConfirm;
         private System.Windows.Forms.LinkLabel lblGeneratePass;
         private System.Windows.Forms.ErrorProvider errorUser;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

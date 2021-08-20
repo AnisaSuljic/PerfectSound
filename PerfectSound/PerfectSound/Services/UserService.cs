@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Services.Users;
 using PerfectSound.Database;
 using PerfectSound.Helper;
 using PerfectSound.Interfaces;
@@ -100,21 +101,20 @@ namespace PerfectSound.Services
             _context.SaveChanges();
             return _mapper.Map<Model.Model.User>(x);
         }
-        /*public Model.Model.User Authenticate(UserLoginRequest request)
+
+        public async Task<Model.Model.User> Login(string username, string password)
         {
-            var user = _context.Users.Include("UserType").FirstOrDefault(x => x.UserName == request.Username);
+            var entity = await _context.Users.Include(u=>u.UserType).FirstOrDefaultAsync(x => x.UserName == username);
 
-            if (user != null)
-            {
-                var newHash = PasswordHash.GenerateHash(user.PasswordSalt, request.Password);
+            if (entity == null)
+                throw new UserException("Invalid username or password.");
 
-                if (newHash == user.PasswordHash)
-                {
-                    Model.Model.User tUser = _mapper.Map<Model.Model.User>(user);
-                    return tUser;
-                }
-            }
-            return null;
-        }*/
+            var hash = PasswordHash.GenerateHash(entity.PasswordSalt, password);
+
+            if (hash != entity.PasswordHash)
+                throw new UserException("Invalid username or password.");
+
+            return _mapper.Map<Model.Model.User>(entity);
+        }
     }
 }

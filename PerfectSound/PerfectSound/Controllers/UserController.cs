@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PerfectSound.Interfaces;
 using PerfectSound.Model.Requests;
 using PerfectSound.Model.Requests.User;
@@ -11,6 +12,7 @@ namespace PerfectSound.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private IUserService _service;
@@ -31,6 +33,7 @@ namespace PerfectSound.Controllers
             return _service.GetById(Id);
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public Model.Model.User Post(UserUpsertRequest request)
         {

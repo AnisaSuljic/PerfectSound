@@ -1,5 +1,6 @@
 ﻿using PerfectSound.Model.Model;
 using PerfectSound.Model.Requests.News;
+using PerfectSound.Model.ViewModels;
 using PerfectSound.WinForms.Helper;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace PerfectSound.WinForms.Forms
                 isEdit = true;
                 _news = N;
                 btnSaveNews.Text = "Update";
+                btnDelete.Visible = true;
             }
             else
             {
@@ -142,5 +144,26 @@ namespace PerfectSound.WinForms.Forms
             }
         }
 
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var N = await _NewsService.Delete<News>(_news.NewsId);
+                MessageBox.Show("Successfully deleted.");
+                this.Hide();
+                frmNewsSearch frm = new frmNewsSearch();
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Deleting was not successful.");
+                this.Hide();
+                frmNewsSearch frm = new frmNewsSearch();
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+            
+        }
     }
 }

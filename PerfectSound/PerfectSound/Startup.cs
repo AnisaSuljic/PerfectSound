@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using PerfectSound.Database;
 using PerfectSound.Filters;
 using PerfectSound.Interfaces;
@@ -19,6 +21,7 @@ using PerfectSound.Model.Requests.Quote;
 using PerfectSound.Model.Requests.SongAndPodcast;
 using PerfectSound.Model.Requests.SongAndPodcastGenre;
 using PerfectSound.Model.Requests.SongAndPodcastPerson;
+using PerfectSound.Security;
 using PerfectSound.Services;
 using System;
 using System.Collections.Generic;
@@ -44,8 +47,31 @@ namespace PerfectSound
                 x.Filters.Add<ErrorFilter>();
             });
 
+            // basic auth
+            services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
             // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PerfectSound API", Version = "v1" });
+
+                c.AddSecurityDefinition("basicAuth", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "basic"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "basicAuth" }
+                        },
+                        new string[]{}
+                    }
+                });
+            });
 
             //Context
             services.AddDbContext<PerfectSoundContext>(options =>
@@ -53,6 +79,9 @@ namespace PerfectSound
 
             //Automapper
             services.AddAutoMapper(typeof(Startup));
+
+           
+
 
             #region dependency injection
             //Onlyread classes 
@@ -99,8 +128,12 @@ namespace PerfectSound
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            
+            
+            app.UseAuthentication();
+            
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

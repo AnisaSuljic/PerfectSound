@@ -351,5 +351,26 @@ namespace PerfectSound.WinForms.Forms
             frm.MdiParent = frmHome.ActiveForm;
             frm.Show();
         }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var SAP = await _SongAndPodcastService.Delete<SongAndPodcast>(_songpodcast.SongAndPodcastId);
+                MessageBox.Show("Successfully deleted.");
+                this.Hide();
+                frmSongAndPodcastSearch frm = new frmSongAndPodcastSearch();
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Deleting was not successful.");
+                this.Hide();
+                frmSongAndPodcastSearch frm = new frmSongAndPodcastSearch();
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+        }
     }
 }

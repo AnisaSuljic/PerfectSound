@@ -15,5 +15,6 @@ namespace PerfectSound.Interfaces
         Model.Model.User Insert(UserUpsertRequest request);
         Model.Model.User Update(int Id, UserUpsertRequest request);
         Model.Model.User Delete(int Id);
+        Task<Model.Model.User> Login(string username, string password);
     }
 }

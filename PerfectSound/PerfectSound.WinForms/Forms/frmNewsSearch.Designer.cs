@@ -203,9 +203,9 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.DateTimePicker dtpPublicationDateSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtTitleSearch;
+        private System.Windows.Forms.RadioButton radioBtnUkljuciDatum;
         private System.Windows.Forms.DataGridViewTextBoxColumn Title;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn PublicationDate;
-        private System.Windows.Forms.RadioButton radioBtnUkljuciDatum;
     }
 }

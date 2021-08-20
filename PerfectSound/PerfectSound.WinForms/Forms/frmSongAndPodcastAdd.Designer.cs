@@ -56,6 +56,7 @@ namespace PerfectSound.WinForms.Forms
             this.btnSeasonEpisodeSetting = new System.Windows.Forms.Button();
             this.btnArtists = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorSoundAndPodcastAdd)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +66,7 @@ namespace PerfectSound.WinForms.Forms
             this.podcastBtn.AutoSize = true;
             this.podcastBtn.BackColor = System.Drawing.SystemColors.Control;
             this.podcastBtn.Checked = true;
-            this.podcastBtn.Location = new System.Drawing.Point(501, 396);
+            this.podcastBtn.Location = new System.Drawing.Point(520, 402);
             this.podcastBtn.Name = "podcastBtn";
             this.podcastBtn.Size = new System.Drawing.Size(80, 21);
             this.podcastBtn.TabIndex = 1;
@@ -78,7 +79,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.pbPoster.BackColor = System.Drawing.Color.White;
             this.pbPoster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbPoster.Location = new System.Drawing.Point(54, 31);
+            this.pbPoster.Location = new System.Drawing.Point(73, 37);
             this.pbPoster.Name = "pbPoster";
             this.pbPoster.Size = new System.Drawing.Size(149, 176);
             this.pbPoster.TabIndex = 2;
@@ -88,7 +89,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnAddPoster.BackColor = System.Drawing.Color.SlateBlue;
             this.btnAddPoster.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnAddPoster.Location = new System.Drawing.Point(54, 213);
+            this.btnAddPoster.Location = new System.Drawing.Point(73, 219);
             this.btnAddPoster.Name = "btnAddPoster";
             this.btnAddPoster.Size = new System.Drawing.Size(149, 35);
             this.btnAddPoster.TabIndex = 3;
@@ -100,7 +101,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.richtxtSong.BackColor = System.Drawing.Color.White;
             this.richtxtSong.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richtxtSong.Location = new System.Drawing.Point(622, 31);
+            this.richtxtSong.Location = new System.Drawing.Point(641, 37);
             this.richtxtSong.Name = "richtxtSong";
             this.richtxtSong.Size = new System.Drawing.Size(270, 335);
             this.richtxtSong.TabIndex = 4;
@@ -109,7 +110,7 @@ namespace PerfectSound.WinForms.Forms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(619, 11);
+            this.label1.Location = new System.Drawing.Point(638, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 17);
             this.label1.TabIndex = 5;
@@ -118,7 +119,7 @@ namespace PerfectSound.WinForms.Forms
             // Title
             // 
             this.Title.AutoSize = true;
-            this.Title.Location = new System.Drawing.Point(244, 11);
+            this.Title.Location = new System.Drawing.Point(263, 17);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(35, 17);
             this.Title.TabIndex = 6;
@@ -127,7 +128,7 @@ namespace PerfectSound.WinForms.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(244, 125);
+            this.label2.Location = new System.Drawing.Point(263, 131);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 17);
             this.label2.TabIndex = 7;
@@ -136,7 +137,7 @@ namespace PerfectSound.WinForms.Forms
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(244, 68);
+            this.label3.Location = new System.Drawing.Point(263, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 17);
             this.label3.TabIndex = 8;
@@ -145,7 +146,7 @@ namespace PerfectSound.WinForms.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(244, 182);
+            this.label4.Location = new System.Drawing.Point(263, 188);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 17);
             this.label4.TabIndex = 9;
@@ -154,7 +155,7 @@ namespace PerfectSound.WinForms.Forms
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(244, 298);
+            this.label5.Location = new System.Drawing.Point(263, 304);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 17);
             this.label5.TabIndex = 10;
@@ -162,28 +163,28 @@ namespace PerfectSound.WinForms.Forms
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(244, 31);
+            this.txtTitle.Location = new System.Drawing.Point(263, 37);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(337, 22);
             this.txtTitle.TabIndex = 11;
             // 
             // txtRunningTime
             // 
-            this.txtRunningTime.Location = new System.Drawing.Point(244, 88);
+            this.txtRunningTime.Location = new System.Drawing.Point(263, 94);
             this.txtRunningTime.Name = "txtRunningTime";
             this.txtRunningTime.Size = new System.Drawing.Size(337, 22);
             this.txtRunningTime.TabIndex = 12;
             // 
             // txtBudget
             // 
-            this.txtBudget.Location = new System.Drawing.Point(244, 202);
+            this.txtBudget.Location = new System.Drawing.Point(263, 208);
             this.txtBudget.Name = "txtBudget";
             this.txtBudget.Size = new System.Drawing.Size(310, 22);
             this.txtBudget.TabIndex = 13;
             // 
             // dtpReleaseDate
             // 
-            this.dtpReleaseDate.Location = new System.Drawing.Point(244, 145);
+            this.dtpReleaseDate.Location = new System.Drawing.Point(263, 151);
             this.dtpReleaseDate.Name = "dtpReleaseDate";
             this.dtpReleaseDate.Size = new System.Drawing.Size(337, 22);
             this.dtpReleaseDate.TabIndex = 15;
@@ -191,7 +192,7 @@ namespace PerfectSound.WinForms.Forms
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(244, 239);
+            this.label6.Location = new System.Drawing.Point(263, 245);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(137, 17);
             this.label6.TabIndex = 16;
@@ -200,7 +201,7 @@ namespace PerfectSound.WinForms.Forms
             // cbProdCompany
             // 
             this.cbProdCompany.FormattingEnabled = true;
-            this.cbProdCompany.Location = new System.Drawing.Point(244, 259);
+            this.cbProdCompany.Location = new System.Drawing.Point(263, 265);
             this.cbProdCompany.Name = "cbProdCompany";
             this.cbProdCompany.Size = new System.Drawing.Size(337, 24);
             this.cbProdCompany.TabIndex = 17;
@@ -209,7 +210,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnSaveSongPodcast.BackColor = System.Drawing.Color.SlateBlue;
             this.btnSaveSongPodcast.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnSaveSongPodcast.Location = new System.Drawing.Point(726, 471);
+            this.btnSaveSongPodcast.Location = new System.Drawing.Point(745, 477);
             this.btnSaveSongPodcast.Name = "btnSaveSongPodcast";
             this.btnSaveSongPodcast.Size = new System.Drawing.Size(166, 35);
             this.btnSaveSongPodcast.TabIndex = 18;
@@ -220,7 +221,7 @@ namespace PerfectSound.WinForms.Forms
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(565, 205);
+            this.label7.Location = new System.Drawing.Point(584, 211);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(16, 17);
             this.label7.TabIndex = 19;
@@ -229,7 +230,7 @@ namespace PerfectSound.WinForms.Forms
             // clbGenre
             // 
             this.clbGenre.FormattingEnabled = true;
-            this.clbGenre.Location = new System.Drawing.Point(244, 318);
+            this.clbGenre.Location = new System.Drawing.Point(263, 324);
             this.clbGenre.Name = "clbGenre";
             this.clbGenre.Size = new System.Drawing.Size(163, 106);
             this.clbGenre.TabIndex = 20;
@@ -245,7 +246,7 @@ namespace PerfectSound.WinForms.Forms
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(459, 68);
+            this.label8.Location = new System.Drawing.Point(478, 74);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(122, 17);
             this.label8.TabIndex = 21;
@@ -255,7 +256,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnSeasonEpisodeSetting.BackColor = System.Drawing.Color.SlateBlue;
             this.btnSeasonEpisodeSetting.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnSeasonEpisodeSetting.Location = new System.Drawing.Point(726, 389);
+            this.btnSeasonEpisodeSetting.Location = new System.Drawing.Point(745, 395);
             this.btnSeasonEpisodeSetting.Name = "btnSeasonEpisodeSetting";
             this.btnSeasonEpisodeSetting.Size = new System.Drawing.Size(166, 35);
             this.btnSeasonEpisodeSetting.TabIndex = 22;
@@ -267,7 +268,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnArtists.BackColor = System.Drawing.Color.SlateBlue;
             this.btnArtists.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnArtists.Location = new System.Drawing.Point(726, 430);
+            this.btnArtists.Location = new System.Drawing.Point(745, 436);
             this.btnArtists.Name = "btnArtists";
             this.btnArtists.Size = new System.Drawing.Size(166, 35);
             this.btnArtists.TabIndex = 23;
@@ -280,7 +281,7 @@ namespace PerfectSound.WinForms.Forms
             this.btnBack.BackColor = System.Drawing.Color.SlateBlue;
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnBack.Location = new System.Drawing.Point(54, 471);
+            this.btnBack.Location = new System.Drawing.Point(12, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(42, 35);
             this.btnBack.TabIndex = 50;
@@ -288,13 +289,27 @@ namespace PerfectSound.WinForms.Forms
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.Firebrick;
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.Location = new System.Drawing.Point(73, 477);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(149, 35);
+            this.btnDelete.TabIndex = 51;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Visible = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // frmSongAndPodcastAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(968, 535);
+            this.ClientSize = new System.Drawing.Size(968, 571);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnArtists);
             this.Controls.Add(this.btnSeasonEpisodeSetting);
@@ -357,5 +372,6 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.Button btnSeasonEpisodeSetting;
         private System.Windows.Forms.Button btnArtists;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

@@ -92,6 +92,7 @@ namespace PerfectSound.WinForms.Forms
             await LoadDGVdata();
         }
 
+
         private async void dgwData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var item = dgwData.SelectedRows[0].DataBoundItem;

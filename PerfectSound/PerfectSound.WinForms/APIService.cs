@@ -24,8 +24,8 @@ namespace PerfectSound.WinForms
 
             public async Task<T> GetAll<T>(object searchRequest = null)
             {
-                try
-                {
+                //try
+                //{
                     var query = "";
                     if (searchRequest != null)
                     {
@@ -33,24 +33,24 @@ namespace PerfectSound.WinForms
                     }
 
                     var list = await $"{endpoint}{_resource}?{query}"
-                        //.WithBasicAuth(username, password)
+                        .WithBasicAuth(username, password)
                         .GetJsonAsync<T>();
-                Console.WriteLine(list);
+                //Console.WriteLine(list);
                     return list;
-                }
-                catch (FlurlHttpException ex)
-                {
-                    var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+                //}
+                //catch (FlurlHttpException ex)
+                //{
+                //    var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
 
-                    var stringBuilder = new StringBuilder();
-                    foreach (var error in errors)
-                    {
-                        stringBuilder.AppendLine($"{error.Key}, {string.Join(",", error.Value)}");
-                    }
+                //    var stringBuilder = new StringBuilder();
+                //    foreach (var error in errors)
+                //    {
+                //        stringBuilder.AppendLine($"{error.Key}, {string.Join(",", error.Value)}");
+                //    }
 
-                    MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return default(T);
-                }
+                //    MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return default(T);
+                //}
             }
 
             public async Task<T> GetById<T>(object id)

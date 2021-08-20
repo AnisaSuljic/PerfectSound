@@ -199,5 +199,26 @@ namespace PerfectSound.WinForms.Forms
                 isChecked = false;
             }
         }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var P = await _PersonService.Delete<Person>(_person.PersonId);
+                MessageBox.Show("Successfully deleted.");
+                this.Hide();
+                frmPersonSearch frm = new frmPersonSearch();
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Deleting was not successful.");
+                this.Hide();
+                frmPersonSearch frm = new frmPersonSearch();
+                frm.MdiParent = frmHome.ActiveForm;
+                frm.Show();
+            }
+        }
     }
 }

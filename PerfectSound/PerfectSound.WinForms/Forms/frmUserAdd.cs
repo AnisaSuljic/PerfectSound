@@ -30,6 +30,7 @@ namespace PerfectSound.WinForms.Forms
                 _user = user;
                 isEdit = true;
                 btnAddUser.Text = "Update";
+                btnDelete.Visible = true;
 
             }
             else

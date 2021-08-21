@@ -218,5 +218,7 @@ namespace PerfectSound.WinForms.Forms
             frm.MdiParent = frmHome.ActiveForm;
             frm.Show();
         }
+
+        
     }
 }

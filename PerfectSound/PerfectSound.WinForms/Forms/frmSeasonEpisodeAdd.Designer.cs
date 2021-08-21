@@ -45,6 +45,7 @@ namespace PerfectSound.WinForms.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.txtEpisodeName = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.dgwEpisodes = new System.Windows.Forms.DataGridView();
             this.EpisodeNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,11 +56,10 @@ namespace PerfectSound.WinForms.Forms
             this.errorSeasonAdd = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnBack = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvSeasons = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtEpisodeNumber)).BeginInit();
@@ -210,6 +210,17 @@ namespace PerfectSound.WinForms.Forms
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(189, 111);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(200, 17);
+            this.label9.TabIndex = 52;
+            this.label9.Text = "*double click to delete episode";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -234,6 +245,7 @@ namespace PerfectSound.WinForms.Forms
             this.dgwEpisodes.Size = new System.Drawing.Size(352, 362);
             this.dgwEpisodes.TabIndex = 50;
             this.dgwEpisodes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwEpisodes_CellContentClick);
+            this.dgwEpisodes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwEpisodes_CellDoubleClick);
             // 
             // EpisodeNum
             // 
@@ -309,6 +321,17 @@ namespace PerfectSound.WinForms.Forms
             this.groupBox4.TabIndex = 52;
             this.groupBox4.TabStop = false;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(189, 32);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(196, 17);
+            this.label10.TabIndex = 53;
+            this.label10.Text = "*double click to delete season\r\n";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -341,28 +364,6 @@ namespace PerfectSound.WinForms.Forms
             this.dataGridViewTextBoxColumn2.HeaderText = "Season name";
             this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(189, 111);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(200, 17);
-            this.label9.TabIndex = 52;
-            this.label9.Text = "*double click to delete episode";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(189, 32);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(196, 17);
-            this.label10.TabIndex = 53;
-            this.label10.Text = "*double click to delete season\r\n";
             // 
             // frmSeasonEpisodeAdd
             // 

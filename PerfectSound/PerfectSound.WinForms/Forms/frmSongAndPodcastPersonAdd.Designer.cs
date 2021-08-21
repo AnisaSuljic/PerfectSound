@@ -245,6 +245,7 @@ namespace PerfectSound.WinForms.Forms
             this.dgwAllArtists.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwAllArtists.Size = new System.Drawing.Size(417, 420);
             this.dgwAllArtists.TabIndex = 46;
+            
             // 
             // ArtistsName
             // 

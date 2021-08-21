@@ -2,6 +2,7 @@
 using PerfectSound.Model.Requests.SongAndPodcast;
 using PerfectSound.Model.ViewModels;
 using PerfectSound.WinForms.Helper;
+using PerfectSound.WinForms.Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +23,8 @@ namespace PerfectSound.WinForms.Forms
         APIService _SongPodcastGenreService = new APIService("SongAndPodcastGenre");
         APIService _ProdCompService = new APIService("ProductionCompany");
         APIService _SongAndPodcastService = new APIService("SongAndPodcast");
-
+        List<frmSongOrPodcastVM> ReportVM;
+        SongAndPodcastSearchRequest ReportSearchRequest;
         public frmSongAndPodcastSearch()
         {
             InitializeComponent();
@@ -56,14 +58,9 @@ namespace PerfectSound.WinForms.Forms
             List<SongAndPodcast> FinalList = list.Where(x=>x.IsPodcast==SongOrPodcast).ToList();
 
             List<frmSongOrPodcastVM> vm = new List<frmSongOrPodcastVM>();
+            ReportVM = new List<frmSongOrPodcastVM>();
             foreach (var item in FinalList)
             {
-                string company="Nepoznato";
-                if (item.ProductionCompanyId != null)
-                {
-                    var tr = await _ProdCompService.GetById<ProductionCompany>(item.ProductionCompanyId);
-                    company = tr.ProductionCompanyName;
-                }
                 
                 frmSongOrPodcastVM viewmodel = new frmSongOrPodcastVM
                 {
@@ -75,14 +72,14 @@ namespace PerfectSound.WinForms.Forms
                     ProductionCompanyName=item.ProductionCompany.ProductionCompanyName
                 };
 
-                var x = item.SongAndPodcastGenre;
-                var y = item.Genre;
                 string lista="| ";
                 foreach (var i in item.Genre)
                 {
                     lista +=i.GenreName+" | ";
                 }
                 viewmodel.Genre = lista;
+
+                ReportVM.Add(viewmodel);
                 vm.Add(viewmodel);
             }
             dgwData.DataSource = vm;
@@ -91,13 +88,15 @@ namespace PerfectSound.WinForms.Forms
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             SongAndPodcastSearchRequest SearchRequest = new SongAndPodcastSearchRequest();
+            ReportSearchRequest = new SongAndPodcastSearchRequest();
 
-            if((int)cbGenreSearch.SelectedValue != 0 || cbGenreSearch!=null)
+            if ((int)cbGenreSearch.SelectedValue != 0 || cbGenreSearch!=null)
                 SearchRequest.GenreId = (int)cbGenreSearch.SelectedValue;
             if(dtpReleaseDateSearch.Enabled==true)
                 SearchRequest.ReleaseDate = dtpReleaseDateSearch.Value;
             SearchRequest.Title = txtTitleSearch.Text;
 
+            ReportSearchRequest = SearchRequest;
             await LoadDGVdata(SearchRequest);
         }
 
@@ -139,6 +138,12 @@ namespace PerfectSound.WinForms.Forms
             frmSongAndPodcastAdd frm = new frmSongAndPodcastAdd(SAP);
             frm.WindowState = FormWindowState.Normal;
             frm.MdiParent = frmHome.ActiveForm;
+            frm.Show();
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            frmRptSAP frm = new frmRptSAP(ReportVM, ReportSearchRequest,SongOrPodcast);
             frm.Show();
         }
     }

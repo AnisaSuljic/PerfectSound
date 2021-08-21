@@ -1,4 +1,5 @@
 ﻿using PerfectSound.WinForms.Forms;
+using PerfectSound.WinForms.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;

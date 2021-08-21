@@ -34,6 +34,7 @@ namespace PerfectSound.WinForms.Forms
                 isEdit = true;
                 _person = P;
                 btnAddPerson.Text = "Update";
+                btnDelete.Visible = true;
             }
             else
             {

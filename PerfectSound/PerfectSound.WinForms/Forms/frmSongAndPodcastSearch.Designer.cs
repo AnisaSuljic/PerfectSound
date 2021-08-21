@@ -46,6 +46,7 @@ namespace PerfectSound.WinForms.Forms
             this.ReleaseDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Budget = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductionCompany = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnReport = new System.Windows.Forms.Button();
             this.Filters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwData)).BeginInit();
             this.SuspendLayout();
@@ -219,12 +220,25 @@ namespace PerfectSound.WinForms.Forms
             this.ProductionCompany.Name = "ProductionCompany";
             this.ProductionCompany.ReadOnly = true;
             // 
+            // btnReport
+            // 
+            this.btnReport.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnReport.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnReport.Location = new System.Drawing.Point(768, 551);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(165, 34);
+            this.btnReport.TabIndex = 9;
+            this.btnReport.Text = "Report";
+            this.btnReport.UseVisualStyleBackColor = false;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
             // frmSongAndPodcastSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(945, 555);
+            this.ClientSize = new System.Drawing.Size(945, 597);
+            this.Controls.Add(this.btnReport);
             this.Controls.Add(this.dgwData);
             this.Controls.Add(this.Filters);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -258,5 +272,6 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn ReleaseDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Budget;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductionCompany;
+        private System.Windows.Forms.Button btnReport;
     }
 }

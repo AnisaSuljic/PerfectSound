@@ -60,12 +60,14 @@ namespace PerfectSound.Database
                 entity.HasOne(d => d.SongAndPodcast)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.SongAndPodcastId)
-                    .HasConstraintName("Comment_SongAndPodcast").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Comment_SongAndPodcast");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("Comment_User").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Comment_User");
             });
 
             modelBuilder.Entity<Gender>(entity =>
@@ -91,7 +93,8 @@ namespace PerfectSound.Database
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.News)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("User_News").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("User_News");
             });
 
             modelBuilder.Entity<Person>(entity =>
@@ -105,7 +108,8 @@ namespace PerfectSound.Database
                 entity.HasOne(d => d.Gender)
                     .WithMany(p => p.People)
                     .HasForeignKey(d => d.GenderId)
-                    .HasConstraintName("Person_Gender").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Person_Gender");
             });
 
             modelBuilder.Entity<PodcastSeason>(entity =>
@@ -118,7 +122,8 @@ namespace PerfectSound.Database
 
                 entity.HasOne(d => d.SongAndPodcast)
                     .WithMany(p => p.PodcastSeasons)
-                    .HasForeignKey(d => d.SongAndPodcastId).OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasForeignKey(d => d.SongAndPodcastId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("SongAndPodcastSeason_SongAndPodcast");
             });
 
@@ -132,7 +137,8 @@ namespace PerfectSound.Database
 
                 entity.HasOne(d => d.PodcastSeason)
                     .WithMany(p => p.PodcastSeasonEpisodes)
-                    .HasForeignKey(d => d.PodcastSeasonId).OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasForeignKey(d => d.PodcastSeasonId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("PodcastSeason_SongAndPodcast");
             });
 
@@ -153,7 +159,8 @@ namespace PerfectSound.Database
 
                 entity.HasOne(d => d.SongAndPodcast)
                     .WithMany(p => p.Quotes)
-                    .HasForeignKey(d => d.SongAndPodcastId).OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasForeignKey(d => d.SongAndPodcastId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("Quote_SongAndPodcast");
             });
 
@@ -170,12 +177,14 @@ namespace PerfectSound.Database
                 entity.HasOne(d => d.SongAndPodcast)
                     .WithMany(p => p.Ratings)
                     .HasForeignKey(d => d.SongAndPodcastId)
-                    .HasConstraintName("Rating_SongAndPodcast").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Rating_SongAndPodcast");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Ratings)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("Rating_User").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("Rating_User");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -197,7 +206,8 @@ namespace PerfectSound.Database
 
                 entity.HasOne(d => d.ProductionCompany)
                     .WithMany(p => p.SongAndPodcasts)
-                    .HasForeignKey(d => d.ProductionCompanyId).OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasForeignKey(d => d.ProductionCompanyId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("SongAndPodcast_ProductionCompany");
             });
 
@@ -214,12 +224,14 @@ namespace PerfectSound.Database
                 entity.HasOne(d => d.Genre)
                     .WithMany(p => p.SongAndPodcastGenres)
                     .HasForeignKey(d => d.GenreId)
-                    .HasConstraintName("SongAndPodcastGenre_Genre").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("SongAndPodcastGenre_Genre");
 
                 entity.HasOne(d => d.SongAndPodcast)
                     .WithMany(p => p.SongAndPodcastGenres)
                     .HasForeignKey(d => d.SongAndPodcastId)
-                    .HasConstraintName("SongAndPodcastGenre_SongAndPodcast").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("SongAndPodcastGenre_SongAndPodcast");
             });
 
             modelBuilder.Entity<SongAndPodcastPerson>(entity =>
@@ -237,17 +249,20 @@ namespace PerfectSound.Database
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.SongAndPodcastPeople)
                     .HasForeignKey(d => d.PersonId)
-                    .HasConstraintName("SongAndPodcastPerson_Person").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("SongAndPodcastPerson_Person");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.SongAndPodcastPeople)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("SongAndPodcastPerson_Role").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("SongAndPodcastPerson_Role");
 
                 entity.HasOne(d => d.SongAndPodcast)
                     .WithMany(p => p.SongAndPodcastPeople)
                     .HasForeignKey(d => d.SongAndPodcastId)
-                    .HasConstraintName("SongAndPodcastPerson_SongAndPodcast").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("SongAndPodcastPerson_SongAndPodcast");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -261,7 +276,8 @@ namespace PerfectSound.Database
                 entity.HasOne(d => d.UserType)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.UserTypeId)
-                    .HasConstraintName("User_UserType").OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("User_UserType");
             });
 
             modelBuilder.Entity<UserType>(entity =>

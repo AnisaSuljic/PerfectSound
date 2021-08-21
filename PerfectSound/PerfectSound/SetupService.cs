@@ -12,8 +12,8 @@ namespace PerfectSound
     {
         public static void Init(PerfectSoundContext context)
         {
-            context.Database.Migrate();
-
+            context.Database.EnsureCreated();
+            /*
             //DATA
 
             //user types
@@ -435,7 +435,7 @@ namespace PerfectSound
 
             //rating
             //comments
-            //quotes
+            //quotes*/
         }
     }
 }

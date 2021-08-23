@@ -11,9 +11,5 @@ namespace PerfectSound.Model.Model
         public string EpisodeName { get; set; }
         public int? EpisodeNumber { get; set; }
 
-        public static implicit operator PodcastSeasonEpisode(List<PodcastSeasonEpisode> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

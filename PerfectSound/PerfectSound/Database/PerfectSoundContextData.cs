@@ -338,9 +338,61 @@ namespace PerfectSound.Database
                     RoleId = 4
                 }
             );
+
             //rating
+
+            modelBuilder.Entity<Rating>().HasData(
+                new Rating()
+                {
+                    RatingId=1,
+                    SongAndPodcastId=1,
+                    UserId=2,
+                    RatingValue=3
+                },
+                new Rating()
+                {
+                    RatingId = 2,
+                    SongAndPodcastId = 2,
+                    UserId = 2,
+                    RatingValue = 4
+                }
+            );
             //comments
-            //quotes*/
+
+            modelBuilder.Entity<Comment>().HasData(
+                new Comment()
+                {
+                    CommentId=1,
+                    SongAndPodcastId=1,
+                    UserId=2,
+                    DateTimeOfComment=new DateTime(2021,07,26),
+                    Content="Komentar 1"
+                },
+                new Comment()
+                {
+                    CommentId = 2,
+                    SongAndPodcastId = 2,
+                    UserId = 2,
+                    DateTimeOfComment = new DateTime(2021, 07, 12),
+                    Content = "Komentar 2"
+                }
+            );
+            //quotes
+
+            modelBuilder.Entity<Quote>().HasData(
+                new Quote()
+                {
+                    QuoteId=1,
+                    SongAndPodcastId=1,
+                    QuoteText= "Just dive right in and follow my lead..."
+                },
+                new Quote()
+                {
+                    QuoteId = 2,
+                    SongAndPodcastId = 1,
+                    QuoteText = "I never knew you were the someone waiting for me..."
+                }
+            );
         }
     }
 }

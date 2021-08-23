@@ -354,7 +354,6 @@ namespace PerfectSound.WinForms.Forms
             this.dgvSeasons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSeasons.Size = new System.Drawing.Size(352, 441);
             this.dgvSeasons.TabIndex = 50;
-            this.dgvSeasons.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeasons_CellContentClick);
             this.dgvSeasons.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeasons_CellDoubleClick);
             // 
             // dataGridViewTextBoxColumn2

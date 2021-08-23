@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PerfectSound.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,21 +16,21 @@ namespace PerfectSound.Controllers
             _service = service;
         }
 
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public TModel Post(TInsert request)
         {
             return _service.Insert(request);
         }
 
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{Id}")]
         public TModel Update(int Id, [FromBody] TUpdate request)
         {
             return _service.Update(Id, request);
         }
 
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{Id}")]
         public TModel Delete(int Id)
         {

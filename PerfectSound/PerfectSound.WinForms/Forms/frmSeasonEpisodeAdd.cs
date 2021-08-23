@@ -255,44 +255,23 @@ namespace PerfectSound.WinForms.Forms
             }
         }
 
-        private void dgvSeasons_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private async void dgwEpisodes_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                var item = dgwEpisodes.SelectedRows[0].DataBoundItem;
-                var E = await _EpisodeService.Delete<PodcastSeasonEpisode>((item as frmEpisodesVM).Id);
-                MessageBox.Show("Successfully deleted.");
-                this.Hide();
-                frmSeasonEpisodeAdd frm = new frmSeasonEpisodeAdd(_sap);
-                frm.MdiParent = frmHome.ActiveForm;
-                frm.Show();
-            }
-            catch
-            {
-                MessageBox.Show("Deleting was not successful.");
-                this.Hide();
-                frmSeasonEpisodeAdd frm = new frmSeasonEpisodeAdd(_sap);
-                frm.MdiParent = frmHome.ActiveForm;
-                frm.Show();
-            }
-        }
 
         private async void dgwEpisodes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                var item = dgwEpisodes.SelectedRows[0].DataBoundItem;
-                var E = await _EpisodeService.Delete<PodcastSeasonEpisode>((item as frmEpisodesVM).Id);
-                MessageBox.Show("Successfully deleted.");
-                this.Hide();
-                frmSeasonEpisodeAdd frm = new frmSeasonEpisodeAdd(_sap);
-                frm.MdiParent = frmHome.ActiveForm;
-                frm.Show();
+                var item = dgwEpisodes.SelectedRows[0].DataBoundItem as frmEpisodesVM;
+                DialogResult result = MessageBox.Show("Do you want do delete this record?", "Warining", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    var E = await _EpisodeService.Delete<PodcastSeasonEpisode>(item.Id);
+                    MessageBox.Show("Successfully deleted.");
+                    this.Hide();
+                    frmSeasonEpisodeAdd frm = new frmSeasonEpisodeAdd(_sap);
+                    frm.MdiParent = frmHome.ActiveForm;
+                    frm.Show();
+                }
+                
             }
             catch
             {
@@ -302,6 +281,11 @@ namespace PerfectSound.WinForms.Forms
                 frm.MdiParent = frmHome.ActiveForm;
                 frm.Show();
             }
+        }
+
+        private void dgwEpisodes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

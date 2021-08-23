@@ -74,18 +74,29 @@ namespace PerfectSound.WinForms
                 }
                 catch (FlurlHttpException ex)
                 {
-                    var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+                //var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
 
-                    var stringBuilder = new StringBuilder();
-                    foreach (var error in errors)
+                //var stringBuilder = new StringBuilder();
+                //foreach (var error in errors)
+                //{
+                //    stringBuilder.AppendLine($"{error.Key}, {string.Join(",", error.Value)}");
+                //}
+
+                //MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //return default(T);
+
+                    if (ex.StatusCode < 500)
                     {
-                        stringBuilder.AppendLine($"{error.Key}, {string.Join(",", error.Value)}");
+                        if (ex.StatusCode == 401)
+                            MessageBox.Show("You do not have permission for this action.");
+                        MessageBox.Show($"You did something wrong!");
                     }
-
-                    MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return default(T);
+                    else
+                    {
+                        MessageBox.Show($"Server issue.");
+                    }
+                return default(T);
                 }
-
             }
 
             public async Task<T> Update<T>(int id, object request)

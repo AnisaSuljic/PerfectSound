@@ -1,5 +1,6 @@
 ﻿using PerfectSound.Model.Model;
 using PerfectSound.Model.Requests.News;
+using PerfectSound.Model.Requests.User;
 using PerfectSound.Model.ViewModels;
 using PerfectSound.WinForms.Helper;
 using System;
@@ -18,6 +19,7 @@ namespace PerfectSound.WinForms.Forms
     public partial class frmNewsAdd : Form
     {
         APIService _NewsService = new APIService("News");
+        APIService _UserService = new APIService("User");
         NewsUpsertRequest _upsertRequest = new NewsUpsertRequest();
 
         System.Byte[] file;
@@ -63,6 +65,12 @@ namespace PerfectSound.WinForms.Forms
             {
                 if (ErrorCheck() == true)
                 {
+                    var x = await _UserService.GetAll<List<User>>(new UserSearchRequest
+                    {
+                        UserName=APIService.username
+                    });
+                    _upsertRequest.UserId = x.FirstOrDefault().UserId;
+
                     _upsertRequest.Title = txtTitleNews.Text;
                     _upsertRequest.SubTitle = txtSubTitleNews.Text;
                     _upsertRequest.PublicationDate = dtpPublication.Value;
@@ -72,24 +80,31 @@ namespace PerfectSound.WinForms.Forms
                     {
                         if (isEdit == false)
                         {
-                            await _NewsService.Insert<News>(_upsertRequest);
-                            MessageBox.Show("Successfully added.");
-                            DialogResult = DialogResult.OK;
-                            Close();
-                            frmNewsSearch frm = new frmNewsSearch();
-                            frm.MdiParent = frmHome.ActiveForm;
-                            frm.Show();
+                            if (await _NewsService.Insert<News>(_upsertRequest) == default(News))
+                                return;
+                            else
+                            {
+                                MessageBox.Show("Successfully added.");
+                                DialogResult = DialogResult.OK;
+                                Close();
+                                frmNewsSearch frm = new frmNewsSearch();
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
                         }
                         else
                         {
-                            await _NewsService.Update<News>(_news.NewsId, _upsertRequest);
-                            MessageBox.Show("Successfully updated.");
-                            DialogResult = DialogResult.OK;
-                            Close();
-                            frmNewsSearch frm = new frmNewsSearch();
-                            frm.MdiParent = frmHome.ActiveForm;
-                            frm.Show();
-
+                            if (await _NewsService.Update<News>(_news.NewsId, _upsertRequest)== default(News))
+                                return;
+                            else
+                            {
+                                MessageBox.Show("Successfully updated.");
+                                DialogResult = DialogResult.OK;
+                                Close();
+                                frmNewsSearch frm = new frmNewsSearch();
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
                         }
 
 

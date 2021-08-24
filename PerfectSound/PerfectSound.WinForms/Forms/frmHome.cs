@@ -92,7 +92,13 @@ namespace PerfectSound.WinForms.Forms
         private void frmHome_Load(object sender, EventArgs e)
         {
             homeToolStripMenuItem_Click(sender, e);
-            
+            if (APIService.username != "Admin")
+            {
+                addEditSoundpodcastToolStripMenuItem.Enabled = false;
+                addToolStripMenuItem.Enabled = false;
+                usersToolStripMenuItem.Enabled = false;
+                addToolStripMenuItem2.Enabled = false;
+            }
         }
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:perfect_sound_mobile/services/APIService.dart';
+
+import 'SongAndPodcasts.dart';
 
 class News{
   final newsId;
@@ -14,6 +17,8 @@ class News{
   factory News.fromJson(Map<String,dynamic>json){
     String PhotoStringByte=json["coverPhoto"]as String;
     List<int>PhotoIntByte=base64.decode(PhotoStringByte);
+
+
 
     return News(
         newsId: ["newsId"],
@@ -34,3 +39,7 @@ class News{
     "coverPhoto":coverPhoto
   };
 }
+
+
+
+

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
+import 'Genre.dart';
+
 
 class SongAndPodcast{
   final songAndPodcastId;
@@ -23,15 +25,12 @@ class SongAndPodcast{
     String PhotoStringByte=json["poster"]as String;
     List<int>PhotoIntByte=base64.decode(PhotoStringByte);
 
-
     var genreList = <Genre>[];
     if (json['genre'] != null) {
       json['genre'].forEach((v) {
         genreList.add(new Genre.fromJson(v));
       });
     }
-
-
     return SongAndPodcast(
         songAndPodcastId: ["songAndPodcastId"],
         title: json["title"],
@@ -57,24 +56,5 @@ class SongAndPodcast{
 
   };
 
-
 }
 
-class Genre {
-  int? genreId;
-  String? genreName;
-
-  Genre({this.genreId, this.genreName});
-
-  Genre.fromJson(Map<String, dynamic> json) {
-    genreId = json['genreId'];
-    genreName = json['genreName'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['genreId'] = this.genreId;
-    data['genreName'] = this.genreName;
-    return data;
-  }
-}

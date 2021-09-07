@@ -21,13 +21,11 @@ class APIService{
   static Future<List<dynamic>?> Get(String route, dynamic object) async{
 
     String querryString=Uri(queryParameters: object).query;
-    String baseURL='https://d3c0-77-77-222-206.ngrok.io/api/'+route;
+    String baseURL='https://5515-77-77-222-133.ngrok.io/api/'+route;
 
     if(object!=null){
       baseURL=baseURL+'?'+querryString;
     }
-    print("querry string=> "+querryString);
-    print("url=> "+baseURL);
 
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
     final response=await http.get(
@@ -36,6 +34,7 @@ class APIService{
     );
 
     if(response.statusCode==200){
+      print("uspelo");
       var result=JsonDecoder().convert(response.body) as List;
       //print("result=> "+result.toString());
 
@@ -50,7 +49,7 @@ class APIService{
 
   static Future<dynamic> GetById(String route, dynamic id) async{
 
-    String baseURL='https://8040-77-77-222-220.ngrok.io/api/'+route+'/'+id;
+    String baseURL='https://5515-77-77-222-133.ngrok.io/api/'+route+'/'+id;
 
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
     final response=await http.get(
@@ -65,6 +64,28 @@ class APIService{
       return null;
     }
   }
+
+  //GetRandom
+  static Future<dynamic> GetRandom(String route) async{
+
+    String baseURL='https://5515-77-77-222-133.ngrok.io/api/'+route;
+
+    final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
+    final response=await http.get(
+      Uri.parse(baseURL),
+      headers:{HttpHeaders.authorizationHeader:basicAuth},
+    );
+    if(response.statusCode==200){
+      var result=JsonDecoder().convert(response.body);
+
+      return result;
+    }
+    else{
+      return null;
+    }
+  }
+
+
 
   //Post method
 

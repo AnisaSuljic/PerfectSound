@@ -6,6 +6,10 @@ import 'package:perfect_sound_mobile/models/News.dart';
 import 'package:perfect_sound_mobile/pages/NewsDetails.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
+import 'AllArtists.dart';
+import 'AllSongsAndPodcasts.dart';
+import 'Home.dart';
+
 class AllNews extends StatefulWidget {
   const AllNews({Key? key}) : super(key: key);
 
@@ -106,7 +110,7 @@ class _AllNewsState extends State<AllNews> {
   Widget bodyWidget() {
     return FutureBuilder<List<News>>(
       future: GetAllNews(titleFilterController.text),
-      builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: Text('Loading...'),
@@ -137,6 +141,7 @@ class _AllNewsState extends State<AllNews> {
     var newsList = await APIService.Get('News',querryParams);
     return newsList!.map((i) => News.fromJson(i)).toList();
   }
+
 
   Widget NewsWidget(news) {
     return Card(

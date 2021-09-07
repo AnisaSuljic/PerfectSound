@@ -18,12 +18,12 @@ namespace PerfectSound.Controllers
             _serviceQuote = (QuoteService)service;
         }
 
-        //[Route("[action]")]
-        //[HttpGet]
-        //public Quote GetRandomQuote()
-        //{
-        //    return _serviceQuote.GetRandom();
-        //}
+        [Route("[action]")]
+        [HttpGet]
+        public Quote GetRandomQuote()
+        {
+            return _serviceQuote.GetRandom();
+        }
 
     }
 }

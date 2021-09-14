@@ -2,7 +2,7 @@
 
 ## Idea
 
--Read more about [PerfectSound](https://edufit-my.sharepoint.com/:w:/g/personal/anisa_suljic_edu_fit_ba/ET9mEk8aQpFDnSNLYh2SCkAB7WVjrQGCNj1mf2a94tqhYQ?e=ycsRFn)
+-Read more about [PerfectSound](https://edufit-my.sharepoint.com/:b:/g/personal/anisa_suljic_edu_fit_ba/EeRZ9t7B3NRCuuT7vkYrd70Bja-6C0N3_9x3qmSUJ1gXOg?e=41VySf)
 
 
 ## Documentation:

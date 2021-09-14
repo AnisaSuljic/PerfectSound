@@ -4,7 +4,7 @@
 
 - EF CORE [How to use](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-5.0)
 
-- Swagger -> [How to use swagger](https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-5.0&tabs=visual-studio)
+- Swagger [How to use swagger](https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-5.0&tabs=visual-studio)
 
 - Nugget:
     * Microsoft.EntityFrameworkCore.Design

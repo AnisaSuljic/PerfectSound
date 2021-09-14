@@ -1,5 +1,10 @@
 # PerfectSound-Project
 
+## Idea
+
+-Read more about [PerfectSound](https://edufit-my.sharepoint.com/:w:/g/personal/anisa_suljic_edu_fit_ba/ET9mEk8aQpFDnSNLYh2SCkAB7WVjrQGCNj1mf2a94tqhYQ?e=ycsRFn)
+
+
 ## Documentation:
 
 - EF CORE [How to use](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-5.0)

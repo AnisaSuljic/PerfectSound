@@ -13,7 +13,6 @@ class Quote {
   Quote({this.quoteId, this.songAndPodcastId, this.quoteText,this.songAndPodcast});
 
   factory Quote.fromJson(Map<String, dynamic>json) {
-
     return Quote(
         quoteId : ['quoteId'],
         songAndPodcastId : json['songAndPodcastId'],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_sound_mobile/pages/AllNews.dart';
+import 'package:perfect_sound_mobile/pages/ArtistDetails.dart';
 import 'package:perfect_sound_mobile/pages/Home.dart';
 import 'package:perfect_sound_mobile/pages/Loading.dart';
 import 'package:perfect_sound_mobile/pages/Login.dart';
@@ -17,7 +18,7 @@ class PerfectSoundApp extends StatelessWidget {
       routes: {
         '/loading' :(context)=>Loading(),
         '/home':(context)=>Home(),
-        '/allnews':(context)=>AllNews()
+        //'/allnews':(context)=>AllNews(),
         // ostatak pageva
         // ...
       },

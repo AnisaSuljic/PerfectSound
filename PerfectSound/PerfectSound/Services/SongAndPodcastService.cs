@@ -48,6 +48,8 @@ namespace PerfectSound.Services
                 item.SongAndPodcastGenre = _mapper.Map <List< SongAndPodcastGenre >> (_context.SongAndPodcastGenres.Where(y => y.SongAndPodcastId == item.SongAndPodcastId));
                 item.Genre = _mapper.Map<List<Genre>>(_context.SongAndPodcastGenres.Include(x => x.Genre).Where(y => y.SongAndPodcastId == item.SongAndPodcastId).Select(z => z.Genre));
                 item.PodcastSeason = _mapper.Map <List< PodcastSeason >> (_context.PodcastSeasons.Where(y => y.SongAndPodcastId == item.SongAndPodcastId));
+                //item.SongAndPodcastPeople = _mapper.Map <List< SongAndPodcastPerson >> (_context.SongAndPodcastPeople.Include(x=>x.Role).Where(y => y.SongAndPodcastId == item.SongAndPodcastId));
+               // item.Person = _mapper.Map<List<Person>>(_context.SongAndPodcastPeople.Include(x => x.Person).Where(y => y.SongAndPodcastId == item.SongAndPodcastId).Select(z => z.Person));
             }
             return _searchSetList;
         }

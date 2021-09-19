@@ -1,14 +1,12 @@
-import 'dart:ui';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:perfect_sound_mobile/models/SongAndPodcastPerson.dart';
 import 'package:perfect_sound_mobile/models/SongAndPodcasts.dart';
 import 'package:perfect_sound_mobile/pages/SongAndPodcastDetails.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
-import 'AllArtists.dart';
-import 'AllNews.dart';
-import 'Home.dart';
 
 class AllSongsAndPodcasts extends StatelessWidget {
   final bool isPodcast;
@@ -41,7 +39,7 @@ class AllSongsAndPodcasts extends StatelessWidget {
     Map<String, String>?querryParams = null;
     querryParams = {'IsPodcast': ispodcast};
 
-    print('querryParams!!=> ' + querryParams.toString());
+    //print('querryParams!!=> ' + querryParams.toString());
 
     var SaPList = await APIService.Get('SongAndPodcast', querryParams);
     return SaPList!.map((i) => SongAndPodcast.fromJson(i)).toList();
@@ -63,6 +61,8 @@ class AllSongsAndPodcasts extends StatelessWidget {
           );
         } else {
           return ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
             children: snapshot.data!
                 .map((e) => SongAndPodcastWidget(e,context))
                 .toList(),
@@ -72,20 +72,66 @@ class AllSongsAndPodcasts extends StatelessWidget {
     );
   }
 
-  Widget SongAndPodcastWidget(SaP,BuildContext context) {
+  Future<List<SongAndPodcastPerson>> GetSinger(songAndPodcastId, int RoleId) async {
+    Map<String, String>?querryParams = null;
+    if(songAndPodcastId!=null){
+      querryParams = {'SongAndPodcastId': songAndPodcastId.toString()};
+    }
+
+    var Singers = await APIService.Get('SongAndPodcastPerson', querryParams);
+
+    print('Singers json '+Singers!.length.toString());
+
+    return Singers.map((i) => SongAndPodcastPerson.fromJson(i)).toList().where((element) => element.roleId==RoleId).toList();
+  }
+
+  Widget SingerSnapshotWidget(BuildContext context,int SaPID) {
+    return FutureBuilder<List<SongAndPodcastPerson>>(
+      future: GetSinger(SaPID,1),
+      builder: (BuildContext context,
+          AsyncSnapshot<List<SongAndPodcastPerson>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: Text(''),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('${snapshot.error}'),
+          );
+        } else {
+          return ListView(
+            children: snapshot.data!
+                .map((e) => SingerWidget(e,context))
+                .toList(),
+          );
+        }
+      },
+    );
+  }
+
+  Widget SingerWidget(SongAndPodcastPerson e, BuildContext context){
+    print(e.person!.firstName.toString()+' '+e.person!.lastName.toString());
+    return Text(e.person!.firstName.toString()+' '+e.person!.lastName.toString(),
+      textAlign: TextAlign.center,style: TextStyle(color: Colors.black,
+          backgroundColor: Colors.white.withOpacity(0.5)),);
+  }
+
+  Widget SongAndPodcastWidget(SongAndPodcast SaP,BuildContext context) {
+
     var running;
     if (SaP.runningTime == null)
       running = "Podcast";
     else
       running = SaP.runningTime.toString();
 
+    
     return Card(
 
       child: Container(
-          height: 100,
+          height: 150,
           decoration: BoxDecoration(
               image: DecorationImage(
-                image: MemoryImage(SaP.poster),
+                image: MemoryImage(SaP.poster as Uint8List),
                 fit: BoxFit.cover,
                 alignment: Alignment.topCenter,
               )
@@ -99,16 +145,18 @@ class AllSongsAndPodcasts extends StatelessWidget {
               },
               child: Column(
                 children: [
-                  Text(SaP.title, style: TextStyle(color: Colors.black,
+                  Text(SaP.title.toString(), style: TextStyle(color: Colors.black,
                       fontSize: 24,
                       backgroundColor: Colors.white.withOpacity(0.5))),
+                  Flexible(child: SingerSnapshotWidget(context,SaP.songAndPodcastId)),
+
                   Text(running, style: TextStyle(color: Colors.black,
                       backgroundColor: Colors.white.withOpacity(0.5))),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      for(var i = 0; i < SaP.genre.length; i++) Text(
-                          '| ' + SaP.genre[i].genreName + " |",
+                      for(var i = 0; i < SaP.genre!.length; i++) Text(
+                          '| ' + SaP.genre![i].genreName.toString() + " |",
                           style: TextStyle(color: Colors.black,
                               backgroundColor: Colors.white.withOpacity(0.5))),
                       Text('4.7', style: TextStyle(color: Colors.black,
@@ -116,13 +164,10 @@ class AllSongsAndPodcasts extends StatelessWidget {
                           backgroundColor: Colors.white.withOpacity(0.5)))
                     ],
                   ),
-
                 ],
               )
           )
       ),
-
     );
   }
-
 }

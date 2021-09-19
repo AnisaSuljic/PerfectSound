@@ -1,8 +1,8 @@
 import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:perfect_sound_mobile/models/Comment.dart';
 import 'package:perfect_sound_mobile/models/SongAndPodcasts.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
@@ -24,10 +24,22 @@ class SongAndPodcastDetails extends StatelessWidget {
         ],
         title: Text('Details'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: bodyWidget(),
-      ),
+      body:
+       Padding(
+         padding: const EdgeInsets.all(10.0),
+         child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+           children: [
+             bodyWidget(),
+             SizedBox(
+               height: 10,
+             ),
+             Text("Comments:",style: TextStyle(fontSize: 16),),
+             CommentWidget(),
+           ],
+         ),
+       ),
+
     );
   }
   Widget bodyWidget() {
@@ -86,7 +98,7 @@ class SongAndPodcastDetails extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 60,
-                        child: Text("Ocijeni  ",style: TextStyle(fontSize: 16)),
+                        child: Text("Rate  ",style: TextStyle(fontSize: 16)),
                       ),
                       Expanded(
                         flex: 40,
@@ -94,7 +106,7 @@ class SongAndPodcastDetails extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text('4.7',style: TextStyle(fontSize: 16,backgroundColor:Colors.grey.withOpacity(0.5),color: Colors.black),),
-                              Text('Prosječna ocjena',style: TextStyle(fontSize: 12,color: Colors.black))
+                              Text('Rating',style: TextStyle(fontSize: 12,color: Colors.black))
                             ],
                           )
                       )
@@ -120,7 +132,7 @@ class SongAndPodcastDetails extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Žanr:",style: TextStyle(fontSize: 16)),
+                    Text("Genre:",style: TextStyle(fontSize: 16)),
                     for(var i=0;i<songAndPodcast.genre!.length;i++) Text(' | '+songAndPodcast.genre![i].genreName.toString()+' | ',style: TextStyle(fontSize: 14,color: Colors.black))
                   ],
                 )
@@ -140,7 +152,7 @@ class SongAndPodcastDetails extends StatelessWidget {
                     [
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                        child: Text("Izvođači: ",style: TextStyle(fontSize: 16)),
+                        child: Text("Artists: ",style: TextStyle(fontSize: 16)),
                       ),
                     ]
                   ),
@@ -158,7 +170,6 @@ class SongAndPodcastDetails extends StatelessWidget {
                                 image: MemoryImage(songAndPodcast.poster as Uint8List)
                                 ),
                           ),
-                          Text("Naziv izvođača"+" | ")
                         ],
                       ),
                     )
@@ -167,22 +178,64 @@ class SongAndPodcastDetails extends StatelessWidget {
                ]
             )
         ),
-        Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: Row(
-                  children: [
-                    Text("Komentari: ",style: TextStyle(fontSize: 16))
-                  ],
-                ),
-              ),
-
-            ],
-          ),
-        )
       ],
     );
+  }
+
+  Widget CommentWidget() {
+    return FutureBuilder<List<Comment>>(
+      future: GetComment(),
+      builder: (BuildContext context, AsyncSnapshot<List<Comment>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: Text('Loading...'),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('${snapshot.error}'),
+          );
+        } else {
+          return ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            children: snapshot.data!.map((e) => CommentList(e)).toList(),
+          );
+        }
+      },
+    );
+  }
+
+  Future<List<Comment>> GetComment() async {
+    var CommentList = await APIService.Get('Comment',null);
+    return CommentList!.map((i) => Comment.fromJson(i)).toList();
+  }
+
+  Widget CommentList(Comment e){
+    return
+      Card(
+        child:  Container(
+          height: 80,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    Flexible(
+                      child:Text("By : "+ e.user!.userName.toString(),style: TextStyle(color: Colors.black)),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Flexible(
+                      child:Text(e.content as String,style: TextStyle(color: Colors.deepPurpleAccent)),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+    ),
+      );
   }
 }

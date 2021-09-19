@@ -136,7 +136,6 @@ class _AllNewsState extends State<AllNews> {
     if(isDateFiltered==true){
       querryParams={'PublicationDate':date.toIso8601String()};
     }
-    print('querryParams!!=> '+querryParams.toString());
 
     var newsList = await APIService.Get('News',querryParams);
     return newsList!.map((i) => News.fromJson(i)).toList();

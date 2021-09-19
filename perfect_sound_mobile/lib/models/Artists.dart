@@ -4,7 +4,7 @@ import 'Gender.dart';
 
 
 class Artists {
-  final personId;
+  final int? personId;
   final String? firstName;
   final String? lastName;
   final List<int>? photo;
@@ -31,14 +31,13 @@ class Artists {
 
   factory Artists.fromJson(Map<String, dynamic>json){
 
-    print('json '+json.toString());
     String PhotoStringByte=json["photo"]as String;
     List<int>PhotoIntByte=base64.decode(PhotoStringByte);
 
     var gender_ =json['gender'] != null ? new Gender.fromJson(json['gender']) : null;
 
     return Artists(
-        personId:["personId"],
+        personId:json["personId"],
         firstName:json["firstName"],
         lastName:json["lastName"],
         photo:PhotoIntByte,

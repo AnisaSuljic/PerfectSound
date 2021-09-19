@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:perfect_sound_mobile/models/News.dart';
 import 'package:perfect_sound_mobile/models/Quote.dart';
 import 'package:perfect_sound_mobile/models/SongAndPodcasts.dart';
@@ -130,17 +131,30 @@ class _HomeState extends State<Home> {
       drawer: Home.DrawerWidget(context),
        body:
       Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
         child: Column(
           children: [
-            QuoteWidget(),
+            Container(
+              height: 180,
+              decoration: BoxDecoration(color: Colors.grey.withOpacity(0.5)),
+              child:QuoteWidget()
+            ),
             SizedBox(
               height: 10,
             ),
-            Expanded(child:NewsWidget(),
-
+            Container(
+              height: 180,
+              decoration: BoxDecoration(color: Colors.grey.withOpacity(0.5)),
+                child:NewsWidget(),
             ),
-          //
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 180,
+              decoration: BoxDecoration(color: Colors.grey.withOpacity(0.5)),
+              child:SaPWidget(),
+            )
            ]
        )
       )
@@ -154,7 +168,7 @@ Widget QuoteWidget() {
     builder: (BuildContext context, AsyncSnapshot<Quote> snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return Center(
-          child: Text('Loading...')
+          child: Text('')
         );
       } else if (snapshot.hasError) {
         return Center(
@@ -182,12 +196,8 @@ GetSongAndPodcast(int id) async {
   return y;
 }
 
-Widget QuoteOfTheDay(Quote? x)
-{
-  return  Container(
-    height: 150,
-    decoration: BoxDecoration(color: Colors.grey.withOpacity(0.5)),
-    child: Padding(
+Widget QuoteOfTheDay(Quote? x){
+  return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
@@ -202,16 +212,20 @@ Widget QuoteOfTheDay(Quote? x)
           Container(
               child: Text(x!.quoteText.toString(),
                   style: TextStyle(fontSize: 16))),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(x.songAndPodcast!.title.toString()
-                    , style: TextStyle(fontSize: 12))])
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 50, 10, 10),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(x.songAndPodcast!.title.toString()
+                      , style: TextStyle(fontSize: 12))]),
+          )
         ],
-      ),
-    ),
+      )
   );
 }
+
+
 
 Widget NewsWidget() {
   return FutureBuilder<List<News>>(
@@ -227,6 +241,7 @@ Widget NewsWidget() {
         );
       } else {
         return ListView(
+          scrollDirection: Axis.horizontal,
           children: snapshot.data!.map((e) => Top3News(e)).toList(),
         );
       }
@@ -238,89 +253,93 @@ Future<List<News>> Get3News() async {
 
   var newsList = await APIService.Get('News',null);
   List<News> x=newsList!.map((i) => News.fromJson(i)).toList();
-  print("sdas 3: "+x[0].title.toString());
   List<News> top3=<News>[];
-  print("ff "+x.length.toString());
   for(int i =x.length-1;i>0;i--){
     if(top3.length==3)
       return top3;
     else
-      top3.add(x[i]);
+      {
+        top3.add(x[i]);
+      }
   }
-  print("lista 3: "+top3[0].title.toString());
+  //print(top3.length.toString());
   return top3;
 }
 
 Widget Top3News(News e){
-  return Text(e.title.toString());
+  return
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: Container(
+                height: 150,
+                width: 110,
+                decoration: BoxDecoration(color: Colors.amber),
+                child:Text(e.title.toString(),textAlign: TextAlign.center,)
+              ),
+          ),
+        ],
+      );
 }
 
-/*
-Container(
-    width: 100,
-    height: 120,
-    decoration: BoxDecoration(
-        color: Colors.pinkAccent.withOpacity(0.5)),
-    child: Column(
-      children: [
-        Text(e.title.toString(), style: TextStyle(fontSize: 16))
-      ],
-    ),
-  );*/
 
-Widget Top3SaP(){
-  return Container(
-      height: 200,
-      decoration: BoxDecoration(color: Colors.grey.withOpacity(0.5)),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-              child: Row(
-                children: [
-                  Text('Najnovije pjesme/podcasti : ',
-                      style: TextStyle(fontSize: 16))
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: 100,
-                  height: 120,
-                  decoration: BoxDecoration(
-                      color: Colors.pinkAccent.withOpacity(0.5)),
-                  child: Column(
-                    children: [],
-                  ),
-                ),
-                Container(
-                  width: 100,
-                  height: 120,
-                  decoration: BoxDecoration(
-                      color: Colors.pinkAccent.withOpacity(0.5)),
-                  child: Column(
-                    children: [],
-                  ),
-                ),
-                Container(
-                  width: 100,
-                  height: 120,
-                  decoration: BoxDecoration(
-                      color: Colors.pinkAccent.withOpacity(0.5)),
-                  child: Column(
-                    children: [],
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      )
+
+Widget SaPWidget() {
+  return FutureBuilder<List<SongAndPodcast>>(
+    future: Get3SaP(),
+    builder: (BuildContext context, AsyncSnapshot<List<SongAndPodcast>> snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(
+          child: Text(''),
+        );
+      } else if (snapshot.hasError) {
+        return Center(
+          child: Text('${snapshot.error}'),
+        );
+      } else {
+        return ListView(
+          scrollDirection: Axis.horizontal,
+          children: snapshot.data!.map((e) => Top3SaP(e)).toList(),
+        );
+      }
+    },
   );
+}
+
+Future<List<SongAndPodcast>> Get3SaP() async {
+
+  var SongAndPodcastList = await APIService.Get('SongAndPodcast',null);
+  List<SongAndPodcast> x=SongAndPodcastList!.map((i) => SongAndPodcast.fromJson(i)).toList();
+  List<SongAndPodcast> top3=<SongAndPodcast>[];
+  for(int i =x.length-1;i>0;i--){
+    if(top3.length==3)
+      return top3;
+    else
+    {
+      top3.add(x[i]);
+    }
+  }
+  return top3;
+}
+
+Widget Top3SaP(SongAndPodcast e){
+  return
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Container(
+              height: 150,
+              width: 110,
+              decoration: BoxDecoration(color: Colors.amber),
+              child:Text(e.title.toString(),textAlign: TextAlign.center,)
+          ),
+        ),
+      ],
+    );
 }
 
 

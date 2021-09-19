@@ -17,7 +17,6 @@ class _LoginState extends State<Login> {
 
   void GetData()async{
     result =await APIService.Get('User',null);
-    print('bog zna1'+result);
   }
   @override
   Widget build(BuildContext context) {

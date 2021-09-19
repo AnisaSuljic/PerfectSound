@@ -8,6 +8,8 @@ class APIService{
   static String? username;
   static String? password;
   String? route;
+  // static String? url='https://ebf1-109-175-38-152.ngrok.io';
+  static String? urlApi='https://c2e8-77-77-222-152.ngrok.io/api/';
 
   APIService({this.route});
 
@@ -21,7 +23,9 @@ class APIService{
   static Future<List<dynamic>?> Get(String route, dynamic object) async{
 
     String querryString=Uri(queryParameters: object).query;
-    String baseURL='https://5515-77-77-222-133.ngrok.io/api/'+route;
+    String baseURL=urlApi!+route;
+
+    print("querry singer"+querryString);
 
     if(object!=null){
       baseURL=baseURL+'?'+querryString;
@@ -49,7 +53,7 @@ class APIService{
 
   static Future<dynamic> GetById(String route, dynamic id) async{
 
-    String baseURL='https://5515-77-77-222-133.ngrok.io/api/'+route+'/'+id;
+    String baseURL=urlApi!+route+'/'+id;
 
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
     final response=await http.get(
@@ -68,7 +72,7 @@ class APIService{
   //GetRandom
   static Future<dynamic> GetRandom(String route) async{
 
-    String baseURL='https://5515-77-77-222-133.ngrok.io/api/'+route;
+    String baseURL=urlApi!+route;
 
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
     final response=await http.get(
@@ -85,13 +89,11 @@ class APIService{
     }
   }
 
-
-
   //Post method
 
   static Future<dynamic> Post(String route, String body) async{
 
-    String baseURL='https://8040-77-77-222-220.ngrok.io/api/'+route;
+    String baseURL=urlApi!+route;
 
     final response=await http.post(
       Uri.parse(baseURL),
@@ -108,4 +110,5 @@ class APIService{
       return null;
     }
   }
+
 }

@@ -9,9 +9,9 @@ using PerfectSound.Interfaces;
 
 namespace PerfectSound.Controllers
 {
-    public class CommentController : BaseCRUDController<Comment, object, CommentUpsertRequest, CommentUpsertRequest>
+    public class CommentController : BaseCRUDController<Comment, CommentSearchRequest, CommentUpsertRequest, CommentUpsertRequest>
     {
-        public CommentController(ICRUDService<Comment, object, CommentUpsertRequest, CommentUpsertRequest> service) : base(service)
+        public CommentController(ICRUDService<Comment, CommentSearchRequest, CommentUpsertRequest, CommentUpsertRequest> service) : base(service)
         {
         }
     }

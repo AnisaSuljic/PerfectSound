@@ -31,6 +31,7 @@ namespace PerfectSound.Services
                 _searchSet = _searchSet.Where(x => x.GenderId == search.GenderId);
             }
             return _mapper.Map<List<Person>>(_searchSet.ToList());
+
         }
 
     

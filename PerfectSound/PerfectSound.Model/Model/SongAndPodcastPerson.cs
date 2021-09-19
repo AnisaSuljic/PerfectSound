@@ -10,5 +10,10 @@ namespace PerfectSound.Model.Model
         public int? SongAndPodcastId { get; set; }
         public int? PersonId { get; set; }
         public int? RoleId { get; set; }
+
+        public Person Person { get; set; }
+        public SongAndPodcast SongAndPodcast { get; set; }
+        public Role Role { get; set; }
+
     }
 }

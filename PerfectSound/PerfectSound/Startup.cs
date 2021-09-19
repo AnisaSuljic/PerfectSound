@@ -102,7 +102,7 @@ namespace PerfectSound
             services.AddScoped<ICRUDService<Model.Model.Person,PersonSearchRequest,PersonUpsertRequest, PersonUpsertRequest>,PersonService>();
             services.AddScoped<ICRUDService<Model.Model.SongAndPodcastPerson, SongAndPodcastPersonSearchRequest, SongAndPodcastPersonUpsertRequest, SongAndPodcastPersonUpsertRequest>,SongAndPodcastPersonService>();
             services.AddScoped<ICRUDService<Model.Model.Quote, object, QuoteUpsertRequest, QuoteUpsertRequest>,QuoteService>();
-            services.AddScoped<ICRUDService<Model.Model.Comment, object, CommentUpsertRequest, CommentUpsertRequest>,CommentService>();
+            services.AddScoped<ICRUDService<Model.Model.Comment, CommentSearchRequest, CommentUpsertRequest, CommentUpsertRequest>,CommentService>();
             services.AddScoped<ICRUDService<Model.Model.SongAndPodcastGenre, SongAndPodcastGenreSearchRequest, SongAndPodcastGenreUpsertRequest, SongAndPodcastGenreUpsertRequest>,SongAndPodcastGenreService>();
 
 

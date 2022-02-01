@@ -1,6 +1,7 @@
 ﻿using PerfectSound.Model.Model;
 using PerfectSound.Model.Requests.User;
 using PerfectSound.Model.ViewModels;
+using PerfectSound.WinForms.Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -101,5 +102,7 @@ namespace PerfectSound.WinForms.Forms
             frm.WindowState = FormWindowState.Normal;
             frm.Show();
         }
+
+       
     }
 }

@@ -136,7 +136,7 @@ namespace PerfectSound.WinForms.Forms
             this.dgwUser.RowHeadersWidth = 51;
             this.dgwUser.RowTemplate.Height = 24;
             this.dgwUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwUser.Size = new System.Drawing.Size(918, 271);
+            this.dgwUser.Size = new System.Drawing.Size(918, 265);
             this.dgwUser.TabIndex = 1;
             this.dgwUser.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwUser_CellDoubleClick);
             // 

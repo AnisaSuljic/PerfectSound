@@ -1,6 +1,7 @@
 ﻿using PerfectSound.Model.Model;
 using PerfectSound.Model.Requests.Person;
 using PerfectSound.Model.ViewModels;
+using PerfectSound.WinForms.Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,8 @@ namespace PerfectSound.WinForms.Forms
     {
         APIService _GenderService = new APIService("Gender");
         APIService _PersonService = new APIService("Person");
-
+        List<frmPersonVM> ReportVM;
+        PersonSearchRequest ReportSearchRequest;
         public frmPersonSearch()
         {
             InitializeComponent();
@@ -45,8 +47,10 @@ namespace PerfectSound.WinForms.Forms
         {
             var list = await _PersonService.GetAll<List<Person>>(search);
 
-            List<frmPersonVM> vm = new List<frmPersonVM>();
 
+
+            List<frmPersonVM> vm = new List<frmPersonVM>();
+            ReportVM = new List<frmPersonVM>();
             foreach (var item in list)
             {
                 frmPersonVM viewmodel = new frmPersonVM
@@ -66,6 +70,7 @@ namespace PerfectSound.WinForms.Forms
                 vm.Add(viewmodel);
             }
             dgwPersonData.DataSource = vm;
+            ReportVM = vm;
         }
 
         private async void dgwPersonData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -80,13 +85,14 @@ namespace PerfectSound.WinForms.Forms
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             PersonSearchRequest SearchRequest = new PersonSearchRequest();
-
+            ReportSearchRequest = new PersonSearchRequest();
             if ((int)cbGenderSearch.SelectedValue != 0 || cbGenderSearch != null)
                 SearchRequest.GenderId = (int)cbGenderSearch.SelectedValue;
             
             SearchRequest.FirstName = txtFirstnameSearch.Text;
             SearchRequest.LastName = txtLastnameSearch.Text;
 
+            ReportSearchRequest = SearchRequest;
             await LoadDGVData(SearchRequest);
         }
 
@@ -95,6 +101,12 @@ namespace PerfectSound.WinForms.Forms
             txtFirstnameSearch.Text = "";
             txtLastnameSearch.Text = "";
             await LoadDataAsync();
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            frmRptArtists frm = new frmRptArtists(ReportVM,ReportSearchRequest);
+            frm.Show();
         }
     }
 }

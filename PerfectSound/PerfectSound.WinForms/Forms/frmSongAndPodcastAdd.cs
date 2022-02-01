@@ -51,6 +51,8 @@ namespace PerfectSound.WinForms.Forms
             {
                 isEdit = false;
                 btnBack.Visible = false;
+                btnArtists.Visible = false;
+                btnSeasonEpisodeSetting.Visible = false;
             }
         }
         private async void SongAndPodcastAdd_LoadAsync(object sender, EventArgs e)
@@ -158,7 +160,10 @@ namespace PerfectSound.WinForms.Forms
                                 await _SongAndPodcastService.Insert<SongAndPodcast>(_upsertRequest);
                                 MessageBox.Show("Successfully added.");
 
-                                SongAndPodcast obj = await _SongAndPodcastService.GetById<SongAndPodcast>(_songpodcast.SongAndPodcastId);
+                                var all =await _SongAndPodcastService.GetAll<List<SongAndPodcast>>();
+                                var a = all.Last();
+
+                                SongAndPodcast obj = await _SongAndPodcastService.GetById<SongAndPodcast>(a.SongAndPodcastId);
 
                                 frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd(obj);
                                 frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;

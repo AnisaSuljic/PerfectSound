@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PerfectSound.Model.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace PerfectSound.WinForms.Forms
     public partial class frmHome : Form
     {
         private int childFormNumber = 0;
+        APIService _UserService = new APIService("User");
 
         public frmHome()
         {
@@ -89,10 +91,14 @@ namespace PerfectSound.WinForms.Forms
             frmAddSongPod.Show();
         }
 
-        private void frmHome_Load(object sender, EventArgs e)
+        private async void frmHome_Load(object sender, EventArgs e)
         {
             homeToolStripMenuItem_Click(sender, e);
-            if (APIService.username != "Admin")
+
+            var allusers = await _UserService.GetAll<List<User>>();
+
+            var logeduser_type = allusers.Where(u => u.UserName == APIService.username).Select(uid => uid.UserType).FirstOrDefault();
+            if (logeduser_type.Type != "Admin")
             {
                 addEditSoundpodcastToolStripMenuItem.Enabled = false;
                 addToolStripMenuItem.Enabled = false;

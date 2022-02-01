@@ -45,6 +45,7 @@ namespace PerfectSound.WinForms.Forms
             this.cbGenderSearch = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFirstnameSearch = new System.Windows.Forms.TextBox();
+            this.btnReport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwPersonData)).BeginInit();
             this.Filters.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +67,7 @@ namespace PerfectSound.WinForms.Forms
             this.dgwPersonData.RowHeadersWidth = 51;
             this.dgwPersonData.RowTemplate.Height = 24;
             this.dgwPersonData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwPersonData.Size = new System.Drawing.Size(921, 265);
+            this.dgwPersonData.Size = new System.Drawing.Size(921, 224);
             this.dgwPersonData.TabIndex = 3;
             this.dgwPersonData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwPersonData_CellDoubleClick);
             // 
@@ -205,11 +206,24 @@ namespace PerfectSound.WinForms.Forms
             this.txtFirstnameSearch.Size = new System.Drawing.Size(288, 22);
             this.txtFirstnameSearch.TabIndex = 0;
             // 
+            // btnReport
+            // 
+            this.btnReport.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnReport.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnReport.Location = new System.Drawing.Point(778, 509);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(165, 34);
+            this.btnReport.TabIndex = 11;
+            this.btnReport.Text = "Report";
+            this.btnReport.UseVisualStyleBackColor = false;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
             // frmPersonSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(966, 554);
+            this.Controls.Add(this.btnReport);
             this.Controls.Add(this.dgwPersonData);
             this.Controls.Add(this.Filters);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -239,5 +253,6 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn Gender;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateOfBirth;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.Button btnReport;
     }
 }

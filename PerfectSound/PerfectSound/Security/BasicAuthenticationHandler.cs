@@ -45,7 +45,10 @@ namespace PerfectSound.Security
 
                 return AuthenticateResult.Fail("Incorrect username or password.");
             }
-
+            if (user == null)
+            {
+                return AuthenticateResult.Fail("Incorrect username or password.");
+            }
             var claims = new List<Claim> {
                     new Claim(ClaimTypes.NameIdentifier, user.UserName),
                     new Claim(ClaimTypes.Name, user.FirstName),

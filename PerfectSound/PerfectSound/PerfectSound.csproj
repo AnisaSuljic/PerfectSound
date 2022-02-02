@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -18,7 +19,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1449.0" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="140.340.80" />
+    <PackageReference Include="Microsoft.SqlServer.Types" Version="14.0.314.76" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
     <PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="16.190.0-preview" />
     <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.14" />

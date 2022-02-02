@@ -22,9 +22,13 @@ services:
     environment:
       - ConnectionStrings:DefaultConnection=Server=app-sql,1433;Database=AppDb;User=sa;Password=QWElkj132!;ConnectRetryCount=0
     ports:
-      - 5000:80
+      - 5010:5010
     networks:
       - appnet
+    links:
+      - app-sql
+    depends_on:
+      - app-sql
 
 networks:
   appnet:

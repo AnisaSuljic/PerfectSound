@@ -84,7 +84,7 @@ namespace PerfectSound.Database
                     Title = "Selena Gomez: 'I won't ever quit making music'",
                     SubTitle = "Selena Gomez is putting to rest rumours that she's quitting the music industry.",
                     PublicationDate = DateTime.Today,
-                    CoverPhoto = File.ReadAllBytes("img/edsheeran.jpg"),
+                    CoverPhoto = File.ReadAllBytes("img/selena.jpg"),
                     Content = "'I don't think I'll ever quit making music,' the Love You Like a Love Song singer reassured fans. " +
                 "'I'm not saying I want a Grammy. I just feel like I'm doing the best I can, and it's all about me. Sometimes, that can really get to me.'The Only Murders in the Building star put out her first - ever Spanish - language EP," +
                 "Revelación, earlier this year.When talking about the experience of making the album,she opened up about using a Spanish coach after struggling to sing in the language."
@@ -170,7 +170,7 @@ namespace PerfectSound.Database
                     PersonId = 1,
                     FirstName = "Selena",
                     LastName = "Gomez",
-                    Photo = File.ReadAllBytes("img/edsheeran.jpg"),
+                    Photo = File.ReadAllBytes("img/selena.jpg"),
                     Biography = "Actress and singer Selena Gomez was born on July 22, 1992 in Grand Prairie, Texas. She is the daughter of Mandy Teefey and Ricardo Gomez. Her mother is of part Italian ancestry, and her father is of Mexican descent. She was named after Tejano singer Selena, who died in 1995.",
                     DateOfBirth = new DateTime(1992, 07, 22),
                     PlaceOfBirth = "Grand Prairie, Texas, SAD",

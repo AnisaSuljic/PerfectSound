@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  PerfectSound-sql:
+  perfectsound-sql:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     restart: unless-stopped
     environment:
@@ -11,25 +11,25 @@ services:
     ports:
       - 1433:1433
     networks:
-      - PerfectSoundnet
+      - perfectsoundnet
 
     
-  PerfectSound-api:
+  perfectsound-api:
     restart: unless-stopped
     build: 
       context: .
       dockerfile: Dockerfile
     environment:
-      - ConnectionStrings:DefaultConnection=Server=PerfectSound-sql,1433;Database=PerfectSoundDb;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+      - ConnectionStrings:DefaultConnection=Server=perfectsound-sql,1433;Database=perfectsoundDb;User=sa;Password=QWElkj132!;ConnectRetryCount=0
     ports:
       - 5010:5010
     networks:
-      - PerfectSoundnet
+      - perfectsoundnet
     links:
-      - PerfectSound-sql
+      - perfectsound-sql
     depends_on:
-      - PerfectSound-sql
+      - perfectsound-sql
 
 networks:
-  PerfectSoundnet:
+  perfectsoundnet:
     driver: bridge

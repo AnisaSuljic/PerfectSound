@@ -12,6 +12,6 @@ RUN dotnet publish "PerfectSound" -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-
+ADD /Images img/
 
 ENTRYPOINT ["dotnet", "PerfectSound.dll"]

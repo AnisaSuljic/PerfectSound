@@ -20,7 +20,7 @@ namespace PerfectSound
             using (var scope = host.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<PerfectSoundContext>();
-               SetupService.Init(context);
+               //SetupService.Init(context);
             }
             host.Run();
         }

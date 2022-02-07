@@ -354,7 +354,14 @@ namespace PerfectSound.Database
                     RatingId = 2,
                     SongAndPodcastId = 2,
                     UserId = 2,
-                    RatingValue = 4
+                    RatingValue = 4.5
+                },
+                new Rating()
+                {
+                    RatingId = 3,
+                    SongAndPodcastId = 1,
+                    UserId = 1,
+                    RatingValue = 5
                 }
             );
             //comments

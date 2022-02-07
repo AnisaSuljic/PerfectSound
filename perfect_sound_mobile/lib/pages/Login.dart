@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:perfect_sound_mobile/models/News.dart';
+import 'package:perfect_sound_mobile/models/Users.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
 class Login extends StatefulWidget {
@@ -14,9 +14,13 @@ class _LoginState extends State<Login> {
   TextEditingController passwordController=new TextEditingController();
   var result;
 
-
-  void GetData()async{
-    result =await APIService.Get('User',null);
+  Future<void> GetUserID(String username)async{
+    Map<String, String>?queryParams;
+    if(username!=''){
+      queryParams = {'User': username};
+    }
+    var result1 = await APIService.Get('User',queryParams);
+    APIService.userID= result1!.map((i) => Users.fromJson(i)).toList().first.userId;
   }
   @override
   Widget build(BuildContext context) {
@@ -67,11 +71,12 @@ class _LoginState extends State<Login> {
                   color: Colors.deepPurpleAccent,
                   borderRadius: BorderRadius.circular(25)
                 ),
-                child: TextButton(onPressed: (){
-                  print(usernameController.text);
-                  print(passwordController.text);
+                child: TextButton(onPressed: () async {
+
                   APIService.username=usernameController.text;
                   APIService.password=passwordController.text;
+                  await GetUserID(usernameController.text);
+
                   if(result!=''){
                     Navigator.of(context).pushReplacementNamed('/home');
                   }

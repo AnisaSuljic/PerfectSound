@@ -51,6 +51,9 @@ namespace PerfectSound.Mapper
             CreateMap<Comment, Model.Model.Comment>().ReverseMap();
             CreateMap<Model.Requests.Comment.CommentUpsertRequest, Database.Comment>().ReverseMap();
 
+            CreateMap<Rating, Model.Model.Rating>().ReverseMap();
+            CreateMap<Model.Requests.Rating.RatingUpsertRequest, Database.Rating>().ReverseMap();
+
             CreateMap<SongAndPodcastGenre, Model.Model.SongAndPodcastGenre>().ReverseMap();
             CreateMap<Model.Requests.SongAndPodcastGenre.SongAndPodcastGenreUpsertRequest, Database.SongAndPodcastGenre>().ReverseMap();
 

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -262,7 +260,6 @@ Future<List<News>> Get3News() async {
         top3.add(x[i]);
       }
   }
-  //print(top3.length.toString());
   return top3;
 }
 

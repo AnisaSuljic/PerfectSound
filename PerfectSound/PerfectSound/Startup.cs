@@ -18,6 +18,7 @@ using PerfectSound.Model.Requests.Person;
 using PerfectSound.Model.Requests.PodcastSeason;
 using PerfectSound.Model.Requests.PodcastSeasonEpisode;
 using PerfectSound.Model.Requests.Quote;
+using PerfectSound.Model.Requests.Rating;
 using PerfectSound.Model.Requests.SongAndPodcast;
 using PerfectSound.Model.Requests.SongAndPodcastGenre;
 using PerfectSound.Model.Requests.SongAndPodcastPerson;
@@ -103,6 +104,7 @@ namespace PerfectSound
             services.AddScoped<ICRUDService<Model.Model.SongAndPodcastPerson, SongAndPodcastPersonSearchRequest, SongAndPodcastPersonUpsertRequest, SongAndPodcastPersonUpsertRequest>,SongAndPodcastPersonService>();
             services.AddScoped<ICRUDService<Model.Model.Quote, object, QuoteUpsertRequest, QuoteUpsertRequest>,QuoteService>();
             services.AddScoped<ICRUDService<Model.Model.Comment, CommentSearchRequest, CommentUpsertRequest, CommentUpsertRequest>,CommentService>();
+            services.AddScoped<ICRUDService<Model.Model.Rating, RatingSearchRequest, RatingUpsertRequest, RatingUpsertRequest>, RatingService>();
             services.AddScoped<ICRUDService<Model.Model.SongAndPodcastGenre, SongAndPodcastGenreSearchRequest, SongAndPodcastGenreUpsertRequest, SongAndPodcastGenreUpsertRequest>,SongAndPodcastGenreService>();
 
 

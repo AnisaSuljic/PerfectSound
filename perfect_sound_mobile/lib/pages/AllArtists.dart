@@ -4,9 +4,6 @@ import 'package:perfect_sound_mobile/models/Artists.dart';
 import 'package:perfect_sound_mobile/pages/ArtistDetails.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
-import 'AllNews.dart';
-import 'AllSongsAndPodcasts.dart';
-import 'Home.dart';
 
 class AllArtists extends StatelessWidget {
 
@@ -32,11 +29,6 @@ class AllArtists extends StatelessWidget {
   }
 
   Future<List<Artists>> GetAllArtists() async {
-    // Map<String, String>?querryParams = null;
-    // querryParams = {'IsPodcast': ispodcast};
-    //
-    // print('querryParams!!=> ' + querryParams.toString());
-
     var ArtistsList = await APIService.Get('Person',null);
     return ArtistsList!.map((i) => Artists.fromJson(i)).toList();
   }

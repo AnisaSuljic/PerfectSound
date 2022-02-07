@@ -6,9 +6,6 @@ import 'package:perfect_sound_mobile/models/News.dart';
 import 'package:perfect_sound_mobile/pages/NewsDetails.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
-import 'AllArtists.dart';
-import 'AllSongsAndPodcasts.dart';
-import 'Home.dart';
 
 class AllNews extends StatefulWidget {
   const AllNews({Key? key}) : super(key: key);
@@ -65,7 +62,6 @@ class _AllNewsState extends State<AllNews> {
                   onChanged:(newVel){
                     setState(() {
                       isDateFiltered=false;
-                  var titleFilter=titleFilterController.text;
                   GetAllNews(titleFilterController.text);
                   });
                   },
@@ -95,6 +91,7 @@ class _AllNewsState extends State<AllNews> {
               onPressed: (){
                     setState(() {
                       isDateFiltered=false;
+                      titleFilterController.text='';
                       GetAllNews(titleFilterController.text);
                     });
               },
@@ -129,15 +126,15 @@ class _AllNewsState extends State<AllNews> {
   }
 
   Future<List<News>> GetAllNews(String titleFilter) async {
-    Map<String,String>?querryParams=null;
-    if(titleFilter!=null || titleFilter!=''){
-      querryParams={'Title':titleFilter.toString()};
+    Map<String,String>?queryParams;
+    if(titleFilter!=''){
+      queryParams={'Title':titleFilter.toString()};
     }
     if(isDateFiltered==true){
-      querryParams={'PublicationDate':date.toIso8601String()};
+      queryParams={'PublicationDate':date.toIso8601String()};
     }
 
-    var newsList = await APIService.Get('News',querryParams);
+    var newsList = await APIService.Get('News',queryParams);
     return newsList!.map((i) => News.fromJson(i)).toList();
   }
 

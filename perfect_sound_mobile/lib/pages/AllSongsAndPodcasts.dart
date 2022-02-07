@@ -36,11 +36,8 @@ class AllSongsAndPodcasts extends StatelessWidget {
 
   Future<List<SongAndPodcast>> GetAllSongs() async {
     var ispodcast=this.isPodcast.toString();
-    Map<String, String>?querryParams = null;
+    Map<String, String>?querryParams;
     querryParams = {'IsPodcast': ispodcast};
-
-    //print('querryParams!!=> ' + querryParams.toString());
-
     var SaPList = await APIService.Get('SongAndPodcast', querryParams);
     return SaPList!.map((i) => SongAndPodcast.fromJson(i)).toList();
   }
@@ -73,16 +70,12 @@ class AllSongsAndPodcasts extends StatelessWidget {
   }
 
   Future<List<SongAndPodcastPerson>> GetSinger(songAndPodcastId, int RoleId) async {
-    Map<String, String>?querryParams = null;
+    Map<String, String>?querryParams;
     if(songAndPodcastId!=null){
       querryParams = {'SongAndPodcastId': songAndPodcastId.toString()};
     }
-
     var Singers = await APIService.Get('SongAndPodcastPerson', querryParams);
-
-    print('Singers json '+Singers!.length.toString());
-
-    return Singers.map((i) => SongAndPodcastPerson.fromJson(i)).toList().where((element) => element.roleId==RoleId).toList();
+    return Singers!.map((i) => SongAndPodcastPerson.fromJson(i)).toList().where((element) => element.roleId==RoleId).toList();
   }
 
   Widget SingerSnapshotWidget(BuildContext context,int SaPID) {
@@ -110,7 +103,6 @@ class AllSongsAndPodcasts extends StatelessWidget {
   }
 
   Widget SingerWidget(SongAndPodcastPerson e, BuildContext context){
-    print(e.person!.firstName.toString()+' '+e.person!.lastName.toString());
     return Text(e.person!.firstName.toString()+' '+e.person!.lastName.toString(),
       textAlign: TextAlign.center,style: TextStyle(color: Colors.black,
           backgroundColor: Colors.white.withOpacity(0.5)),);

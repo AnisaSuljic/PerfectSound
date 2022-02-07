@@ -1,9 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:perfect_sound_mobile/models/News.dart';
 
 class NewsDetails extends StatelessWidget {

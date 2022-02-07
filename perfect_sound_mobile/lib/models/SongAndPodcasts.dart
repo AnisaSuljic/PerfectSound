@@ -4,7 +4,6 @@ import 'package:perfect_sound_mobile/models/ProductionCompany.dart';
 import 'package:perfect_sound_mobile/models/SongAndPodcastGenre.dart';
 
 import 'Genre.dart';
-import 'SongAndPodcastPerson.dart';
 
 
 class SongAndPodcast{

@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:perfect_sound_mobile/services/APIService.dart';
-
-import 'News.dart';
 import 'SongAndPodcasts.dart';
 
 class Quote {

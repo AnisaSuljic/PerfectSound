@@ -1,8 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:perfect_sound_mobile/services/APIService.dart';
-
-import 'SongAndPodcasts.dart';
 
 class News{
   final newsId;

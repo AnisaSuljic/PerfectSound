@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
 import 'Home.dart';
@@ -9,20 +10,8 @@ class Feelings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Icon(Icons.account_box_rounded),
-          Padding(
-            padding: EdgeInsets.fromLTRB(5.0, 18.0, 18.0, 18.0),
-            child: Text(
-              APIService.username as String,
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
-        ],
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
-      drawer: Home.DrawerWidget(context),
+      appBar: buildAppBar(context),
+      drawer: buildDrawer(context),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: bodyWidget1(),

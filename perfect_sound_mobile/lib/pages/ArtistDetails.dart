@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/models/Artists.dart';
 import 'package:perfect_sound_mobile/models/SongAndPodcastPerson.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
@@ -19,20 +20,7 @@ class _ArtistDetailsState extends State<ArtistDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent,
-        actions: [
-          Icon(Icons.account_box_rounded),
-          Padding(
-            padding: EdgeInsets.fromLTRB(5.0, 18.0, 18.0, 18.0),
-            child: Text(
-              APIService.username as String,
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
-        ],
-        title: Text('Details'),
-      ),
+      appBar: buildAppBar(context),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:perfect_sound_mobile/models/User/Users.dart';
 
 class APIService{
   static String? username;
   static String? password;
   static int? userID;
+  static Users? usersData;
 
 
   String? route;
@@ -19,17 +21,61 @@ class APIService{
     password=Password;
 
   }
+  //Login metod
+  static Future<Users?> Login() async{
+
+    String baseURL=urlApi!+"User/Login";
+
+    final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
+    final response=await http.get(
+      Uri.parse(baseURL),
+      headers:{HttpHeaders.authorizationHeader:basicAuth},
+    );
+    if(response.statusCode==200){
+      print("200 "+ response.body.toString());
+      var result=Users.fromJson(JsonDecoder().convert(response.body));
+      print("result "+ result.toString());
+
+      return result;
+    }
+    else{
+      print("gr "+ response.body.toString());
+
+      return null;
+    }
+  }
+
+  static Future<dynamic> SignUp(String body) async{
+
+    String baseURL=urlApi!+"User/SignUp";
+
+    final response=await http.post(
+        Uri.parse(baseURL),
+        headers:{
+          HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
+        },
+        body: body
+    );
+    if(response.statusCode==201){
+      print("greskaa");
+      var result=JsonDecoder().convert(response.body);
+      return result;
+    }
+    else{
+      print("greskaa11 "+ response.statusCode.toString());
+      var result=JsonDecoder().convert(response.body);
+      print("gr "+ result.toString());
+      return null;
+    }
+  }
 
 //Get method
 
   static Future<List<dynamic>?> Get(String route, dynamic object) async{
 
     String querryString=Uri(queryParameters: object).query;
-    print("uri: "+querryString);
 
     String baseURL=urlApi!+route;
-    print("baseURL: "+baseURL);
-
     if(object!=null){
       baseURL=baseURL+'?'+querryString;
     }
@@ -42,7 +88,6 @@ class APIService{
 
     if(response.statusCode==200){
       var result=JsonDecoder().convert(response.body) as List;
-      //print("200 "+result.toString());
 
       return result;
     }

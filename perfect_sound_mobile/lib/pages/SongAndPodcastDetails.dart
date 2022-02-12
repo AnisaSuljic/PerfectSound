@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/models/Comment/Comment.dart';
 import 'package:perfect_sound_mobile/models/Comment/CommentUpsertRequest.dart';
 import 'package:perfect_sound_mobile/models/Rating/Rating.dart';
@@ -32,18 +33,7 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
     TextEditingController CommentController = new TextEditingController();
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.deepPurpleAccent,
-          actions: [
-            Icon(Icons.account_box_rounded),
-            Padding(
-              padding: EdgeInsets.fromLTRB(5.0, 18.0, 18.0, 18.0),
-              child: Text(
-                APIService.username as String, style: TextStyle(fontSize: 16),),
-            ),
-          ],
-          title: Text('Details'),
-        ),
+        appBar: buildAppBar(context),
         body:
         SingleChildScrollView(
           child: Padding(
@@ -160,8 +150,6 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
             personalRating=0;
           else
             personalRating=snapshot.data!.where((element) => element.userId==APIService.userID).first.ratingValue!;
-          //if(rate.)
-          //print("RATE : "+ rate.ratingValue.toString());
 
     return Column(
       children: [
@@ -239,7 +227,6 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                     ),
                     itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
                     onRatingUpdate: (rating) {
-                      print(rating);
                       requestRating.songAndPodcastId=this.widget.songAndPodcast.songAndPodcastId;
                       requestRating.userId=APIService.userID;
                       requestRating.ratingValue=rating;
@@ -401,7 +388,6 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
   //Rating post
 
   Future<void> PostRating(RatingUpsertRequest request) async {
-    print("done!");
     await APIService.Post("Rating", json.encode(request.toJson()));
   }
 

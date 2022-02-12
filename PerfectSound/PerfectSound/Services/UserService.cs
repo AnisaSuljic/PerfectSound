@@ -116,5 +116,23 @@ namespace PerfectSound.Services
 
             return _mapper.Map<Model.Model.User>(entity);
         }
+
+        public Model.Model.User SignUp(UserUpsertRequest request)
+        {
+            var entity = _mapper.Map<Database.User>(request);
+
+            if (request.Password != request.PasswordConfirm)
+            {
+                throw new Exception("Password and password confirm not matched");
+            }
+
+            entity.PasswordSalt = PasswordHash.GenerateSalt();
+            entity.PasswordHash = PasswordHash.GenerateHash(entity.PasswordSalt, request.Password);
+
+            _context.Users.Add(entity);
+            _context.SaveChanges();
+
+            return _mapper.Map<Model.Model.User>(entity);
+        }
     }
 }

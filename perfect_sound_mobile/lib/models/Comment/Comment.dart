@@ -1,4 +1,4 @@
-import '../Users.dart';
+import '../User/Users.dart';
 
 class Comment {
   final commentId;

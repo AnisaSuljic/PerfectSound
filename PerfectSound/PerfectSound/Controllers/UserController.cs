@@ -6,13 +6,14 @@ using PerfectSound.Model.Requests.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PerfectSound.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private IUserService _service;
@@ -20,13 +21,14 @@ namespace PerfectSound.Controllers
         {
             _service = service;
         }
+        [Authorize]
         [HttpGet]
         public List<Model.Model.User> GetAll([FromQuery] UserSearchRequest search)
         {
             return _service.Get(search);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpGet("{Id}")]
         public Model.Model.User GetById(int Id)
         {
@@ -40,18 +42,38 @@ namespace PerfectSound.Controllers
             return _service.Insert(request);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPut("{Id}")]
         public Model.Model.User Update(int Id, [FromBody] UserUpsertRequest request)
         {
             return _service.Update(Id, request);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{Id}")]
         public Model.Model.User Delete(int Id)
         {
             return _service.Delete(Id);
+        }
+
+        [HttpGet("Login")]
+        public async Task<Model.Model.User> Login()
+        {
+            string authorization = HttpContext.Request.Headers["Authorization"];
+
+            string encodedHeader = authorization["Basic ".Length..].Trim();
+
+            Encoding encoding = Encoding.GetEncoding("iso-8859-1");
+            string usernamePassword = encoding.GetString(Convert.FromBase64String(encodedHeader));
+
+            int seperatorIndex = usernamePassword.IndexOf(':');
+            return await _service.Login(usernamePassword.Substring(0, seperatorIndex), usernamePassword[(seperatorIndex + 1)..]);
+        }
+
+        [HttpPost("SignUp")]
+        public Model.Model.User SignUp(UserUpsertRequest request)
+        {
+            return _service.SignUp(request);
         }
     }
 }

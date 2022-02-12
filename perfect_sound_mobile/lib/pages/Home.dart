@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:perfect_sound_mobile/helper/components.dart';
+import 'package:perfect_sound_mobile/helper/constants.dart';
 import 'package:perfect_sound_mobile/models/News.dart';
 import 'package:perfect_sound_mobile/models/Quote.dart';
 import 'package:perfect_sound_mobile/models/SongAndPodcasts.dart';
@@ -9,125 +12,24 @@ import 'package:perfect_sound_mobile/pages/AllNews.dart';
 import 'package:perfect_sound_mobile/pages/AllSongsAndPodcasts.dart';
 import 'package:perfect_sound_mobile/pages/Feelings.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
-
 import 'AllArtists.dart';
+import 'Login&SignUp/Login.dart';
+import 'Login&SignUp/UserProfile.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
-
-  static DrawerWidget(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: [
-          Container(
-            height: 80,
-            child: DrawerHeader(
-                child: ListTile(
-              title: Center(
-                  child: Text('PerfectSound',
-                      style: TextStyle(color: Colors.white, fontSize: 16))),
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Home()));
-              },
-            )),
-            decoration: BoxDecoration(color: Colors.deepPurpleAccent),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'News',
-                style: TextStyle(fontSize: 16),
-              ),
-              onTap: () {
-                //Navigator.of(context).pushReplacementNamed('/allnews');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AllNews()));
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Songs',
-                style: TextStyle(fontSize: 16),
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            AllSongsAndPodcasts(isPodcast: false)));
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Podcasts',
-                style: TextStyle(fontSize: 16),
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            AllSongsAndPodcasts(isPodcast: true)));
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Artists',
-                style: TextStyle(fontSize: 16),
-              ),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AllArtists()));
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Feelings',
-                style: TextStyle(fontSize: 16),
-              ),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Feelings()));
-              },
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }
 
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Icon(Icons.account_box_rounded),
-          Padding(
-            padding: EdgeInsets.fromLTRB(5.0, 18.0, 18.0, 18.0),
-            child: Text(
-              APIService.username as String,
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
-        ],
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
-      drawer: Home.DrawerWidget(context),
-       body:
+      appBar: buildAppBar(context),
+      drawer: buildDrawer(context),
+      /*body:
       Padding(
         padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
         child: Column(
@@ -155,11 +57,14 @@ class _HomeState extends State<Home> {
             )
            ]
        )
-      )
+      )*/
     );
   }
 }
 
+
+
+/*
 Widget QuoteWidget() {
   return FutureBuilder<Quote>(
     future:GetQuote(),
@@ -339,4 +244,4 @@ Widget Top3SaP(SongAndPodcast e){
     );
 }
 
-
+*/

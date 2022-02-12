@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/models/Artists.dart';
 import 'package:perfect_sound_mobile/pages/ArtistDetails.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
@@ -12,18 +13,8 @@ class AllArtists extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent,
-        actions: [
-          Icon(Icons.account_box_rounded),
-          Padding(
-            padding: EdgeInsets.fromLTRB(5.0, 18.0, 18.0, 18.0),
-            child: Text(
-              APIService.username as String, style: TextStyle(fontSize: 16),),
-          ),
-        ],
-        title: Text('Artists'),
-      ),
+      appBar: buildAppBar(context),
+      drawer: buildDrawer(context),
       body: bodyWidget(context),
     );
   }

@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:perfect_sound_mobile/helper/components.dart';
@@ -20,6 +19,7 @@ class _AllNewsState extends State<AllNews> {
   TextEditingController titleDateController=new TextEditingController();
   DateTime date=new DateTime(0001,1,1,0,0,0,0,0);
   bool isDateFiltered=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,6 +127,7 @@ class _AllNewsState extends State<AllNews> {
     }
 
     var newsList = await APIService.Get('News',queryParams);
+
     return newsList!.map((i) => News.fromJson(i)).toList();
   }
 
@@ -147,12 +148,11 @@ class _AllNewsState extends State<AllNews> {
                     padding: const EdgeInsets.all(10.0),
                     child: Image(
                         width:80,
-                        height: 80,
                         image: MemoryImage(news.coverPhoto as Uint8List)
                     ),
                   ),
                   Flexible(
-                    child:Text(news.title,style: TextStyle(color: Colors.deepPurpleAccent)),
+                    child:Text(news.title,style: TextStyle(color: Colors.black87)),
                   )
                 ],
               ),

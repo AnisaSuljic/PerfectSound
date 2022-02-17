@@ -17,7 +17,7 @@ class News{
 
 
     return News(
-        newsId: ["newsId"],
+        newsId: json["newsId"],
         title: json["title"],
         subTitle: json["subTitle"],
         content: json["content"],

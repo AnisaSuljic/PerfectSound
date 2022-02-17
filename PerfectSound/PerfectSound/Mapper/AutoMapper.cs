@@ -27,7 +27,10 @@ namespace PerfectSound.Mapper
             CreateMap<UserUpsertRequest, User>().ReverseMap();
 
             //CRUD
-            CreateMap<SongAndPodcast, Model.Model.SongAndPodcast>().ReverseMap();
+            CreateMap<SongAndPodcast, Model.Model.SongAndPodcast>()
+                .ForMember(x => x.RatingValue, m => m.MapFrom(src => src.Ratings.Average(x => x.RatingValue)))
+                .ForMember(x => x.LastName, m => m.MapFrom(src => src.SongAndPodcastPeople.Where(x => x.RoleId == 1).FirstOrDefault().Person.LastName))
+                .ForMember(x => x.FirstName, m => m.MapFrom(src => src.SongAndPodcastPeople.Where(x => x.RoleId == 1).FirstOrDefault().Person.FirstName));
             CreateMap<Model.Requests.SongAndPodcast.SongAndPodcastUpsertRequest, SongAndPodcast>().ReverseMap();
 
             CreateMap<PodcastSeason, Model.Model.PodcastSeason>().ReverseMap();

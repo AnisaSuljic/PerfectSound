@@ -13,14 +13,19 @@ namespace PerfectSound.Model.Model
         public DateTime? ReleaseDate { get; set; }
         public decimal? Budget { get; set; }
         public byte[] Poster { get; set; }
-        public int? NumberOfRatings { get; set; }
+       // public int? NumberOfRatings { get; set; }
         public int? ProductionCompanyId { get; set; }
         public bool? IsPodcast { get; set; }
+        public double? RatingValue { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
 
         public ProductionCompany ProductionCompany { get; set; }
         public ICollection<SongAndPodcastGenre> SongAndPodcastGenre { get; set; }
         public ICollection<Genre> Genre { get; set; }
         public ICollection<PodcastSeason> PodcastSeason { get; set; }
+
 
 
 

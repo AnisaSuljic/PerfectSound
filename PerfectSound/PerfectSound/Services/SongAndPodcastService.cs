@@ -21,6 +21,9 @@ namespace PerfectSound.Services
                 .Include(x=>x.ProductionCompany)
                 .Include(x=>x.SongAndPodcastGenres)
                 .ThenInclude(x=>x.Genre)
+                .Include(x => x.SongAndPodcastPeople)
+                .ThenInclude(x=>x.Person)
+                .Include(x => x.Ratings)
                 .AsQueryable();
 
             if (search.GenreId != 0)

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/helper/constants.dart';
+import 'package:perfect_sound_mobile/models/News.dart';
 import 'package:perfect_sound_mobile/models/User/Users.dart';
 import 'package:perfect_sound_mobile/pages/Login&SignUp/SignUp.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
@@ -55,8 +56,8 @@ class _LoginState extends State<Login> {
   }
 
   //GET USER METHOD
-  Future<void> GetUser()async{
-    loggedUser = await APIService.Login();
+  Future<void> getUser()async{
+    loggedUser = await APIService.Login(false,null);
   }
 
   //SHOW DIALOG Widget
@@ -91,12 +92,13 @@ class _LoginState extends State<Login> {
     APIService.username=usernameController.text;
     APIService.password=passwordController.text;
 
-    await GetUser();
+    await getUser();
 
     if(loggedUser!=null){
       if(loggedUser!.userTypeId==2){
-        await GetUserID(usernameController.text);
+        await getUserID(usernameController.text);
         APIService.usersData=loggedUser;
+
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
       }
       else{
@@ -109,7 +111,7 @@ class _LoginState extends State<Login> {
   }
 }
   //LOGIN TEXT FIELDS
-  Future<void> GetUserID(String username)async{
+  Future<void> getUserID(String username)async{
   Map<String, String>?queryParams;
   if(username!=''){
     queryParams = {'User': username};

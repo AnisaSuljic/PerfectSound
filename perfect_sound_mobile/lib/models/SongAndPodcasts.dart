@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:perfect_sound_mobile/models/PodcastSeason.dart';
 import 'package:perfect_sound_mobile/models/ProductionCompany.dart';
 import 'package:perfect_sound_mobile/models/SongAndPodcastGenre.dart';
-
 import 'Genre.dart';
 
 
@@ -14,14 +13,16 @@ class SongAndPodcast{
   final DateTime? releaseDate;
   final double? budget;
   final List<int>? poster;
-  final int? numberOfRatings;
+  //final int? numberOfRatings;
   final int? productionCompanyId;
   final ProductionCompany? productionCompany;
   final List<SongAndPodcastGenre?> songAndPodcastGenre;
   final bool? isPodcast;
   final List<Genre>? genre;
   final List<PodcastSeason?> podcastSeason;
-
+  //final double? ratingValue;
+  final String? firstName;
+  final String? lastName;
 
   SongAndPodcast(
       {this.songAndPodcastId,
@@ -31,13 +32,15 @@ class SongAndPodcast{
         this.releaseDate,
         this.budget,
         this.poster,
-        this.numberOfRatings,
+        //this.numberOfRatings,
         this.productionCompanyId,
         this.isPodcast,
         this.productionCompany,
         required this.songAndPodcastGenre,
         this.genre,
-        required this.podcastSeason});
+        required this.podcastSeason,
+        //this.ratingValue,
+        this.firstName, this.lastName,});
 
 
   factory SongAndPodcast.fromJson(Map<String,dynamic>json){
@@ -73,13 +76,16 @@ class SongAndPodcast{
         releaseDate: DateTime.parse(json['releaseDate']),
         budget: json["budget"],
         poster: PhotoIntByte,
-        numberOfRatings : json['numberOfRatings'],
+        //numberOfRatings : json['numberOfRatings'],
         productionCompanyId : json['productionCompanyId'],
         productionCompany : json['productionCompany'] != null? new ProductionCompany.fromJson(json['productionCompany']): null,
         isPodcast: (json['isPodcast']),
         genre: genreList,
         songAndPodcastGenre:songAndPodcastGenreList,
-        podcastSeason: podcastSeasonList
+        podcastSeason: podcastSeasonList,
+        //ratingValue : json['ratingValue'],
+        firstName : json['firstName'],
+        lastName : json['lastName'],
     );
   }
 
@@ -92,7 +98,7 @@ class SongAndPodcast{
     data['releaseDate'] = this.releaseDate;
     data['budget'] = this.budget;
     data['poster'] = this.poster;
-    data['numberOfRatings'] = this.numberOfRatings;
+    //data['numberOfRatings'] = this.numberOfRatings;
     data['productionCompanyId'] = this.productionCompanyId;
     data['isPodcast'] = this.isPodcast;
     if (this.productionCompany != null) {
@@ -109,6 +115,9 @@ class SongAndPodcast{
       data['podcastSeason'] =
           this.podcastSeason.map((v) => v!.toJson()).toList();
     }
+    //data['ratingValue'] = this.ratingValue;
+    data['firstName'] = this.firstName;
+    data['lastName'] = this.lastName;
     return data;
   }
 

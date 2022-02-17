@@ -11,36 +11,38 @@ class APIService{
 
 
   String? route;
-  //static String? urlApi='http://10.0.2.2:8000/api';
+  //static String? urlApi='http://192.168.0.11:45464/api';
   static String? urlApi='http://10.0.2.2:5010/api/';
 
   APIService({this.route });
 
-  Future<void> SetPatameter(String Username,String Password) async {
+  static Future<void> SetPatameter(String Username,String Password,Users data) async {
     username=Username;
     password=Password;
+    usersData=data;
 
   }
   //Login metod
-  static Future<Users?> Login() async{
+  static Future<Users?> Login(bool check, String? pass) async{
 
     String baseURL=urlApi!+"User/Login";
+    final String basicAuth;
+    if(!check)
+      basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
+    else
+      basicAuth='Basic '+base64Encode(utf8.encode('$username:$pass'));
 
-    final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
     final response=await http.get(
       Uri.parse(baseURL),
       headers:{HttpHeaders.authorizationHeader:basicAuth},
     );
+
     if(response.statusCode==200){
-      print("200 "+ response.body.toString());
       var result=Users.fromJson(JsonDecoder().convert(response.body));
-      print("result "+ result.toString());
 
       return result;
     }
     else{
-      print("gr "+ response.body.toString());
-
       return null;
     }
   }
@@ -56,15 +58,12 @@ class APIService{
         },
         body: body
     );
-    if(response.statusCode==201){
-      print("greskaa");
+    if (response.statusCode == 200) {
       var result=JsonDecoder().convert(response.body);
-      return result;
-    }
-    else{
-      print("greskaa11 "+ response.statusCode.toString());
+      return JsonDecoder().convert(response.body);
+
+    } else {
       var result=JsonDecoder().convert(response.body);
-      print("gr "+ result.toString());
       return null;
     }
   }
@@ -92,7 +91,6 @@ class APIService{
       return result;
     }
     else{
-      print("greskica "+response.body.toString());
       return null;
     }
   }
@@ -101,7 +99,7 @@ class APIService{
 
   static Future<dynamic> GetById(String route, dynamic id) async{
 
-    String baseURL=urlApi!+route+'/'+id;
+    String baseURL=urlApi!+route+'/'+id.toString();
 
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
     final response=await http.get(
@@ -165,9 +163,9 @@ class APIService{
     }
   }
 
-  static Future<dynamic> Put(String route, int id, String body) async {
+  static Future<dynamic> Put(String route, int? id, String body) async {
 
-    String baseURL=urlApi!+route;
+    String baseURL=urlApi!+route+"/"+id.toString();
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
 
     final response = await http.put(
@@ -179,15 +177,11 @@ class APIService{
       body: body,
     );
 
-    if(response.statusCode==201){
-      print("greskaa");
+    if(response.statusCode==200){
       var result=JsonDecoder().convert(response.body);
       return result;
     }
     else{
-      print("greskaa11 "+ response.statusCode.toString());
-      var result=JsonDecoder().convert(response.body);
-      print("gr "+ result.toString());
       return null;
     }
   }

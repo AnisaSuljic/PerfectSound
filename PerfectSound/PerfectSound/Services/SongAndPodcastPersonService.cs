@@ -43,5 +43,16 @@ namespace PerfectSound.Services
 
            
         }
+        public override SongAndPodcastPerson GetById(int Id)
+        {
+            var entity = _context.SongAndPodcastPeople
+                .Include(x => x.Role)
+                .Include(x => x.Person)
+                .Include(x => x.SongAndPodcast)
+                .AsQueryable().Where(x => x.SongAndPodcastId == Id).FirstOrDefault();
+
+
+            return _mapper.Map<SongAndPodcastPerson>(entity);
+        }
     }
 }

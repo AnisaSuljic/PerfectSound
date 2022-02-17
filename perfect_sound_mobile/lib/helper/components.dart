@@ -4,9 +4,10 @@ import 'package:perfect_sound_mobile/pages/AllNews.dart';
 import 'package:perfect_sound_mobile/pages/AllSongsAndPodcasts.dart';
 import 'package:perfect_sound_mobile/pages/Feelings.dart';
 import 'package:perfect_sound_mobile/pages/Home.dart';
-import 'package:perfect_sound_mobile/pages/Login&SignUp/Login.dart';
 import 'package:perfect_sound_mobile/pages/Login&SignUp/UserProfile.dart';
+import 'package:perfect_sound_mobile/pages/Welcome/Welcome.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
+
 import 'constants.dart';
 
 //ROUNDED BUTTONS
@@ -81,6 +82,88 @@ class TextFieldContainer extends StatelessWidget {
   }
 }
 
+// TEXT FORM FIELDS
+class TextFormFieldContainer extends StatelessWidget {
+  final String msgRequiredField;
+  final String hintText;
+  final String? msgFormat;
+  final String? regex;
+  final IconData icon;
+  final IconData? suffixIcon;
+  final bool obscureText;
+  final TextEditingController? txtController;
+
+  const TextFormFieldContainer({Key? key, required this.hintText, required this.icon,
+    this.suffixIcon, required this.obscureText, this.txtController, required this.msgRequiredField, this.msgFormat, this.regex,}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 25),
+      width: size.width * 0.7,
+      decoration: BoxDecoration(color: PrimaryColorLight, borderRadius: BorderRadius.circular(30)),
+      child:
+      TextFormField(
+          controller: txtController,
+          obscureText: obscureText,
+          decoration: InputDecoration(
+              icon: Icon(icon, color: PrimaryColor),
+              hintText: hintText,
+              border: InputBorder.none,
+              suffixIcon: IconButton(
+                  onPressed: null,
+                  icon: Icon(suffixIcon,color: PrimaryColor,)
+              ),
+          ),
+          validator: (value){
+            if(value==null || value.isEmpty)
+              return msgRequiredField;
+            if(regex!=null){
+              if(!RegExp(regex!).hasMatch(value))
+                return msgFormat;
+            }
+            return null;
+          },
+      ),
+    );
+  }
+}
+
+class FormFieldBuild extends StatelessWidget {
+  final TextEditingController txtController;
+  final String msgRequiredField;
+  final String label;
+  final String? msgFormat;
+  final String? regex;
+  final bool obscure;
+
+  const FormFieldBuild({
+    Key? key,
+    required this.txtController,
+    required this.msgRequiredField, required this.label, required this.obscure, this.msgFormat, this.regex,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: txtController,
+      obscureText: obscure,
+      decoration: InputDecoration(labelText: label),
+      validator: (value){
+        if(value==null || value.isEmpty)
+          return msgRequiredField;
+        if(regex!=null){
+          if(!RegExp(regex!).hasMatch(value))
+            return msgFormat;
+        }
+        return null;
+      },
+    );
+  }
+}
+
 //METHOD - EXTRACTED APPBAR
 AppBar buildAppBar(BuildContext context) {
   return AppBar(
@@ -130,7 +213,7 @@ Drawer buildDrawer(BuildContext context) {
             cardName: "Podcasts"),
         CardBuilder(route: AllArtists(), cardName: "Artists"),
         CardBuilder(route: Feelings(), cardName: "Feelings"),
-        CardBuilder(route: Login(), cardName: "Log out"),
+        CardBuilder(route: Welcome(), cardName: "Log out"),
       ],
     ),
   );
@@ -167,18 +250,46 @@ class ProfileTextField extends StatelessWidget {
   final TextEditingController txtController;
   final String label;
   final bool obscureText;
+  final ValueChanged<String>onChanged;
+  final String? errMsg;
 
-  const ProfileTextField({Key? key, required this.txtController, required this.label, required this.obscureText}) : super(key: key);
+
+  const ProfileTextField({Key? key, required this.txtController, required this.label, required this.obscureText, required this.onChanged, this.errMsg}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20,0,20,0),
       child: TextField(
+        onChanged: onChanged,
         obscureText: obscureText,
-        decoration: InputDecoration(labelText: label),
+        decoration: InputDecoration(labelText: label, errorText: errMsg),
         autocorrect: false,
         controller: txtController,
+      ),
+    );
+  }
+}
+
+//WIDGET - LINE SEPARATOR
+class LineSeparator extends StatelessWidget {
+  final double width;
+  final double height;
+  const LineSeparator({
+    Key? key, required this.width, required this.height,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20,0,0,0),
+        child: Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: PrimaryColor),
+        ),
       ),
     );
   }

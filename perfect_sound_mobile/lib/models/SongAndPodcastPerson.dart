@@ -23,7 +23,7 @@ class SongAndPodcastPerson {
 
   factory SongAndPodcastPerson.fromJson(Map<String, dynamic> json) {
     return SongAndPodcastPerson(
-        songAndPodcastPersonId:['songAndPodcastPersonId'],
+        songAndPodcastPersonId:json['songAndPodcastPersonId'],
         songAndPodcastId:json['songAndPodcastId'],
         personId:json['personId'],
         roleId:json['roleId'],

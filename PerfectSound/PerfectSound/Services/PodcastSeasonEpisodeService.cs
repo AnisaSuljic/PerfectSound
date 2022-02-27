@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PerfectSound.Model.Model;
 using PerfectSound.Model.Requests.PodcastSeasonEpisode;
 using System;
@@ -16,7 +17,7 @@ namespace PerfectSound.Services
         }
         public override List<PodcastSeasonEpisode> Get(PodcastSeasonEpisodeSearchRequest search)
         {
-            var _searchSet = _context.PodcastSeasonEpisodes.AsQueryable();
+            var _searchSet = _context.PodcastSeasonEpisodes.Include(x=>x.PodcastSeason).AsQueryable();
 
             if (search?.PodcastSeasonId!=null &&  search.PodcastSeasonId!=0)
             {
@@ -32,6 +33,16 @@ namespace PerfectSound.Services
             }
 
             return _mapper.Map<List<PodcastSeasonEpisode>>(_searchSet.ToList());
+        }
+
+        public override PodcastSeasonEpisode GetById(int Id)
+        {
+            var entity = _context.PodcastSeasonEpisodes
+                .Include(x => x.PodcastSeason)
+                .AsQueryable().Where(x => x.PodcastSeasonEpisodeId == Id).FirstOrDefault();
+
+
+            return _mapper.Map<PodcastSeasonEpisode>(entity);
         }
     }
 }

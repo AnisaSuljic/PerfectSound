@@ -18,6 +18,10 @@ namespace PerfectSound.Services
         {
             var _searchSet = _context.PodcastSeasons.AsQueryable();
 
+            if (search?.SongAndPodcastId != null && search.SongAndPodcastId != 0)
+            {
+                _searchSet = _searchSet.Where(x => x.SongAndPodcastId == search.SongAndPodcastId);
+            }
             if (!string.IsNullOrWhiteSpace(search.SeasonName))
             {
                 _searchSet = _searchSet.Where(x => x.SeasonName.ToLower().StartsWith(search.SeasonName.ToLower()));

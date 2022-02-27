@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'Genre.dart';
+
 class SAP {
   int? songAndPodcastId;
   String? title;
@@ -8,11 +10,15 @@ class SAP {
   DateTime? releaseDate;
   double? budget;
   List<int>? poster;
+  late int numberOfRatings;
   int? productionCompanyId;
   bool? isPodcast;
   double? ratingValue;
   String? firstName;
   String? lastName;
+  List<Genre>? genre;
+  String? productionCompanyName;
+
 
   SAP(
       {this.songAndPodcastId,
@@ -22,18 +28,26 @@ class SAP {
         this.releaseDate,
         this.budget,
         this.poster,
+        required this.numberOfRatings,
         this.productionCompanyId,
         this.isPodcast,
         this.ratingValue,
         this.firstName,
-        this.lastName});
+        this.lastName,
+        this.genre,
+        this.productionCompanyName});
 
   SAP.fromJson(Map<String, dynamic> json) {
-    print("json: "+ json['firstName'].toString());
 
     String PhotoStringByte=json["poster"]as String;
     List<int>PhotoIntByte=base64.decode(PhotoStringByte);
 
+    var genreList = <Genre>[];
+    if (json['genre'] != null) {
+      json['genre'].forEach((v) {
+        genreList.add(new Genre.fromJson(v));
+      });
+    }
 
     songAndPodcastId = json['songAndPodcastId'];
     title = json['title'];
@@ -42,6 +56,7 @@ class SAP {
     releaseDate = DateTime.parse(json['releaseDate']);
     budget = json['budget'];
     poster = PhotoIntByte;
+    numberOfRatings = json['numberOfRatings'];
     productionCompanyId = json['productionCompanyId'];
     isPodcast = json['isPodcast'];
     if(json['ratingValue'].runtimeType==int){
@@ -50,8 +65,13 @@ class SAP {
     }
     else
       ratingValue = json['ratingValue'];
+    if(json['ratingValue']==null)
+      ratingValue=0.0;
     firstName = json['firstName'];
     lastName = json['lastName'];
+    genre = genreList;
+    productionCompanyName = json['productionCompanyName'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -63,11 +83,17 @@ class SAP {
     data['releaseDate'] = this.releaseDate;
     data['budget'] = this.budget;
     data['poster'] = this.poster;
+    data['numberOfRatings'] = this.numberOfRatings;
     data['productionCompanyId'] = this.productionCompanyId;
     data['isPodcast'] = this.isPodcast;
     data['ratingValue'] = this.ratingValue;
     data['firstName'] = this.firstName;
     data['lastName'] = this.lastName;
+    if (this.genre != null) {
+      data['genre'] = this.genre!.map((v) => v.toJson()).toList();
+    }
+    data['productionCompanyName'] = this.productionCompanyName;
+
     return data;
   }
 }

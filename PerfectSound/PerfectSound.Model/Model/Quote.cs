@@ -11,5 +11,6 @@ namespace PerfectSound.Model.Model
         public virtual SongAndPodcast SongAndPodcast { get; set; }
 
         public string QuoteText { get; set; }
+        public string ArtistName { get; set; }
     }
 }

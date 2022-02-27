@@ -27,18 +27,30 @@ namespace PerfectSound.WinForms.Forms
 
             try
             {
-                var result =await _UserService.GetAll<dynamic>();
-                this.Hide();
-                frmHome frm = new frmHome();
-                frm.Show();
+                var result = await _UserService.Login<Model.Model.User>();
+                APIService.UserID = result.UserId;
+
+                if (result.UserTypeId == 1)
+                {
+                    this.Hide();
+                    frmHome frm = new frmHome();
+                    frm.Show();
+                }
+                else
+                {
+                    lblError.Text = "Incorrect username or password.";
+                    txtUsername.Clear();
+                    txtPassword.Clear();
+                }
+                
             }
             catch 
             {
                 lblError.Text = "Incorrect username or password.";
                 txtUsername.Clear();
                 txtPassword.Clear();
-                //MessageBox.Show("Incorrect username or password.");
             }
+            
         }
 
         

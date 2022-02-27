@@ -7,13 +7,14 @@ class Comment {
   final String? dateTimeOfComment;
   final String? content;
   final Users? user;
+  final String? username;
 
   Comment(
       {this.commentId,
         this.songAndPodcastId,
         this.userId,
         this.dateTimeOfComment,
-        this.content,this.user});
+        this.content,this.user,this.username,});
 
   factory Comment.fromJson(Map<String, dynamic> json) {
     return Comment(
@@ -22,6 +23,7 @@ class Comment {
         userId:json['userId'],
         dateTimeOfComment:json['dateTimeOfComment'],
         content:json['content'],
+        username:json['username'],
         user : json['user'] != null ? new Users.fromJson(json['user']) : null
     );
   }
@@ -33,6 +35,7 @@ class Comment {
     data['userId'] = this.userId;
     data['dateTimeOfComment'] = this.dateTimeOfComment;
     data['content'] = this.content;
+    data['username'] = this.username;
     return data;
   }
 }

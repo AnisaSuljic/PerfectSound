@@ -13,12 +13,13 @@ namespace PerfectSound.Model.Model
         public DateTime? ReleaseDate { get; set; }
         public decimal? Budget { get; set; }
         public byte[] Poster { get; set; }
-       // public int? NumberOfRatings { get; set; }
+       public int? NumberOfRatings { get; set; }
         public int? ProductionCompanyId { get; set; }
         public bool? IsPodcast { get; set; }
         public double? RatingValue { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string ProductionCompanyName { get; set; }
 
 
         public ProductionCompany ProductionCompany { get; set; }

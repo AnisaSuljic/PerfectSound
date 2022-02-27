@@ -12,5 +12,10 @@ namespace PerfectSound.Model.Requests.SongAndPodcast
 
         public DateTime? ReleaseDate { get; set; }
 
+        public int FeelingId { get; set; }
+        public int ArtistId { get; set; }
+        public int Year { get; set; }
+
+
     }
 }

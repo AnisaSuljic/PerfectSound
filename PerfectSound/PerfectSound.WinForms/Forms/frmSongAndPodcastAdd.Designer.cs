@@ -299,7 +299,6 @@ namespace PerfectSound.WinForms.Forms
             this.btnDelete.TabIndex = 51;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Visible = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmSongAndPodcastAdd

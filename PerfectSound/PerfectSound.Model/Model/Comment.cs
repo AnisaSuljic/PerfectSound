@@ -12,5 +12,7 @@ namespace PerfectSound.Model.Model
         public DateTime? DateTimeOfComment { get; set; }
         public string Content { get; set; }
         public User User { get; set; }
+        public string Username { get; set; }
+
     }
 }

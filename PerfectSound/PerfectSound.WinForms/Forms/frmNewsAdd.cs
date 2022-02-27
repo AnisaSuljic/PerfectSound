@@ -31,6 +31,7 @@ namespace PerfectSound.WinForms.Forms
             if (N != null)
             {
                 isEdit = true;
+                file = N.CoverPhoto;
                 _news = N;
                 btnSaveNews.Text = "Update";
                 btnDelete.Visible = true;
@@ -76,6 +77,7 @@ namespace PerfectSound.WinForms.Forms
                     _upsertRequest.PublicationDate = dtpPublication.Value;
                     _upsertRequest.Content = txtContent.Text;
                     _upsertRequest.CoverPhoto = file;
+                    _upsertRequest.UserId = APIService.UserID;
                     try
                     {
                         if (isEdit == false)
@@ -101,6 +103,7 @@ namespace PerfectSound.WinForms.Forms
                                 MessageBox.Show("Successfully updated.");
                                 DialogResult = DialogResult.OK;
                                 Close();
+                                
                                 frmNewsSearch frm = new frmNewsSearch();
                                 frm.MdiParent = frmHome.ActiveForm;
                                 frm.Show();

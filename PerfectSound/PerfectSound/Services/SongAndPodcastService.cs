@@ -44,16 +44,20 @@ namespace PerfectSound.Services
                 _searchSet = _searchSet.Where(x => x.IsPodcast == search.IsPodcast);
             }
 
-            var _searchSetList = _mapper.Map<List<SongAndPodcast>>(_searchSet);
-
-            foreach (var item in _searchSetList)
+            if(search.FeelingId!=0)
             {
-                item.SongAndPodcastGenre = _mapper.Map <List< SongAndPodcastGenre >> (_context.SongAndPodcastGenres.Where(y => y.SongAndPodcastId == item.SongAndPodcastId));
-                item.Genre = _mapper.Map<List<Genre>>(_context.SongAndPodcastGenres.Include(x => x.Genre).Where(y => y.SongAndPodcastId == item.SongAndPodcastId).Select(z => z.Genre));
-                item.PodcastSeason = _mapper.Map <List< PodcastSeason >> (_context.PodcastSeasons.Where(y => y.SongAndPodcastId == item.SongAndPodcastId));
-                //item.SongAndPodcastPeople = _mapper.Map <List< SongAndPodcastPerson >> (_context.SongAndPodcastPeople.Include(x=>x.Role).Where(y => y.SongAndPodcastId == item.SongAndPodcastId));
-               // item.Person = _mapper.Map<List<Person>>(_context.SongAndPodcastPeople.Include(x => x.Person).Where(y => y.SongAndPodcastId == item.SongAndPodcastId).Select(z => z.Person));
+                _searchSet = _searchSet.Where(x => x.SongAndPodcastGenres.Select(y => y.GenreId).Contains(search.FeelingId));
             }
+            if(search.ArtistId!=0)
+            {
+                _searchSet = _searchSet.Where(x => x.SongAndPodcastPeople.Select(y => y.Person.PersonId).Contains(search.ArtistId));
+            }
+            if (search.Year != 0)
+            {
+                _searchSet = _searchSet.Where(x => x.ReleaseDate.Value.Year==search.Year );
+            }
+
+            var _searchSetList = _mapper.Map<List<SongAndPodcast>>(_searchSet);
             return _searchSetList;
         }
 
@@ -75,6 +79,51 @@ namespace PerfectSound.Services
             return _mapper.Map<SongAndPodcast> (entity);
         }
 
+        public override SongAndPodcast Update(int Id, SongAndPodcastUpsertRequest request)
+        {
+            var entity = _context.SongAndPodcasts.Find(Id);
+
+
+            _context.SongAndPodcasts.Attach(entity);
+            _context.SongAndPodcasts.Update(entity);
+            _context.SaveChanges();
+
+            var SAPGenreList = _context.SongAndPodcastGenres.Include(x=>x.Genre).AsQueryable().Where(x=>x.SongAndPodcastId==Id);
+
+            foreach (var item in SAPGenreList)
+            {
+                _context.SongAndPodcastGenres.Remove(item);
+            }
+
+            foreach (var genre in request.GenreIDList)
+            {
+                Database.SongAndPodcastGenre _songPodcastGenre = new Database.SongAndPodcastGenre();
+                _songPodcastGenre.SongAndPodcastId = entity.SongAndPodcastId;
+                _songPodcastGenre.GenreId = genre;
+                _context.SongAndPodcastGenres.Add(_songPodcastGenre);
+            }
+            _mapper.Map(request, entity);
+
+            _context.SaveChanges();
+            return _mapper.Map<SongAndPodcast>(entity);
+
+
+        }
+
+        public override Model.Model.SongAndPodcast GetById(int Id)
+        {
+            var entity = _context.SongAndPodcasts
+                .Include(x => x.ProductionCompany)
+                .Include(x => x.SongAndPodcastGenres)
+                .ThenInclude(x => x.Genre)
+                .Include(x => x.SongAndPodcastPeople)
+                .ThenInclude(x => x.Person)
+                .Include(x => x.Ratings)
+                .AsQueryable().Where(x => x.SongAndPodcastId == Id).FirstOrDefault();
+
+
+            return _mapper.Map<SongAndPodcast>(entity);
+        }
 
     }
 }

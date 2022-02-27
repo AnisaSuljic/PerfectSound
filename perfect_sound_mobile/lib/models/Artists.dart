@@ -49,4 +49,21 @@ class Artists {
         gender:gender_
     );
   }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['personId'] = this.personId;
+    data['firstName'] = this.firstName;
+    data['lastName'] = this.lastName;
+    data['photo'] = this.photo;
+    data['biography'] = this.biography;
+    data['dateOfBirth'] = this.dateOfBirth;
+    data['placeOfBirth'] = this.placeOfBirth;
+    data['dateOfDeath'] = this.dateOfDeath;
+    data['genderId'] = this.genderId;
+    if (this.gender != null) {
+      data['gender'] = this.gender!.toJson();
+    }
+
+    return data;
+  }
 }

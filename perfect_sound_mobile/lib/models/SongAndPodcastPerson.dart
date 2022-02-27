@@ -1,6 +1,7 @@
-import 'package:perfect_sound_mobile/models/Person.dart';
+import 'package:perfect_sound_mobile/models/Artists.dart';
 import 'package:perfect_sound_mobile/models/Role.dart';
-import 'package:perfect_sound_mobile/models/SongAndPodcasts.dart';
+
+import 'SAP.dart';
 
 
 class SongAndPodcastPerson {
@@ -8,8 +9,8 @@ class SongAndPodcastPerson {
   final int? songAndPodcastId;
   final int? personId;
   final int? roleId;
-  final Person? person;
-  final SongAndPodcast? songAndPodcast;
+  final Artists? person;
+  final SAP? songAndPodcast;
   final Role? role;
 
   SongAndPodcastPerson(
@@ -27,8 +28,8 @@ class SongAndPodcastPerson {
         songAndPodcastId:json['songAndPodcastId'],
         personId:json['personId'],
         roleId:json['roleId'],
-        person:json['person'] != null ? new Person.fromJson(json['person']) : null,
-        songAndPodcast:json['songAndPodcast'] != null? new SongAndPodcast.fromJson(json['songAndPodcast']): null,
+        person:json['person'] != null ? new Artists.fromJson(json['person']) : null,
+        songAndPodcast:json['songAndPodcast'] != null? new SAP.fromJson(json['songAndPodcast']): null,
         role:json['role'] != null ? new Role.fromJson(json['role']) : null
     );
   }

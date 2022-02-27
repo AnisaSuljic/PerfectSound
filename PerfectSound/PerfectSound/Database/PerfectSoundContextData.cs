@@ -84,6 +84,7 @@ namespace PerfectSound.Database
                     Title = "Selena Gomez: 'I won't ever quit making music'",
                     SubTitle = "Selena Gomez is putting to rest rumours that she's quitting the music industry.",
                     PublicationDate = DateTime.Today,
+                    UserId=1,
                     CoverPhoto = File.ReadAllBytes("img/selena.jpg"),
                     Content = "'I don't think I'll ever quit making music,' the Love You Like a Love Song singer reassured fans. " +
                 "'I'm not saying I want a Grammy. I just feel like I'm doing the best I can, and it's all about me. Sometimes, that can really get to me.'The Only Murders in the Building star put out her first - ever Spanish - language EP," +
@@ -95,6 +96,7 @@ namespace PerfectSound.Database
                     Title = "Ed Sheeran’s Bad Habits claims eighth week on top with Drill remix",
                     SubTitle = "Ed Sheeran’s Bad Habits claims an eighth week at Number 1 on the Official Singles Chart, enjoying a boost this week thanks to the release of a drill remix of the track featuring rappers Tion Wayne and Central Cee, remixed by London-based producer Fumez The Engineer.",
                     PublicationDate = DateTime.Today,
+                    UserId=1,
                     CoverPhoto = File.ReadAllBytes("img/edsheeran.jpg"),
                     Content = "Meanwhile, Becky Hill & David Guetta’s Remember climbs two to Number 3, becoming Becky’s second-highest charting single to date, and David Guetta’s third Top 3 hit of 2021." +
                     "Digga D scores the week’s highest new entry at Number 6 with Wasted ft.ArrDee,both rappers’ second UK Top 10.Elsewhere in the Top 10," +
@@ -335,7 +337,7 @@ namespace PerfectSound.Database
                     SongAndPodcastPersonId=1,
                     SongAndPodcastId = 1,
                     PersonId = 2,
-                    RoleId = 4
+                    RoleId = 1
                 }
             );
 

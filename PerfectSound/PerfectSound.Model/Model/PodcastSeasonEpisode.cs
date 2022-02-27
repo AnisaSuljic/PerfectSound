@@ -10,6 +10,7 @@ namespace PerfectSound.Model.Model
         public int? PodcastSeasonId { get; set; }
         public string EpisodeName { get; set; }
         public int? EpisodeNumber { get; set; }
+        public virtual PodcastSeason PodcastSeason { get; set; }
 
     }
 }

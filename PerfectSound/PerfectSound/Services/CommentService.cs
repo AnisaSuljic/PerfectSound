@@ -16,7 +16,7 @@ namespace PerfectSound.Services
         }
         public override List<Comment> Get(CommentSearchRequest search)
         {
-            var _searchSet = _context.Comments.Include(x=>x.User).AsQueryable();
+            var _searchSet = _context.Comments.Include(x=>x.User).ThenInclude(x=>x.UserType).AsQueryable();
 
             if (search.SongAndPodcastId != null)
             {
@@ -24,6 +24,16 @@ namespace PerfectSound.Services
             }
 
             return _mapper.Map<List<Comment>>(_searchSet.ToList());
+        }
+
+        public override Comment GetById(int Id)
+        {
+            var entity = _context.Comments
+                .Include(x => x.User).ThenInclude(x => x.UserType)
+                .AsQueryable().Where(x => x.CommentId == Id).FirstOrDefault();
+
+
+            return _mapper.Map<Comment>(entity);
         }
     }
 }

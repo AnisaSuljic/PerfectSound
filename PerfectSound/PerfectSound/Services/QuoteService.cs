@@ -25,7 +25,13 @@ namespace PerfectSound.Services
         }
         public Quote GenerateRandomQuote()
         {
-            List<Database.Quote> list = _context.Quotes.Include(x => x.SongAndPodcast).ToList();
+            List<Database.Quote> list = _context.Quotes
+                .Include(x => x.SongAndPodcast).ThenInclude(x=>x.ProductionCompany)
+                .Include(x => x.SongAndPodcast).ThenInclude(x=>x.SongAndPodcastPeople).ThenInclude(x=>x.Person)
+                .Include(x => x.SongAndPodcast).ThenInclude(x=>x.Ratings)
+                .Include(x => x.SongAndPodcast).ThenInclude(x=>x.SongAndPodcastGenres).ThenInclude(x=>x.Genre)
+                .Include(x => x.SongAndPodcast).ThenInclude(x=>x.PodcastSeasons)
+                .ToList();
             int[] listOfIds = list.Select(x => x.QuoteId).ToArray();
 
             Random random = new Random();
@@ -35,5 +41,6 @@ namespace PerfectSound.Services
 
             return _quoteOfTheDay;
         }
+
     }
 }

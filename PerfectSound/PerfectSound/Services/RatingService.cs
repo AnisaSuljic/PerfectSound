@@ -47,7 +47,8 @@ namespace PerfectSound.Services
             {
                 var entity = _mapper.Map<Database.Rating>(request);
                 _context.Ratings.Add(entity);
-                _context.SongAndPodcasts.Where(x => x.SongAndPodcastId == request.SongAndPodcastId).SingleOrDefault().NumberOfRatings++;
+                _context.SongAndPodcasts.Where(y => y.SongAndPodcastId == request.SongAndPodcastId).FirstOrDefault().NumberOfRatings++;
+             
                 _context.SaveChanges();
                 return _mapper.Map<Rating>(entity);
             }

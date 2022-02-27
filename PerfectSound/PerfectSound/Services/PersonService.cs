@@ -33,7 +33,15 @@ namespace PerfectSound.Services
             return _mapper.Map<List<Person>>(_searchSet.ToList());
 
         }
+        public override Person GetById(int Id)
+        {
+            var entity = _context.People
+                .Include(x => x.Gender)
+                .AsQueryable().Where(x => x.PersonId == Id).FirstOrDefault();
 
-    
+
+            return _mapper.Map<Person>(entity);
+        }
+
     }
 }

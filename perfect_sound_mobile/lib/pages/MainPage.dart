@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_sound_mobile/helper/constants.dart';
-import 'AllArtists.dart';
-import 'AllNews.dart';
+import 'Artists/AllArtists.dart';
+import 'News/AllNews.dart';
 import 'Home.dart';
 import 'Login&SignUp/Login.dart';
 

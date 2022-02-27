@@ -12,142 +12,134 @@ namespace PerfectSound.WinForms
 {
     public class APIService
     {
-            public static string username;
-            public static string password;
-            public string _resource;
-            public string endpoint = $"{Resources.ApiUrl}";
+        public static string username;
+        public static string password;
+        public static int UserID;
+        public string _resource;
+        public string endpoint = $"{Resources.ApiUrl}";
 
-            public APIService(string resource)
+        public APIService(string resource)
+        {
+            _resource = resource;
+        }
+
+        private static async Task ErrorHandle(FlurlHttpException ex)
+        {
+            var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+
+            var stringBuilder = new StringBuilder();
+            foreach (var error in errors)
             {
-                _resource = resource;
+                stringBuilder.AppendLine($"{error.Key}, {string.Join(",", error.Value)}");
             }
 
-            public async Task<T> GetAll<T>(object searchRequest = null)
+            MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public async Task<T> GetAll<T>(object searchRequest = null)
+        {
+            try
             {
-                //try
-                //{
-                    var query = "";
-                    if (searchRequest != null)
-                    {
-                        query = await searchRequest?.ToQueryString();
-                    }
+                var query = "";
+                if (searchRequest != null)
+                {
+                    query = await searchRequest?.ToQueryString();
+                }
 
-                    var list = await $"{endpoint}{_resource}?{query}"
-                        .WithBasicAuth(username, password)
-                        .GetJsonAsync<T>();
-                //Console.WriteLine(list);
-                    return list;
-                //}
-                //catch (FlurlHttpException ex)
-                //{
-                //    var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
-
-                //    var stringBuilder = new StringBuilder();
-                //    foreach (var error in errors)
-                //    {
-                //        stringBuilder.AppendLine($"{error.Key}, {string.Join(",", error.Value)}");
-                //    }
-
-                //    MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    return default(T);
-                //}
-            }
-
-            public async Task<T> GetById<T>(object id)
-            {
-                var url = $"{endpoint}{_resource}/{id}";
-
-                return await url
+                return await $"{endpoint}{_resource}?{query}"
                     .WithBasicAuth(username, password)
                     .GetJsonAsync<T>();
             }
-
-            public async Task<T> Insert<T>(object request)
+            catch (FlurlHttpException ex)
             {
-                var url = $"{endpoint}{_resource}";
-
-                try
-                {
-                    return await url
-                        .WithBasicAuth(username, password)
-                        .PostJsonAsync(request).ReceiveJson<T>();
-                }
-                catch (FlurlHttpException ex)
-                {
-                //var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
-
-                //var stringBuilder = new StringBuilder();
-                //foreach (var error in errors)
-                //{
-                //    stringBuilder.AppendLine($"{error.Key}, {string.Join(",", error.Value)}");
-                //}
-
-                //MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //return default(T);
-
-                    if (ex.StatusCode < 500)
-                    {
-                        if (ex.StatusCode == 401)
-                            MessageBox.Show("You do not have permission for this action.");
-                        MessageBox.Show($"You did something wrong!");
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Server issue.");
-                    }
+                await ErrorHandle(ex);
                 return default(T);
-                }
             }
+        }       
 
-            public async Task<T> Update<T>(int id, object request)
+        public async Task<T> Login<T>()
+        {
+            try
             {
-                try
-                {
-                    var url = $"{endpoint}{_resource}/{id}";
 
-                    return await url
-                        .WithBasicAuth(username, password)
-                        .PutJsonAsync(request).ReceiveJson<T>();
-                }
-                catch (FlurlHttpException ex)
-                {
-                    var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
-
-                    var stringBuilder = new StringBuilder();
-                    foreach (var error in errors)
-                    {
-                        stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
-                    }
-
-                    MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return default(T);
-                }
-
+                return await $"{endpoint}{_resource}/{"Login"}"
+                    .WithBasicAuth(username, password)
+                    .GetJsonAsync<T>();
             }
-
-            public async Task<T> Delete<T>(int id)
+            catch (FlurlHttpException ex)
             {
-                try
-                {
-                    return await $"{endpoint}{_resource}/{id}"
-                        .WithBasicAuth(username, password)
-                        .DeleteAsync().ReceiveJson<T>();
-                }
-                catch (FlurlHttpException ex)
-                {
-                    var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+                if (ex.StatusCode == 401)
+                    MessageBox.Show("Incorrect username or password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show("An error has occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    var stringBuilder = new StringBuilder();
-                    foreach (var error in errors)
-                    {
-                        stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
-                    }
-
-                    MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return default(T);
-                }
-
+                return default(T);
             }
-        
+        }
+
+        public async Task<T> GetById<T>(object id)
+        {
+            try
+            {
+                return await $"{endpoint}{_resource}/{id}"
+                .WithBasicAuth(username, password)
+                .GetJsonAsync<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                await ErrorHandle(ex);
+                return default(T);
+            }
+        }
+
+        public async Task<T> Insert<T>(object request)
+        {
+            try
+            {
+                return await $"{endpoint}{_resource}"
+                    .WithBasicAuth(username, password)
+                    .PostJsonAsync(request).ReceiveJson<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                await ErrorHandle(ex);
+                return default(T);
+            }
+        }
+
+        public async Task<T> Update<T>(int id, object request)
+        {
+            try
+            {
+                return await $"{endpoint}{_resource}/{id}"
+                    .WithBasicAuth(username, password)
+                    .PutJsonAsync(request).ReceiveJson<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                await ErrorHandle(ex);
+                return default(T);
+            }
+
+        }
+
+        public async Task<T> Delete<T>(int id)
+        {
+            try
+            {
+                return await $"{endpoint}{_resource}/{id}"
+                    .WithBasicAuth(username, password)
+                    .DeleteAsync().ReceiveJson<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                await ErrorHandle(ex);
+                return default(T);
+            }
+
+        }
+
+
+
     }
 }

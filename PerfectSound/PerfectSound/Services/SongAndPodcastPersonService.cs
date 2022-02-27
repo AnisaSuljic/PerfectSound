@@ -18,8 +18,8 @@ namespace PerfectSound.Services
         {
             var _searchSet = _context.SongAndPodcastPeople
                 .Include(x=>x.Role)
-                .Include(x => x.Person)
-                .Include(x => x.SongAndPodcast)
+                .Include(x => x.Person).ThenInclude(x=>x.Gender)
+                .Include(x => x.SongAndPodcast).ThenInclude(x=>x.ProductionCompany)
                 .AsQueryable();
 
             if (search?.PersonId!=null && search.PersonId != 0)
@@ -48,7 +48,7 @@ namespace PerfectSound.Services
             var entity = _context.SongAndPodcastPeople
                 .Include(x => x.Role)
                 .Include(x => x.Person)
-                .Include(x => x.SongAndPodcast)
+                .Include(x => x.SongAndPodcast).ThenInclude(x=>x.ProductionCompany)
                 .AsQueryable().Where(x => x.SongAndPodcastId == Id).FirstOrDefault();
 
 

@@ -15,6 +15,9 @@ namespace PerfectSound.Model.Model
         public string PlaceOfBirth { get; set; }
         public DateTime? DateOfDeath { get; set; }
         public int? GenderId { get; set; }
+        public string GenderName { get; set; }
+
+
         public Gender Gender { get; set; }
 
 

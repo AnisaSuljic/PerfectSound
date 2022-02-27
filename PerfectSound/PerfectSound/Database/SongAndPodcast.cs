@@ -24,7 +24,7 @@ namespace PerfectSound.Database
         public DateTime? ReleaseDate { get; set; }
         public decimal? Budget { get; set; }
         public byte[] Poster { get; set; }
-        public int? NumberOfRatings { get; set; }
+        public int NumberOfRatings { get; set; }
         public int? ProductionCompanyId { get; set; }
         public bool? IsPodcast { get; set; }
 

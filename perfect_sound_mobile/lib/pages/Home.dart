@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +9,9 @@ import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/helper/constants.dart';
 import 'package:perfect_sound_mobile/models/News.dart';
 import 'package:perfect_sound_mobile/models/Quote.dart';
-import 'package:perfect_sound_mobile/models/Rating/Rating.dart';
 import 'package:perfect_sound_mobile/models/SAP.dart';
-import 'package:perfect_sound_mobile/models/SongAndPodcasts.dart';
-import 'package:perfect_sound_mobile/pages/NewsDetails.dart';
-import 'package:perfect_sound_mobile/pages/SongAndPodcastDetails.dart';
+import 'package:perfect_sound_mobile/pages/News/NewsDetails.dart';
+import 'package:perfect_sound_mobile/pages/SongAndPodcasts/SongAndPodcastDetails.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
 class Home extends StatefulWidget {
@@ -24,6 +22,26 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+/*
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(Duration(days: 1), (Timer t) =>
+      setState(() {
+        getQuote();
+      })
+
+    );
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +54,12 @@ class _HomeState extends State<Home> {
         Container(
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20,0,0,5),
-                  child: Text("Discover",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87),textAlign: TextAlign.start,),
-                ),
-              ),
+              PageTitle(title: "Discover"),
               LineSeparator(height: 6,width: 40),
               Expanded(
                 flex: 1,
                   child: Container(
                     width: size.width,
-                    //margin: EdgeInsets.fromLTRB(0,10,0,0),
                     child: quoteWidget(),
                   )
               ),
@@ -62,6 +73,7 @@ class _HomeState extends State<Home> {
       );
   }
 }
+
 
 class ExpandedArea extends StatelessWidget {
   final String title;
@@ -92,28 +104,10 @@ class ExpandedArea extends StatelessWidget {
   }
 }
 
-Future<SongAndPodcast> getSongAndPodcast(int id) async {
-  var x= await APIService.GetById('SongAndPodcast',id.toString());
-  var y=SongAndPodcast.fromJson(x);
-  return y;
-}
-Future<News> getNews(int id) async {
-  var x= await APIService.GetById('News',id.toString());
-  var y=News.fromJson(x);
-  return y;
-}
-Future<Rating> getRating(int id) async {
-  var x= await APIService.GetById('Rating',id.toString());
-  var y=Rating.fromJson(x);
-  return y;
-}
-
 //METHOD GET RANDOM QUOTE
 Future<Quote> getQuote() async {
-  var quote = await APIService.GetRandom('Quote/GetRandomQuote');
+  var quote = await APIService.GetRandom();
   var x=Quote.fromJson(quote);
-  SongAndPodcast sap=await getSongAndPodcast(x.songAndPodcastId as int);
-  x.songAndPodcast=sap;
   return x;
 }
 
@@ -142,8 +136,6 @@ Future<List<News>> get3News() async {
 Future<List<SAP>> get3SaP() async {
   var songAndPodcastList = await APIService.Get('SongAndPodcast',null);
   List<SAP> x=songAndPodcastList!.map((i) => SAP.fromJson(i)).toList();
-  print("gg: "+ x[0].ratingValue.toString());
-
   List<SAP> top3=<SAP>[];
 
   if(x.length>3){
@@ -158,7 +150,6 @@ Future<List<SAP>> get3SaP() async {
   else{
     top3=x;
   }
-  //print("topic: "+ top3[0].toString());
   return top3;
 
 }
@@ -175,13 +166,12 @@ Widget quoteOfTheDay(Quote? x,BuildContext context){
         Text(x!.quoteText.toString(),style: TextStyle(fontSize: 14)),
         TextButton(
         onPressed: () async{
-          SongAndPodcast SaP=await getSongAndPodcast(x.songAndPodcastId as int);
           Navigator.push(
             context, MaterialPageRoute(builder: (context) =>
-              SongAndPodcastDetails(songAndPodcast: SaP)),
+              SongAndPodcastDetails(songAndPodcast: x.songAndPodcast as SAP)),
           );
         }
-        ,child: Align(alignment: Alignment.centerRight, child: Text(x.songAndPodcast!.title.toString(), style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: PrimaryColor))))
+        ,child: Align(alignment: Alignment.centerRight, child: Text(x.songAndPodcast!.title.toString()+'-'+x.artistName.toString(), style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: PrimaryColor))))
       ],
     ),
   );
@@ -206,10 +196,10 @@ Widget top3News(News e,BuildContext context){
         )
     ),
       onPressed: () async{
-      News news=await getNews(e.newsId as int);
+      //News news=await getNews(e.newsId as int);
         Navigator.push(
           context, MaterialPageRoute(builder: (context) =>
-            NewsDetails(news: news)),
+            NewsDetails(news: e)),
         );
       }
   );
@@ -233,7 +223,7 @@ Widget top3SaP(SAP e, BuildContext context){
                   Column(
                     children: [
                       Text(e.title.toString(),textAlign: TextAlign.center,style: TextStyle(fontSize: 12,color: Colors.black87),),
-                      Text(e.firstName !=null && e.lastName!=null?e.firstName! + " "+ e.lastName!:'Unknown performer',textAlign: TextAlign.center,style: TextStyle(fontSize: 8,color: Colors.black87),),
+                      Text(nameFormat(e.firstName,e.lastName),textAlign: TextAlign.center,style: TextStyle(fontSize: 8,color: Colors.black87),),
                       SizedBox(height: 5,),
                       Text("Rate: "+ e.ratingValue.toString(),textAlign: TextAlign.center,style: TextStyle(fontSize: 10,color: Colors.black87),),
                       SizedBox(height: 5,),
@@ -246,10 +236,10 @@ Widget top3SaP(SAP e, BuildContext context){
           )
       ),
         onPressed: () async{
-          SongAndPodcast SaP=await getSongAndPodcast(e.songAndPodcastId as int);
+          //SAP SaP=await getSongAndPodcast(e.songAndPodcastId as int);
           Navigator.push(
             context, MaterialPageRoute(builder: (context) =>
-              SongAndPodcastDetails(songAndPodcast: SaP)),
+              SongAndPodcastDetails(songAndPodcast: e)),
           );
         }
     );

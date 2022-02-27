@@ -39,7 +39,6 @@ class APIService{
 
     if(response.statusCode==200){
       var result=Users.fromJson(JsonDecoder().convert(response.body));
-
       return result;
     }
     else{
@@ -72,13 +71,13 @@ class APIService{
 
   static Future<List<dynamic>?> Get(String route, dynamic object) async{
 
-    String querryString=Uri(queryParameters: object).query;
 
+    String querryString=Uri(queryParameters: object).query;
     String baseURL=urlApi!+route;
+
     if(object!=null){
       baseURL=baseURL+'?'+querryString;
     }
-
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
     final response=await http.get(
       Uri.parse(baseURL),
@@ -87,7 +86,6 @@ class APIService{
 
     if(response.statusCode==200){
       var result=JsonDecoder().convert(response.body) as List;
-
       return result;
     }
     else{
@@ -106,6 +104,7 @@ class APIService{
       Uri.parse(baseURL),
       headers:{HttpHeaders.authorizationHeader:basicAuth},
     );
+
     if(response.statusCode==200){
       var result=JsonDecoder().convert(response.body);
       return result;
@@ -116,21 +115,23 @@ class APIService{
   }
 
   //GetRandom
-  static Future<dynamic> GetRandom(String route) async{
+  static Future<dynamic> GetRandom() async{
 
-    String baseURL=urlApi!+route;
+    String baseURL=urlApi!+'QuoteOfTheDay';
 
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
+
     final response=await http.get(
       Uri.parse(baseURL),
       headers:{HttpHeaders.authorizationHeader:basicAuth},
     );
+
     if(response.statusCode==200){
       var result=JsonDecoder().convert(response.body);
-
       return result;
     }
     else{
+
       return null;
     }
   }
@@ -151,14 +152,11 @@ class APIService{
       body: body
     );
     if(response.statusCode==201){
-      print("greskaa");
       var result=JsonDecoder().convert(response.body);
       return result;
     }
     else{
-      print("greskaa11 "+ response.statusCode.toString());
       var result=JsonDecoder().convert(response.body);
-      print("gr "+ result.toString());
       return null;
     }
   }

@@ -1,3 +1,6 @@
+using Hangfire;
+using Hangfire.Dashboard;
+using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -81,19 +84,27 @@ namespace PerfectSound
             //Automapper
             services.AddAutoMapper(typeof(Startup));
 
-           
+            //Hangfire
+            services.AddHangfire(x =>
+                x.SetDataCompatibilityLevel(CompatibilityLevel.Version_110)
+                .UseDefaultTypeSerializer()
+                .UseMemoryStorage());
+
+            services.AddHangfireServer();
+
 
 
             #region dependency injection
             //Onlyread classes 
-            services.AddScoped<IService<Model.Model.Genre, object>, BaseService<Model.Model.Genre, object, Database.Genre>>();
-            services.AddScoped<IService<Model.Model.Gender, object>, BaseService<Model.Model.Gender, object, Database.Gender>>();
-            services.AddScoped<IService<Model.Model.Role, object>, BaseService<Model.Model.Role, object, Database.Role>>();
-            services.AddScoped<IService<Model.Model.UserType, object>, BaseService<Model.Model.UserType, object, Database.UserType>>();
+            services.AddScoped<IService<Model.Model.Genre, object>, BaseService<Model.Model.Genre, object, Genre>>();
+            services.AddScoped<IService<Model.Model.Gender, object>, BaseService<Model.Model.Gender, object, Gender>>();
+            services.AddScoped<IService<Model.Model.Role, object>, BaseService<Model.Model.Role, object, Role>>();
+            services.AddScoped<IService<Model.Model.UserType, object>, BaseService<Model.Model.UserType, object, UserType>>();
             services.AddScoped<IService<Model.Model.ProductionCompany, object>, BaseService<Model.Model.ProductionCompany, object, ProductionCompany>>();
 
             //Onlyread classes (custom services)
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IDailyQuoteService, QuoteOfTheDayService>();
 
             //CRUD
             services.AddScoped<ICRUDService<Model.Model.SongAndPodcast, SongAndPodcastSearchRequest, SongAndPodcastUpsertRequest, SongAndPodcastUpsertRequest>, SongAndPodcastService>();
@@ -112,7 +123,8 @@ namespace PerfectSound
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobManager,
+            IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -130,8 +142,10 @@ namespace PerfectSound
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // Enable using hangfire dashboard
             
-            
+
             app.UseAuthentication();
             
             app.UseAuthorization();
@@ -141,6 +155,19 @@ namespace PerfectSound
             {
                 endpoints.MapControllers();
             });
+
+            var options = new DashboardOptions()
+            {
+                Authorization = new[] { new MyAuthorizationFilter() }
+            };
+            app.UseHangfireDashboard("/hangfire", options);
+            //Job of hangfire
+            recurringJobManager.AddOrUpdate(
+                "Generate daily quote",
+                () => serviceProvider.GetService<IDailyQuoteService>().GenerateRandomQuote(),
+                Cron.Daily
+            );
+            recurringJobManager.Trigger("Generate daily quote");
         }
     }
 }

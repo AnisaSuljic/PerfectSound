@@ -1,5 +1,5 @@
 class PodcastSeason {
-  final podcastSeasonId;
+  final int? podcastSeasonId;
   final int? songAndPodcastId;
   final String? seasonName;
 
@@ -7,7 +7,7 @@ class PodcastSeason {
 
   factory PodcastSeason.fromJson(Map<String, dynamic> json) {
     return PodcastSeason(
-        podcastSeasonId : ['podcastSeasonId'],
+        podcastSeasonId : json['podcastSeasonId'],
         songAndPodcastId : json['songAndPodcastId'],
         seasonName : json['seasonName']
     );

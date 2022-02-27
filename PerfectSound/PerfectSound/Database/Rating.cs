@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PerfectSound.Database
 {
-    public class Rating
+    public partial class Rating
     {
         public int RatingId { get; set; }
         public int? SongAndPodcastId { get; set; }

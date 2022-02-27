@@ -16,14 +16,14 @@ namespace PerfectSound.Controllers
             _service = service;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpPost]
         public TModel Post(TInsert request)
         {
             return _service.Insert(request);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpPut("{Id}")]
         public TModel Update(int Id, [FromBody] TUpdate request)
         {

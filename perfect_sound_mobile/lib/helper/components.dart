@@ -1,10 +1,14 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
-import 'package:perfect_sound_mobile/pages/AllArtists.dart';
-import 'package:perfect_sound_mobile/pages/AllNews.dart';
-import 'package:perfect_sound_mobile/pages/AllSongsAndPodcasts.dart';
+import 'package:perfect_sound_mobile/models/SongAndPodcastPerson.dart';
+import 'package:perfect_sound_mobile/pages/Artists/AllArtists.dart';
 import 'package:perfect_sound_mobile/pages/Feelings.dart';
 import 'package:perfect_sound_mobile/pages/Home.dart';
 import 'package:perfect_sound_mobile/pages/Login&SignUp/UserProfile.dart';
+import 'package:perfect_sound_mobile/pages/News/AllNews.dart';
+import 'package:perfect_sound_mobile/pages/SongAndPodcasts/AllSongsAndPodcasts.dart';
+import 'package:perfect_sound_mobile/pages/TopRated.dart';
 import 'package:perfect_sound_mobile/pages/Welcome/Welcome.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
@@ -212,6 +216,7 @@ Drawer buildDrawer(BuildContext context) {
             route: AllSongsAndPodcasts(isPodcast: true),
             cardName: "Podcasts"),
         CardBuilder(route: AllArtists(), cardName: "Artists"),
+        CardBuilder(route: TopRated(), cardName: "Top rated"),
         CardBuilder(route: Feelings(), cardName: "Feelings"),
         CardBuilder(route: Welcome(), cardName: "Log out"),
       ],
@@ -290,6 +295,81 @@ class LineSeparator extends StatelessWidget {
           width: width,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: PrimaryColor),
         ),
+      ),
+    );
+  }
+}
+
+class PageTitle extends StatelessWidget {
+  final String title;
+  const PageTitle({
+    Key? key, required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20,0,0,5),
+        child: Text(title,style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87),textAlign: TextAlign.start,),
+      ),
+    );
+  }
+}
+
+class GenreCard extends StatelessWidget {
+  final String genre;
+  const GenreCard({
+    Key? key, required this.genre,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      margin: EdgeInsets.only(left: 10),
+      padding: EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 3
+      ),
+      decoration: BoxDecoration(
+          border: Border.all(color: PrimaryColor),
+          borderRadius: BorderRadius.circular(20)
+      ),
+      child: Text(genre,style: TextStyle(color: Colors.black87),),
+    );
+  }
+}
+//Artists heads
+
+class ArtistsHeads extends StatelessWidget {
+  final SongAndPodcastPerson artists;
+  const ArtistsHeads({
+    Key? key, required this.artists,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 10),
+      width: 80,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image:MemoryImage(artists.person!.photo as Uint8List)
+              )
+            ),
+          ),
+          SizedBox(height: 3,),
+          Text(nameFormat(artists.person!.firstName,artists.person!.lastName), textAlign: TextAlign.center,maxLines: 2,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.black87),),
+          Text(artists.role!.roleName.toString(), textAlign: TextAlign.center,style: TextStyle(fontSize: 10,color: Colors.black87)),
+        ],
       ),
     );
   }

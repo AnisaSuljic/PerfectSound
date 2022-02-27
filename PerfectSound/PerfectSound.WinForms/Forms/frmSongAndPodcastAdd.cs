@@ -1,5 +1,6 @@
 ﻿using PerfectSound.Model.Model;
 using PerfectSound.Model.Requests.SongAndPodcast;
+using PerfectSound.Model.Requests.SongAndPodcastGenre;
 using PerfectSound.WinForms.Helper;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace PerfectSound.WinForms.Forms
                 isEdit = true;
                 _songpodcast = SAP;
                 btnSaveSongPodcast.Text = "Update";
-                clbGenre.Enabled = false;
+                //clbGenre.Enabled = false;
                 file = _songpodcast.Poster;
                 podcastBtn.Enabled = false;
 
@@ -66,7 +67,8 @@ namespace PerfectSound.WinForms.Forms
             }
             else
             {
-                await LoadGenersAsync();
+                SongAndPodcastGenreSearchRequest genreSearch = new SongAndPodcastGenreSearchRequest { SongAndPodcastId = _songpodcast.SongAndPodcastId };
+                await LoadGenersAsync(genreSearch);
                 await LoadProdCompanyAsync();
                 txtTitle.Text = _songpodcast.Title;
                 txtBudget.Text = _songpodcast.Budget.ToString();
@@ -98,13 +100,26 @@ namespace PerfectSound.WinForms.Forms
             cbProdCompany.ValueMember = "ProductionCompanyId";
         }
 
-        public async Task LoadGenersAsync()
+        public async Task LoadGenersAsync(SongAndPodcastGenreSearchRequest searchObj=null)
         {
             var genreList = await _GenreService.GetAll<List<Genre>>();
             clbGenre.DataSource = genreList;
             clbGenre.DisplayMember = "GenreName";
             clbGenre.ValueMember = "GenreId";
-            
+
+            if (searchObj != null)
+            {
+                List<SongAndPodcastGenre> SAPGenre = await _SongPodcastGenreService.GetAll<List<SongAndPodcastGenre>>(searchObj);
+                List<int> checkedGenreList = new List<int>();
+                foreach(var item in SAPGenre)
+                {
+                    checkedGenreList.Add(item.Genre.GenreId);
+                }
+                for (int i = 0; i < checkedGenreList.Count; i++)
+                {
+                    clbGenre.SetItemCheckState(checkedGenreList[i]-1, CheckState.Checked);
+                }
+            }
         }
         private void podcastBtn_MouseClick(object sender, MouseEventArgs e)
         {
@@ -192,6 +207,7 @@ namespace PerfectSound.WinForms.Forms
                             _upsertRequest.Poster = file;
                             _upsertRequest.ProductionCompanyId = Convert.ToInt32(cbProdCompany.SelectedValue);
                             _upsertRequest.IsPodcast = false;
+                            _upsertRequest.GenreIDList = genreIdList;
 
                             try
                             {
@@ -263,6 +279,7 @@ namespace PerfectSound.WinForms.Forms
                             _upsertRequest.Poster = file;
                             _upsertRequest.ProductionCompanyId = Convert.ToInt32(cbProdCompany.SelectedValue);
                             _upsertRequest.IsPodcast = true;
+                            _upsertRequest.GenreIDList = genreIdList;
 
                             try
                             {

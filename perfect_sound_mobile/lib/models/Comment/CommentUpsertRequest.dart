@@ -1,7 +1,7 @@
 class CommentUpsertRequest {
   int? songAndPodcastId;
   int? userId;
-  String? dateTimeOfComment;
+  DateTime? dateTimeOfComment;
   String? content;
 
   CommentUpsertRequest(
@@ -13,7 +13,7 @@ class CommentUpsertRequest {
   CommentUpsertRequest.fromJson(Map<String, dynamic> json) {
     songAndPodcastId = json['songAndPodcastId'];
     userId = json['userId'];
-    dateTimeOfComment = json['dateTimeOfComment'];
+    dateTimeOfComment = DateTime.parse(json['dateTimeOfComment']);
     content = json['content'];
   }
 
@@ -21,7 +21,7 @@ class CommentUpsertRequest {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['songAndPodcastId'] = this.songAndPodcastId;
     data['userId'] = this.userId;
-    data['dateTimeOfComment'] = this.dateTimeOfComment;
+    data['dateTimeOfComment'] = this.dateTimeOfComment!.toIso8601String();
     data['content'] = this.content;
     return data;
   }

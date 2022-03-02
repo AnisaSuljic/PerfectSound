@@ -73,10 +73,10 @@ class AllArtists extends StatelessWidget {
           height: 90,
           child: TextButton(
               onPressed: () async {
-                var list=await GetSongAndPodcastPerson(Artist.personId);
+                //var list=await GetSongAndPodcastPerson(Artist.personId);
                 Navigator.push(
                   context, MaterialPageRoute(builder: (context) =>
-                    ArtistDetails(artists: Artist, listSap:list)),
+                    ArtistDetails(artists: Artist)),
                 );
               },
               child: Row(

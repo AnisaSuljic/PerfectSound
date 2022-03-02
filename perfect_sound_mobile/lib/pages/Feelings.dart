@@ -41,7 +41,10 @@ class _FeelingsState extends State<Feelings> {
 
   @override
   void initState() {
-    fetchData();
+    super.initState();
+    fetchData().then((result) {
+      setState(() {});
+    });
   }
 
   @override
@@ -169,7 +172,7 @@ class _FeelingsState extends State<Feelings> {
                       });
                     }, child: Text("Reset filters",style: TextStyle(color: PrimaryColor),)),
                   ),
-                  Container(
+                  /*Container(
                     width: size.width*0.3,
                     margin: EdgeInsets.symmetric(vertical: 5),
                     child: ClipRRect(
@@ -188,7 +191,7 @@ class _FeelingsState extends State<Feelings> {
                         }, child: const Text('Find'),
                       ),
                     ),
-                  ),
+                  ),*/
                   SizedBox(height: 15,),
                 ],
               ),

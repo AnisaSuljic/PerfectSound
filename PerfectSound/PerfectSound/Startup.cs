@@ -104,6 +104,7 @@ namespace PerfectSound
 
             //Onlyread classes (custom services)
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRecommendedService, RecommendedService>();
             services.AddScoped<IDailyQuoteService, QuoteOfTheDayService>();
 
             //CRUD

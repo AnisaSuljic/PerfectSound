@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -5,17 +6,35 @@ import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/helper/constants.dart';
 import 'package:perfect_sound_mobile/models/Artists.dart';
 import 'package:perfect_sound_mobile/models/SAP.dart';
+import 'package:perfect_sound_mobile/models/SongAndPodcastPerson.dart';
 import 'package:perfect_sound_mobile/pages/SongAndPodcasts/SongAndPodcastDetails.dart';
+import 'package:perfect_sound_mobile/services/APIService.dart';
 
 class ArtistDetails extends StatefulWidget {
   final Artists artists;
-  final List<SAP?> listSap;
-  ArtistDetails({Key? key, required this.artists, required this.listSap}) : super(key: key);
+  ArtistDetails({Key? key, required this.artists}) : super(key: key);
 
   @override
   _ArtistDetailsState createState() => _ArtistDetailsState();
 }
+
 class _ArtistDetailsState extends State<ArtistDetails> {
+  List<SAP?> listSap=[];
+  List<String> listSap1=['No song and/or podcasts yet'];
+
+  Future<void> fetchData() async {
+    listSap=await GetSongAndPodcastPerson(this.widget.artists.personId);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData()
+    .then((result) {
+    setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -168,7 +187,8 @@ class _ArtistDetailsState extends State<ArtistDetails> {
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         children:
-                        this.widget.listSap.map((e) => SongAndPodcastPersonListWidget(e!)).toList(),
+                            listSap.length==0?listSap1.map((e) => Center(child: Text(e))).toList():
+                        listSap.map((e) => SongAndPodcastPersonListWidget(e)).toList(),
                       )
                   ]
                 )
@@ -176,15 +196,17 @@ class _ArtistDetailsState extends State<ArtistDetails> {
         );
   }
   void sortUp() {
-    this.widget.listSap.sort((a, b) => a!.releaseDate!
+    listSap.sort((a, b) => a!.releaseDate!
           .compareTo(b!.releaseDate as DateTime));
   }
   void sortDown() {
-    this.widget.listSap.sort((a, b) => b!.releaseDate!
+    listSap.sort((a, b) => b!.releaseDate!
         .compareTo(a!.releaseDate as DateTime));
   }
 
-  Widget SongAndPodcastPersonListWidget(SAP e) {
+  Widget SongAndPodcastPersonListWidget(SAP? e,) {
+    if(e==null)
+      return Text("No news yet");
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -209,5 +231,20 @@ class _ArtistDetailsState extends State<ArtistDetails> {
         ),
       ),
     );
+  }
+
+  Future<List<SAP?>> GetSongAndPodcastPerson(
+      int? personId) async {
+    Map<String, String>? querryParams;
+    if (personId != null) {
+      querryParams = {'personId': personId.toString()};
+    }
+    var SongAndPodcastPersonList =
+    await APIService.Get('SongAndPodcastPerson', querryParams);
+
+    List<SAP?> x = SongAndPodcastPersonList!
+        .map((i) => SongAndPodcastPerson.fromJson(i).songAndPodcast)
+        .toList();
+    return x;
   }
 }

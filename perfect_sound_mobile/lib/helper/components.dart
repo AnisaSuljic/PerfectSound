@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:perfect_sound_mobile/models/SAP.dart';
 import 'package:perfect_sound_mobile/models/SongAndPodcastPerson.dart';
 import 'package:perfect_sound_mobile/pages/Artists/AllArtists.dart';
 import 'package:perfect_sound_mobile/pages/Feelings.dart';
@@ -369,6 +370,40 @@ class ArtistsHeads extends StatelessWidget {
           SizedBox(height: 3,),
           Text(nameFormat(artists.person!.firstName,artists.person!.lastName), textAlign: TextAlign.center,maxLines: 2,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.black87),),
           Text(artists.role!.roleName.toString(), textAlign: TextAlign.center,style: TextStyle(fontSize: 10,color: Colors.black87)),
+        ],
+      ),
+    );
+  }
+}
+
+//Recomm heads
+
+class RecommHeads extends StatelessWidget {
+  final SAP sap_;
+  const RecommHeads({
+    Key? key, required this.sap_,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 10),
+      width: 80,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    image:MemoryImage(sap_.poster as Uint8List)
+                )
+            ),
+          ),
+          SizedBox(height: 3,),
+          Text(sap_.title.toString(), textAlign: TextAlign.center,maxLines: 2,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.black87),),
+          Text(nameFormat(sap_.firstName,sap_.lastName), textAlign: TextAlign.center,style: TextStyle(fontSize: 10,color: Colors.black87)),
         ],
       ),
     );

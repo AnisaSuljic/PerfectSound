@@ -4,12 +4,10 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:intl/intl.dart';
 import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/helper/constants.dart';
 import 'package:perfect_sound_mobile/models/Comment/Comment.dart';
 import 'package:perfect_sound_mobile/models/Comment/CommentUpsertRequest.dart';
-import 'package:perfect_sound_mobile/models/PodcastSeason.dart';
 import 'package:perfect_sound_mobile/models/Rating/Rating.dart';
 import 'package:perfect_sound_mobile/models/Rating/RatingUpsertRequest.dart';
 import 'package:perfect_sound_mobile/models/SAP.dart';
@@ -33,6 +31,21 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
   CommentUpsertRequest requestComment = CommentUpsertRequest();
   double personalRating = 0.0;
   late double fullRating = this.widget.songAndPodcast.ratingValue as double;
+
+  List<SAP> listSap1=[];
+
+  Future<void> fetchData() async {
+
+    listSap1=await Get_saps();
+    }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData().then((result) {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,22 +149,22 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)))),
-                        onPressed: () async {
-                          if (this.widget.songAndPodcast.isPodcast == false) {
-                            Navigator.push(
-                                context, MaterialPageRoute(builder: (context) =>
-                                SongMoreDetails(songAndPodcast: this.widget
-                                    .songAndPodcast)));
-                          }
-                          else {
-                            var seasons = await GetSeasons(
-                                this.widget.songAndPodcast
-                                    .songAndPodcastId as int);
-                            Navigator.push(
-                                context, MaterialPageRoute(builder: (context) =>
-                                PodcastMoreDetails(sapID: this.widget.songAndPodcast.songAndPodcastId as int))
-                            );
-                          }
+                                onPressed: () async {
+                                  if (this.widget.songAndPodcast.isPodcast == false) {
+                                    Navigator.push(
+                                        context, MaterialPageRoute(builder: (context) =>
+                                        SongMoreDetails(songAndPodcast: this.widget
+                                            .songAndPodcast)));
+                                  }
+                                  else {
+                                    var seasons = await GetSeasons(
+                                        this.widget.songAndPodcast
+                                            .songAndPodcastId as int);
+                                    Navigator.push(
+                                        context, MaterialPageRoute(builder: (context) =>
+                                        PodcastMoreDetails(sapID: this.widget.songAndPodcast.songAndPodcastId as int))
+                                    );
+                                  }
                         },
                         child: Text(
                           "Read more", style: TextStyle(color: Colors.white),
@@ -190,6 +203,19 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                       ArtistsWidget(),
                     ]
                 ),
+              ),
+              //recommended
+              Padding(
+                  padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Recommended songs or podcasts", style: TextStyle(fontSize: 16)),
+                    SizedBox(height: 15,),
+                    RecommendedHead(listSap1: listSap1)
+                  ],
+                ),
+
               ),
               Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: CommentRow(context, CommentController),
@@ -420,17 +446,13 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                           child: Text(
                             "Cancle", style: TextStyle(color: PrimaryColor),)),
                       TextButton(
-                          onPressed: () {
-                            requestComment.songAndPodcastId =
-                                this.widget.songAndPodcast.songAndPodcastId;
-                            requestComment.userId =
-                                APIService.usersData!.userId;
-                            requestComment.dateTimeOfComment =
-                                DateFormat('yyyy-MM-ddTkk:mm:ss').format(
-                                    DateTime.now());
+                          onPressed: () async {
+                            requestComment.songAndPodcastId =this.widget.songAndPodcast.songAndPodcastId;
+                            requestComment.userId =APIService.usersData!.userId;
+                            requestComment.dateTimeOfComment =DateTime.now();
                             requestComment.content = CommentController.text;
 
-                            PostComment(requestComment);
+                            await PostComment(requestComment);
 
                             setState(() {});
                             Navigator.pop(context, true);
@@ -461,6 +483,7 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
 
   //Comment post
   Future<void> PostComment(CommentUpsertRequest request) async {
+    print("post: "+ request.content.toString());
     await APIService.Post("Comment", json.encode(request.toJson()));
   }
 
@@ -493,11 +516,9 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                         TextButton(
                             onPressed: () async {
                               var art_=listArtist[index].person;
-                              var list=await GetSongAndPodcastPerson(art_!.personId);
-
                               Navigator.push(
                                 context, MaterialPageRoute(builder: (context) =>
-                                  ArtistDetails(artists: art_,listSap: list,)),
+                                  ArtistDetails(artists: art_!)),
                               );
                             },
                             child: ArtistsHeads(artists: listArtist[index])),
@@ -523,6 +544,16 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
     return listArt;
   }
 
+  //Get artists
+  Future<List<SAP>> Get_saps() async {
+    int? id=this.widget.songAndPodcast.songAndPodcastId;
+    var sapList = await APIService.Get('Recommended/Recommend/${id}', null);
+    var x = sapList!.toList();
+    var listsp = x.map((i) => SAP.fromJson(i)).toList();
+
+    return listsp;
+  }
+
 
   Future<List<SAP?>> GetSongAndPodcastPerson(
       int? personId) async {
@@ -537,5 +568,36 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
         .map((i) => SongAndPodcastPerson.fromJson(i).songAndPodcast)
         .toList();
     return x;
+  }
+}
+
+class RecommendedHead extends StatelessWidget {
+  const RecommendedHead({
+    Key? key,
+    required this.listSap1,
+  }) : super(key: key);
+
+  final List<SAP> listSap1;
+
+  @override
+  Widget build(BuildContext context) {
+    print("head: "+ listSap1.length.toString());
+    return SizedBox(
+        height: 110,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: listSap1.length,
+          itemBuilder: (context, index) =>
+              TextButton(
+                  onPressed: () async {
+                    var songpod=listSap1[index];
+                    Navigator.push(
+                      context, MaterialPageRoute(builder: (context) =>
+                        SongAndPodcastDetails(songAndPodcast: songpod)),
+                    );
+                  },
+                  child: RecommHeads(sap_: listSap1[index])),
+        )
+    );
   }
 }

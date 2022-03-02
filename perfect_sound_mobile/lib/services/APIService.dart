@@ -78,6 +78,7 @@ class APIService{
     if(object!=null){
       baseURL=baseURL+'?'+querryString;
     }
+
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
     final response=await http.get(
       Uri.parse(baseURL),
@@ -86,6 +87,7 @@ class APIService{
 
     if(response.statusCode==200){
       var result=JsonDecoder().convert(response.body) as List;
+
       return result;
     }
     else{
@@ -151,7 +153,8 @@ class APIService{
       },
       body: body
     );
-    if(response.statusCode==201){
+
+    if(response.statusCode==200){
       var result=JsonDecoder().convert(response.body);
       return result;
     }

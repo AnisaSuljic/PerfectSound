@@ -22,26 +22,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-/*
-  Timer? timer;
-
-  @override
-  void initState() {
-    super.initState();
-    timer = Timer.periodic(Duration(days: 1), (Timer t) =>
-      setState(() {
-        getQuote();
-      })
-
-    );
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
-  }
-*/
 
   @override
   Widget build(BuildContext context) {

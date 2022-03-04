@@ -15,6 +15,10 @@
     * Microsoft.EntityFrameworkCore.Design
     * Microsoft.EntityFrameworkCore.SqlServer
     * Microsoft.EntityFrameworkCore.Tools
+    * Flurl & Flurl.Http
+    * Hangfire, Hangfire.Core, Hangfire.MemoryStorage & Hangfire.SqlServer
+    * Microsoft.ML & Microsoft.ML.Recommender
+    * Microsoft.ReportingServices.ReportViewerControl.Winforms
     
 - Reverse Engineering [How to use](https://docs.microsoft.com/en-us/ef/core/managing-schemas/scaffolding?tabs=dotnet-core-cli)
    * Scaffold-DbContext 'Data Source=localhost;Initial Catalog=PerfectSound;Trusted_Connection=True;' Microsoft.EntityFrameworkCore.SqlServer -OutputDir Database

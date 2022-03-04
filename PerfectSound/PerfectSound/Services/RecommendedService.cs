@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
@@ -7,6 +8,8 @@ using PerfectSound.Database;
 using PerfectSound.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,16 +25,15 @@ namespace PerfectSound.Services
             this._mapper = _mapper;
         }
 
-        private static MLContext mlContext = null;
+       /* private static MLContext mlContext = null;
         private static ITransformer modeltr { get; set; }
-
-
+        
         public List<Model.Model.SongAndPodcast>Recommend(int SaPId)
         {
             if (mlContext == null)
             {
                 mlContext = new MLContext();
-                var tempData = _context.Ratings.Where(x=>x.RatingValue>=3.0).ToList();
+                var tempData = _context.Ratings.ToList();
                 var data = new List<RatingEntry>();
                 if (tempData.Count > 1)
                 {
@@ -89,47 +91,60 @@ namespace PerfectSound.Services
 
             return _mapper.Map<List<Model.Model.SongAndPodcast>>(finalResult);
 
-        }
+        }*/
         
-       /* Dictionary<decimal, List<Rating>> songs_podcasts = new Dictionary<decimal, List<Rating>>();
+        Dictionary<decimal, List<Rating>> songs_podcasts = new Dictionary<decimal, List<Rating>>();
+        Dictionary<User, List<Rating>> user_rates = new Dictionary<User, List<Rating>>();
 
-        public List<SongAndPodcast> LoadSimilar(int titleId)
+        public List<SongAndPodcast> LoadSimilar(int kokrisnikID)
         {
-            List<SongAndPodcast> saps = _context.SongAndPodcasts.Where(x => x.SongAndPodcastId != titleId).ToList();
-            List<Rating> ratings = new List<Rating>();
-            foreach (SongAndPodcast item in saps)
+            List<User> users = _context.Users.Include(x => x.UserType).Where(y => y.UserId != kokrisnikID && y.UserType.UserTypeId == 2).ToList();
+
+            foreach (User item in users)
             {
-                ratings = _context.Ratings.Include(x => x.User).Where(x => x.SongAndPodcastId == item.SongAndPodcastId).OrderBy(x => x.UserId).ToList();
-                if (ratings.Count > 0)
-                    songs_podcasts.Add(item.SongAndPodcastId, ratings);
+                var rates = _context.Ratings.Where(x => x.UserId == item.UserId && x.RatingValue>=3.0).ToList();
+                user_rates.Add(item, rates);
             }
 
-            List<Rating> baseRating = _context.Ratings.Where(x => x.SongAndPodcastId == titleId).OrderBy(x => x.UserId).ToList();
+            List<Rating> baseRating = _context.Ratings.Where(x => x.UserId == kokrisnikID).ToList();
 
-            List<Rating> ratings1 = new List<Rating>();
-            List<Rating> ratings2 = new List<Rating>();
+            List<Rating> ratingsCurrentUser = new List<Rating>();
+            List<Rating> ratingsOther = new List<Rating>();
+
+            List<int> recomendedSapsID = new List<int>();
             List<SongAndPodcast> recomendedSaps = new List<SongAndPodcast>();
 
-            foreach (var item in songs_podcasts)
+            var listOfAlreadyRatedSaPID = _context.Ratings.Where(x => x.UserId == kokrisnikID ).Select(x=>x.SongAndPodcastId).ToList();
+
+            foreach (var item in user_rates)
             {
+                int sapid = (int)item.Value.Select(x=>x.SongAndPodcastId).FirstOrDefault();
                 foreach (Rating rating in baseRating)
                 {
-                    if (item.Value.Where(x => x.UserId == rating.UserId).Count() > 0)
+                    if (item.Value.Any(x=>x.SongAndPodcastId==rating.SongAndPodcastId))
                     {
-                        ratings1.Add(rating);
-                        ratings2.Add(item.Value.Where(x => x.UserId == rating.UserId).First());
+                        ratingsCurrentUser.Add(rating);
+                        ratingsOther.Add(item.Value.Where(x => x.SongAndPodcastId == rating.SongAndPodcastId).FirstOrDefault());
                     }
                 }
-                double similarity = GetSimilarity(ratings1, ratings2);
+                double similarity = GetSimilarity(ratingsCurrentUser, ratingsOther);
                 if (similarity > 0.5)
                 {
-                    recomendedSaps.Add(_context.SongAndPodcasts.Where(x => x.SongAndPodcastId == item.Key).FirstOrDefault());
+                    var d = user_rates.Select(x => x.Value).SelectMany(x => x).Where(x => x.RatingValue >= 3.0).Select(x => x.SongAndPodcastId).Where(x => !listOfAlreadyRatedSaPID.Contains(x)).ToList();
+
+                    d.ForEach(e => {
+                        var s = _context.SongAndPodcasts.Where(x => x.SongAndPodcastId == (int)e).FirstOrDefault();
+                        if (!recomendedSaps.Contains(s))
+                            recomendedSaps.Add(s);
+                    });
+                    
+
                 }
-                ratings1.Clear();
-                ratings2.Clear();
+                ratingsCurrentUser.Clear();
+                ratingsOther.Clear();
             }
 
-            return recomendedSaps.Take(3).ToList();
+            return recomendedSaps.Take(6).ToList();
         }
 
         private double GetSimilarity(List<Rating> ratings1, List<Rating> ratings2)
@@ -153,7 +168,7 @@ namespace PerfectSound.Services
             if (y == 0)
                 return 0;
             return x / y;
-        }*/
+        }
 
     }
 

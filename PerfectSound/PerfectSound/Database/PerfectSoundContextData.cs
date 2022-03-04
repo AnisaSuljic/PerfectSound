@@ -71,8 +71,47 @@ namespace PerfectSound.Database
             u2.PasswordSalt = Helper.PasswordHash.GenerateSalt();
             u2.PasswordHash = Helper.PasswordHash.GenerateHash(u2.PasswordSalt, "test");
 
+            User u3 = new User()
+            {
+                UserId = 3,
+                UserName = "user3",
+                FirstName = "User",
+                LastName = "User3",
+                Email = "User3@gmail.com",
+                Phone = "032165498",
+                UserTypeId = 2
+            };
+            u2.PasswordSalt = Helper.PasswordHash.GenerateSalt();
+            u2.PasswordHash = Helper.PasswordHash.GenerateHash(u2.PasswordSalt, "test");
+
+            User u4 = new User()
+            {
+                UserId = 4,
+                UserName = "user4",
+                FirstName = "User",
+                LastName = "User4",
+                Email = "User4@gmail.com",
+                Phone = "032165498",
+                UserTypeId = 2
+            };
+            u2.PasswordSalt = Helper.PasswordHash.GenerateSalt();
+            u2.PasswordHash = Helper.PasswordHash.GenerateHash(u2.PasswordSalt, "test");
+
+            User u5 = new User()
+            {
+                UserId = 5,
+                UserName = "user5",
+                FirstName = "User",
+                LastName = "User5",
+                Email = "User5@gmail.com",
+                Phone = "032165498",
+                UserTypeId = 2
+            };
+            u2.PasswordSalt = Helper.PasswordHash.GenerateSalt();
+            u2.PasswordHash = Helper.PasswordHash.GenerateHash(u2.PasswordSalt, "test");
+
             modelBuilder.Entity<User>().HasData(
-                u1,u2
+                u1,u2,u3,u4,u5
             );
 
             //news
@@ -257,6 +296,186 @@ namespace PerfectSound.Database
                     Poster = File.ReadAllBytes("img/Song_Exploder.png"),
                     ProductionCompanyId = 3,
                     IsPodcast = true
+                },
+                new SongAndPodcast()
+                {
+                    SongAndPodcastId = 3,
+                    Title = "123",
+                    Text = "I found a love for me" +
+                            "Oh darling," +
+                            "just dive right in and follow my lead" +
+                            "Well," +
+                            "I found a girl," +
+                            "beautiful and sweet" +
+                            "Oh," +
+                            "I never knew you were the someone waiting for me" +
+                            "'Cause we were just kids when we fell in love" +
+                            "Not knowing what it was...",
+                    RunningTime = "00:04:22",
+                    ReleaseDate = new DateTime(2017, 09, 26),
+                    Budget = 3500,
+                    Poster = File.ReadAllBytes("img/edsheeran.jpg"),
+                    ProductionCompanyId = 1,
+                    IsPodcast = false
+                },
+                new SongAndPodcast()
+                {
+                    SongAndPodcastId = 4,
+                    Title = "666",
+                    Text = "I found a love for me" +
+                            "Oh darling," +
+                            "just dive right in and follow my lead" +
+                            "Well," +
+                            "I found a girl," +
+                            "beautiful and sweet" +
+                            "Oh," +
+                            "I never knew you were the someone waiting for me" +
+                            "'Cause we were just kids when we fell in love" +
+                            "Not knowing what it was...",
+                    RunningTime = "00:04:22",
+                    ReleaseDate = new DateTime(2017, 09, 26),
+                    Budget = 3500,
+                    Poster = File.ReadAllBytes("img/edsheeran.jpg"),
+                    ProductionCompanyId = 1,
+                    IsPodcast = false
+                },
+                new SongAndPodcast()
+                {
+                    SongAndPodcastId = 5,
+                    Title = "0009999",
+                    Text = "I found a love for me" +
+                            "Oh darling," +
+                            "just dive right in and follow my lead" +
+                            "Well," +
+                            "I found a girl," +
+                            "beautiful and sweet" +
+                            "Oh," +
+                            "I never knew you were the someone waiting for me" +
+                            "'Cause we were just kids when we fell in love" +
+                            "Not knowing what it was...",
+                    RunningTime = "00:04:22",
+                    ReleaseDate = new DateTime(2017, 09, 26),
+                    Budget = 3500,
+                    Poster = File.ReadAllBytes("img/edsheeran.jpg"),
+                    ProductionCompanyId = 1,
+                    IsPodcast = false
+                },
+                new SongAndPodcast()
+                {
+                    SongAndPodcastId = 6,
+                    Title = "56456544",
+                    Text = "I found a love for me" +
+                            "Oh darling," +
+                            "just dive right in and follow my lead" +
+                            "Well," +
+                            "I found a girl," +
+                            "beautiful and sweet" +
+                            "Oh," +
+                            "I never knew you were the someone waiting for me" +
+                            "'Cause we were just kids when we fell in love" +
+                            "Not knowing what it was...",
+                    RunningTime = "00:04:22",
+                    ReleaseDate = new DateTime(2017, 09, 26),
+                    Budget = 3500,
+                    Poster = File.ReadAllBytes("img/edsheeran.jpg"),
+                    ProductionCompanyId = 1,
+                    IsPodcast = false
+                },
+                new SongAndPodcast()
+                {
+                    SongAndPodcastId = 7,
+                    Title = "mostar",
+                    Text = "I found a love for me" +
+                            "Oh darling," +
+                            "just dive right in and follow my lead" +
+                            "Well," +
+                            "I found a girl," +
+                            "beautiful and sweet" +
+                            "Oh," +
+                            "I never knew you were the someone waiting for me" +
+                            "'Cause we were just kids when we fell in love" +
+                            "Not knowing what it was...",
+                    RunningTime = "00:04:22",
+                    ReleaseDate = new DateTime(2017, 09, 26),
+                    Budget = 3500,
+                    Poster = File.ReadAllBytes("img/edsheeran.jpg"),
+                    ProductionCompanyId = 1,
+                    IsPodcast = false
+                },
+                new SongAndPodcast()
+                {
+                    SongAndPodcastId = 8,
+                    Title = "mepas",
+                    Text = "I found a love for me" +
+                            "Oh darling," +
+                            "just dive right in and follow my lead" +
+                            "Well," +
+                            "I found a girl," +
+                            "beautiful and sweet" +
+                            "Oh," +
+                            "I never knew you were the someone waiting for me" +
+                            "'Cause we were just kids when we fell in love" +
+                            "Not knowing what it was...",
+                    RunningTime = "00:04:22",
+                    ReleaseDate = new DateTime(2017, 09, 26),
+                    Budget = 3500,
+                    Poster = File.ReadAllBytes("img/edsheeran.jpg"),
+                    ProductionCompanyId = 1,
+                    IsPodcast = false
+                },
+                new SongAndPodcast()
+                {
+                    SongAndPodcastId = 9,
+                    Title = "zgrada",
+                    Text = "I found a love for me" +
+                            "Oh darling," +
+                            "just dive right in and follow my lead" +
+                            "Well," +
+                            "I found a girl," +
+                            "beautiful and sweet" +
+                            "Oh," +
+                            "I never knew you were the someone waiting for me" +
+                            "'Cause we were just kids when we fell in love" +
+                            "Not knowing what it was...",
+                    RunningTime = "00:04:22",
+                    ReleaseDate = new DateTime(2017, 09, 26),
+                    Budget = 3500,
+                    Poster = File.ReadAllBytes("img/edsheeran.jpg"),
+                    ProductionCompanyId = 1,
+                    IsPodcast = false
+                },
+                new SongAndPodcast()
+                {
+                    SongAndPodcastId = 10,
+                    Title = "mjesec",
+                    Text = "I found a love for me" +
+                            "Oh darling," +
+                            "just dive right in and follow my lead" +
+                            "Well," +
+                            "I found a girl," +
+                            "beautiful and sweet" +
+                            "Oh," +
+                            "I never knew you were the someone waiting for me" +
+                            "'Cause we were just kids when we fell in love" +
+                            "Not knowing what it was...",
+                    RunningTime = "00:04:22",
+                    ReleaseDate = new DateTime(2017, 09, 26),
+                    Budget = 3500,
+                    Poster = File.ReadAllBytes("img/edsheeran.jpg"),
+                    ProductionCompanyId = 1,
+                    IsPodcast = false
+                },
+                new SongAndPodcast()
+                {
+                    SongAndPodcastId = 11,
+                    Title = "Podcast 1",
+                    Text = "",
+                    RunningTime = null,
+                    ReleaseDate = new DateTime(2014, 01, 14),
+                    Budget = 11500,
+                    Poster = File.ReadAllBytes("img/Song_Exploder.png"),
+                    ProductionCompanyId = 3,
+                    IsPodcast = true
                 }
             );
 
@@ -279,6 +498,12 @@ namespace PerfectSound.Database
                     PodcastSeasonId = 3,
                     SeasonName = "Exploder S3",
                     SongAndPodcastId = 2
+                },
+                new PodcastSeason()
+                {
+                    PodcastSeasonId = 4,
+                    SeasonName = "Season pilot 0",
+                    SongAndPodcastId = 11
                 }
              );
 
@@ -311,6 +536,20 @@ namespace PerfectSound.Database
                     EpisodeName = "Episode 1",
                     EpisodeNumber = 1,
                     PodcastSeasonId = 2
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 5,
+                    EpisodeName = "Episode 0",
+                    EpisodeNumber = 1,
+                    PodcastSeasonId = 4
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 6,
+                    EpisodeName = "Episode 1",
+                    EpisodeNumber = 2,
+                    PodcastSeasonId = 4
                 }
             );
 
@@ -327,6 +566,90 @@ namespace PerfectSound.Database
                     SongAndPodcastGenreId = 2,
                     SongAndPodcastId = 2,
                     GenreId = 3
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 3,
+                    SongAndPodcastId = 2,
+                    GenreId = 5
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 4,
+                    SongAndPodcastId = 3,
+                    GenreId = 5
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 5,
+                    SongAndPodcastId = 3,
+                    GenreId = 1
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 6,
+                    SongAndPodcastId = 4,
+                    GenreId = 5
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 7,
+                    SongAndPodcastId = 5,
+                    GenreId = 2
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 8,
+                    SongAndPodcastId = 5,
+                    GenreId = 3
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 9,
+                    SongAndPodcastId = 6,
+                    GenreId = 1
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 10,
+                    SongAndPodcastId = 7,
+                    GenreId = 4
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 11,
+                    SongAndPodcastId = 8,
+                    GenreId = 4
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 12,
+                    SongAndPodcastId = 8,
+                    GenreId = 3
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 13,
+                    SongAndPodcastId = 9,
+                    GenreId = 1
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 14,
+                    SongAndPodcastId = 10,
+                    GenreId = 5
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 15,
+                    SongAndPodcastId = 10,
+                    GenreId = 2
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 16,
+                    SongAndPodcastId = 11,
+                    GenreId = 2
                 }
             );
 
@@ -336,6 +659,76 @@ namespace PerfectSound.Database
                 {
                     SongAndPodcastPersonId=1,
                     SongAndPodcastId = 1,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 2,
+                    SongAndPodcastId = 2,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 3,
+                    SongAndPodcastId = 3,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 4,
+                    SongAndPodcastId = 4,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 5,
+                    SongAndPodcastId = 5,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 6,
+                    SongAndPodcastId = 6,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 7,
+                    SongAndPodcastId = 7,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 8,
+                    SongAndPodcastId = 8,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 9,
+                    SongAndPodcastId = 9,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 10,
+                    SongAndPodcastId = 10,
+                    PersonId = 2,
+                    RoleId = 1
+                },
+                new SongAndPodcastPerson()
+                {
+                    SongAndPodcastPersonId = 11,
+                    SongAndPodcastId = 11,
                     PersonId = 2,
                     RoleId = 1
                 }
@@ -348,22 +741,204 @@ namespace PerfectSound.Database
                 {
                     RatingId=1,
                     SongAndPodcastId=1,
-                    UserId=2,
+                    UserId=4,
                     RatingValue=3
                 },
                 new Rating()
                 {
                     RatingId = 2,
                     SongAndPodcastId = 2,
-                    UserId = 2,
+                    UserId = 3,
                     RatingValue = 4.5
                 },
                 new Rating()
                 {
                     RatingId = 3,
+                    SongAndPodcastId = 2,
+                    UserId = 5,
+                    RatingValue = 3.5
+                },
+                new Rating()
+                {
+                    RatingId = 4,
                     SongAndPodcastId = 1,
-                    UserId = 1,
+                    UserId = 2,
                     RatingValue = 5
+                },
+                new Rating()
+                {
+                    RatingId = 5,
+                    SongAndPodcastId = 3,
+                    UserId = 2,
+                    RatingValue = 3.5
+                },
+                new Rating()
+                {
+                    RatingId = 6,
+                    SongAndPodcastId = 3,
+                    UserId = 3,
+                    RatingValue = 2.5
+                },
+                new Rating()
+                {
+                    RatingId = 7,
+                    SongAndPodcastId = 4,
+                    UserId = 4,
+                    RatingValue = 4.5
+                },
+                new Rating()
+                {
+                    RatingId = 8,
+                    SongAndPodcastId = 4,
+                    UserId = 5,
+                    RatingValue = 3.5
+                },
+                new Rating()
+                {
+                    RatingId = 9,
+                    SongAndPodcastId = 4,
+                    UserId = 2,
+                    RatingValue = 3.0
+                },
+                new Rating()
+                {
+                    RatingId = 10,
+                    SongAndPodcastId = 5,
+                    UserId = 5,
+                    RatingValue = 5
+                },
+                new Rating()
+                {
+                    RatingId = 11,
+                    SongAndPodcastId = 5,
+                    UserId = 3,
+                    RatingValue = 4.5
+                },
+                new Rating()
+                {
+                    RatingId = 12,
+                    SongAndPodcastId = 6,
+                    UserId = 2,
+                    RatingValue = 2.0
+                },
+                new Rating()
+                {
+                    RatingId = 13,
+                    SongAndPodcastId = 6,
+                    UserId = 2,
+                    RatingValue = 3.5
+                },
+                new Rating()
+                {
+                    RatingId = 14,
+                    SongAndPodcastId = 7,
+                    UserId = 3,
+                    RatingValue = 2.0
+                },
+                new Rating()
+                {
+                    RatingId = 15,
+                    SongAndPodcastId = 7,
+                    UserId = 4,
+                    RatingValue = 4.0
+                },
+                new Rating()
+                {
+                    RatingId = 16,
+                    SongAndPodcastId = 7,
+                    UserId = 5,
+                    RatingValue = 2.0
+                },
+                new Rating()
+                {
+                    RatingId = 17,
+                    SongAndPodcastId = 8,
+                    UserId = 2,
+                    RatingValue = 5
+                },
+                new Rating()
+                {
+                    RatingId = 18,
+                    SongAndPodcastId = 8,
+                    UserId = 4,
+                    RatingValue = 4.5
+                },
+                new Rating()
+                {
+                    RatingId = 19,
+                    SongAndPodcastId = 9,
+                    UserId = 4,
+                    RatingValue = 3.0
+                },
+                new Rating()
+                {
+                    RatingId = 20,
+                    SongAndPodcastId = 9,
+                    UserId = 5,
+                    RatingValue = 1.5
+                },
+                new Rating()
+                {
+                    RatingId = 21,
+                    SongAndPodcastId = 10,
+                    UserId = 3,
+                    RatingValue = 3.5
+                },
+                new Rating()
+                {
+                    RatingId = 22,
+                    SongAndPodcastId = 10,
+                    UserId = 4,
+                    RatingValue = 3.0
+                },
+                new Rating()
+                {
+                    RatingId = 23,
+                    SongAndPodcastId = 11,
+                    UserId = 4,
+                    RatingValue = 2.0
+                },
+                new Rating()
+                {
+                    RatingId = 24,
+                    SongAndPodcastId = 11,
+                    UserId = 5,
+                    RatingValue = 3.0
+                },
+                new Rating()
+                {
+                    RatingId = 25,
+                    SongAndPodcastId = 11,
+                    UserId = 2,
+                    RatingValue = 2.0
+                },
+                new Rating()
+                {
+                    RatingId = 26,
+                    SongAndPodcastId = 10,
+                    UserId = 2,
+                    RatingValue = 5
+                },
+                new Rating()
+                {
+                    RatingId = 27,
+                    SongAndPodcastId = 10,
+                    UserId = 5,
+                    RatingValue = 3.5
+                },
+                new Rating()
+                {
+                    RatingId = 28,
+                    SongAndPodcastId = 9,
+                    UserId = 2,
+                    RatingValue = 1.5
+                },
+                new Rating()
+                {
+                    RatingId = 29,
+                    SongAndPodcastId = 9,
+                    UserId = 3,
+                    RatingValue = 3.5
                 }
             );
             //comments

@@ -394,5 +394,6 @@ namespace PerfectSound.WinForms.Forms
                 frm.Show();
             }
         }
+
     }
 }

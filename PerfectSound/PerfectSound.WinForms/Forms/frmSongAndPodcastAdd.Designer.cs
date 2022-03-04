@@ -210,7 +210,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnSaveSongPodcast.BackColor = System.Drawing.Color.SlateBlue;
             this.btnSaveSongPodcast.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnSaveSongPodcast.Location = new System.Drawing.Point(745, 477);
+            this.btnSaveSongPodcast.Location = new System.Drawing.Point(745, 489);
             this.btnSaveSongPodcast.Name = "btnSaveSongPodcast";
             this.btnSaveSongPodcast.Size = new System.Drawing.Size(166, 35);
             this.btnSaveSongPodcast.TabIndex = 18;
@@ -256,7 +256,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnSeasonEpisodeSetting.BackColor = System.Drawing.Color.SlateBlue;
             this.btnSeasonEpisodeSetting.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnSeasonEpisodeSetting.Location = new System.Drawing.Point(745, 395);
+            this.btnSeasonEpisodeSetting.Location = new System.Drawing.Point(745, 407);
             this.btnSeasonEpisodeSetting.Name = "btnSeasonEpisodeSetting";
             this.btnSeasonEpisodeSetting.Size = new System.Drawing.Size(166, 35);
             this.btnSeasonEpisodeSetting.TabIndex = 22;
@@ -268,7 +268,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnArtists.BackColor = System.Drawing.Color.SlateBlue;
             this.btnArtists.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnArtists.Location = new System.Drawing.Point(745, 436);
+            this.btnArtists.Location = new System.Drawing.Point(745, 448);
             this.btnArtists.Name = "btnArtists";
             this.btnArtists.Size = new System.Drawing.Size(166, 35);
             this.btnArtists.TabIndex = 23;
@@ -293,7 +293,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnDelete.BackColor = System.Drawing.Color.Firebrick;
             this.btnDelete.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.Location = new System.Drawing.Point(73, 477);
+            this.btnDelete.Location = new System.Drawing.Point(73, 489);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(149, 35);
             this.btnDelete.TabIndex = 51;

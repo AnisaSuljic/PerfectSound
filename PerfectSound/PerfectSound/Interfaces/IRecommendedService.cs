@@ -8,8 +8,8 @@ namespace PerfectSound.Interfaces
 {
     public interface IRecommendedService
     {
-        public List<Model.Model.SongAndPodcast> Recommend(int SaPId);
-        //public List<SongAndPodcast> LoadSimilar(int titleId);
+        //public List<Model.Model.SongAndPodcast> Recommend(int SaPId);
+        public List<SongAndPodcast> LoadSimilar(int titleId);
 
 
     }

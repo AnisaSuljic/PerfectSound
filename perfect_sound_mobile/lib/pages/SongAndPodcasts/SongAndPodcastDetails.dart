@@ -32,9 +32,9 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
   double personalRating = 0.0;
   late double fullRating = this.widget.songAndPodcast.ratingValue as double;
 
-  List<SAP> listSap1=[];
+  //List<SAP> listSap1=[];
 
-  Future<void> fetchData() async {
+  /*Future<void> fetchData() async {
 
     listSap1=await Get_saps();
     }
@@ -46,7 +46,7 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
       setState(() {});
     });
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     TextEditingController CommentController = new TextEditingController();
@@ -205,7 +205,7 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                 ),
               ),
               //recommended
-              Padding(
+              /*Padding(
                   padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,7 +216,7 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                   ],
                 ),
 
-              ),
+              ),*/
               Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: CommentRow(context, CommentController),
               ),
@@ -543,8 +543,8 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
 
     return listArt;
   }
-
-  //Get artists
+/*
+  //Get Recommended
   Future<List<SAP>> Get_saps() async {
     int? id=this.widget.songAndPodcast.songAndPodcastId;
     var sapList = await APIService.Get('Recommended/Recommend/${id}', null);
@@ -553,7 +553,7 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
 
     return listsp;
   }
-
+*/
 
   Future<List<SAP?>> GetSongAndPodcastPerson(
       int? personId) async {
@@ -570,7 +570,7 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
     return x;
   }
 }
-
+/*
 class RecommendedHead extends StatelessWidget {
   const RecommendedHead({
     Key? key,
@@ -600,4 +600,4 @@ class RecommendedHead extends StatelessWidget {
         )
     );
   }
-}
+}*/

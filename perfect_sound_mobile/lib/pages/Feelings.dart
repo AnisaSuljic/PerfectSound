@@ -172,26 +172,7 @@ class _FeelingsState extends State<Feelings> {
                       });
                     }, child: Text("Reset filters",style: TextStyle(color: PrimaryColor),)),
                   ),
-                  /*Container(
-                    width: size.width*0.3,
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: ElevatedButton(
-                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(PrimaryColor), padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 40))),
-                        onPressed: () async {
-                          if(_formKey.currentState!.validate()){
-                            //searchResponse=null;
 
-                            GetAll();
-
-                            if(searchResponse.isEmpty)
-                              showDialogWidget("An error has occurred, please try again.",context);
-                          }
-                        }, child: const Text('Find'),
-                      ),
-                    ),
-                  ),*/
                   SizedBox(height: 15,),
                 ],
               ),

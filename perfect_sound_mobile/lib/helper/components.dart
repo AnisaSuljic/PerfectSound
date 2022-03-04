@@ -8,6 +8,7 @@ import 'package:perfect_sound_mobile/pages/Feelings.dart';
 import 'package:perfect_sound_mobile/pages/Home.dart';
 import 'package:perfect_sound_mobile/pages/Login&SignUp/UserProfile.dart';
 import 'package:perfect_sound_mobile/pages/News/AllNews.dart';
+import 'package:perfect_sound_mobile/pages/Recommended.dart';
 import 'package:perfect_sound_mobile/pages/SongAndPodcasts/AllSongsAndPodcasts.dart';
 import 'package:perfect_sound_mobile/pages/TopRated.dart';
 import 'package:perfect_sound_mobile/pages/Welcome/Welcome.dart';
@@ -218,6 +219,7 @@ Drawer buildDrawer(BuildContext context) {
             cardName: "Podcasts"),
         CardBuilder(route: AllArtists(), cardName: "Artists"),
         CardBuilder(route: TopRated(), cardName: "Top rated"),
+        CardBuilder(route: Recommended(), cardName: "Recommended"),
         CardBuilder(route: Feelings(), cardName: "Feelings"),
         CardBuilder(route: Welcome(), cardName: "Log out"),
       ],

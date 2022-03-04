@@ -41,14 +41,18 @@ namespace PerfectSound.WinForms.Forms
             this.allArtistsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allNewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.versesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.usersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allUsersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +65,8 @@ namespace PerfectSound.WinForms.Forms
             this.artistsToolStripMenuItem,
             this.usersToolStripMenuItem,
             this.newsToolStripMenuItem,
+            this.versesToolStripMenuItem,
+            this.usersToolStripMenuItem1,
             this.testToolStripMenuItem,
             this.logOutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -89,21 +95,21 @@ namespace PerfectSound.WinForms.Forms
             // songsToolStripMenuItem
             // 
             this.songsToolStripMenuItem.Name = "songsToolStripMenuItem";
-            this.songsToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
+            this.songsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.songsToolStripMenuItem.Text = "All songs";
             this.songsToolStripMenuItem.Click += new System.EventHandler(this.songsToolStripMenuItem_Click);
             // 
             // podcastsToolStripMenuItem
             // 
             this.podcastsToolStripMenuItem.Name = "podcastsToolStripMenuItem";
-            this.podcastsToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
+            this.podcastsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.podcastsToolStripMenuItem.Text = "All podcasts";
             this.podcastsToolStripMenuItem.Click += new System.EventHandler(this.podcastsToolStripMenuItem_Click);
             // 
             // addEditSoundpodcastToolStripMenuItem
             // 
             this.addEditSoundpodcastToolStripMenuItem.Name = "addEditSoundpodcastToolStripMenuItem";
-            this.addEditSoundpodcastToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
+            this.addEditSoundpodcastToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.addEditSoundpodcastToolStripMenuItem.Text = "Add";
             this.addEditSoundpodcastToolStripMenuItem.Click += new System.EventHandler(this.addEditSoundpodcastToolStripMenuItem_Click);
             // 
@@ -132,27 +138,8 @@ namespace PerfectSound.WinForms.Forms
             // 
             // usersToolStripMenuItem
             // 
-            this.usersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allUsersToolStripMenuItem,
-            this.addToolStripMenuItem1});
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
-            this.usersToolStripMenuItem.Text = "Users";
-            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
-            // 
-            // allUsersToolStripMenuItem
-            // 
-            this.allUsersToolStripMenuItem.Name = "allUsersToolStripMenuItem";
-            this.allUsersToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.allUsersToolStripMenuItem.Text = "All users";
-            this.allUsersToolStripMenuItem.Click += new System.EventHandler(this.allUsersToolStripMenuItem_Click);
-            // 
-            // addToolStripMenuItem1
-            // 
-            this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
-            this.addToolStripMenuItem1.Text = "Add";
-            this.addToolStripMenuItem1.Click += new System.EventHandler(this.addToolStripMenuItem1_Click);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(14, 24);
             // 
             // newsToolStripMenuItem
             // 
@@ -166,21 +153,22 @@ namespace PerfectSound.WinForms.Forms
             // allNewsToolStripMenuItem
             // 
             this.allNewsToolStripMenuItem.Name = "allNewsToolStripMenuItem";
-            this.allNewsToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.allNewsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.allNewsToolStripMenuItem.Text = "All news";
             this.allNewsToolStripMenuItem.Click += new System.EventHandler(this.allNewsToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem2
             // 
             this.addToolStripMenuItem2.Name = "addToolStripMenuItem2";
-            this.addToolStripMenuItem2.Size = new System.Drawing.Size(147, 26);
+            this.addToolStripMenuItem2.Size = new System.Drawing.Size(224, 26);
             this.addToolStripMenuItem2.Text = "Add";
             this.addToolStripMenuItem2.Click += new System.EventHandler(this.addToolStripMenuItem2_Click);
             // 
-            // testToolStripMenuItem
+            // versesToolStripMenuItem
             // 
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(14, 24);
+            this.versesToolStripMenuItem.Name = "versesToolStripMenuItem";
+            this.versesToolStripMenuItem.Size = new System.Drawing.Size(89, 24);
+            this.versesToolStripMenuItem.Text = "Add verse";
             // 
             // logOutToolStripMenuItem
             // 
@@ -188,6 +176,48 @@ namespace PerfectSound.WinForms.Forms
             this.logOutToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.logOutToolStripMenuItem.Text = "Log out";
             this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(14, 24);
+            // 
+            // allUsersToolStripMenuItem
+            // 
+            this.allUsersToolStripMenuItem.Name = "allUsersToolStripMenuItem";
+            this.allUsersToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.allUsersToolStripMenuItem.Text = "All users";
+            this.allUsersToolStripMenuItem.Click += new System.EventHandler(this.allUsersToolStripMenuItem_Click);
+            // 
+            // addToolStripMenuItem1
+            // 
+            this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(147, 26);
+            this.addToolStripMenuItem1.Text = "Add";
+            this.addToolStripMenuItem1.Click += new System.EventHandler(this.addToolStripMenuItem1_Click);
+            // 
+            // usersToolStripMenuItem1
+            // 
+            this.usersToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allUsersToolStripMenuItem1,
+            this.addUserToolStripMenuItem});
+            this.usersToolStripMenuItem1.Name = "usersToolStripMenuItem1";
+            this.usersToolStripMenuItem1.Size = new System.Drawing.Size(58, 24);
+            this.usersToolStripMenuItem1.Text = "Users";
+            // 
+            // addUserToolStripMenuItem
+            // 
+            this.addUserToolStripMenuItem.Name = "addUserToolStripMenuItem";
+            this.addUserToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.addUserToolStripMenuItem.Text = "Add user";
+            this.addUserToolStripMenuItem.Click += new System.EventHandler(this.addUserToolStripMenuItem_Click);
+            // 
+            // allUsersToolStripMenuItem1
+            // 
+            this.allUsersToolStripMenuItem1.Name = "allUsersToolStripMenuItem1";
+            this.allUsersToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.allUsersToolStripMenuItem1.Text = "All users";
+            this.allUsersToolStripMenuItem1.Click += new System.EventHandler(this.allUsersToolStripMenuItem1_Click);
             // 
             // frmHome
             // 
@@ -232,6 +262,10 @@ namespace PerfectSound.WinForms.Forms
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem versesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem addUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allUsersToolStripMenuItem1;
     }
 }
 

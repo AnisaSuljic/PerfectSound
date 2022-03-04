@@ -28,13 +28,22 @@ namespace PerfectSound.WinForms.Forms
             try
             {
                 var result = await _UserService.Login<Model.Model.User>();
-                APIService.UserID = result.UserId;
-
-                if (result.UserTypeId == 1)
+                if (result != null)
                 {
-                    this.Hide();
-                    frmHome frm = new frmHome();
-                    frm.Show();
+                    APIService.UserID = result.UserId;
+
+                    if (result.UserTypeId == 1)
+                    {
+                        this.Hide();
+                        frmHome frm = new frmHome();
+                        frm.Show();
+                    }
+                    else
+                    {
+                        lblError.Text = "You do not have permissions.";
+                        txtUsername.Clear();
+                        txtPassword.Clear();
+                    }
                 }
                 else
                 {
@@ -42,17 +51,16 @@ namespace PerfectSound.WinForms.Forms
                     txtUsername.Clear();
                     txtPassword.Clear();
                 }
-                
             }
-            catch 
+            catch
             {
                 lblError.Text = "Incorrect username or password.";
                 txtUsername.Clear();
                 txtPassword.Clear();
             }
-            
+
         }
 
-        
+
     }
 }

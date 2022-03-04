@@ -22,18 +22,18 @@ namespace PerfectSound.Controllers
             _service = service;
             _mapper = mapper;
         }
-        /*[AllowAnonymous]
+        [AllowAnonymous]
         [HttpGet("Similar/{id}")]
         public List<Model.Model.SongAndPodcast> LoadSimilar(int id)
         {
             return _mapper.Map< List < Model.Model.SongAndPodcast >>( _service.LoadSimilar(id));
 
-        }*/
-        [AllowAnonymous]
+        }
+        /*[AllowAnonymous]
         [HttpGet("Recommend/{id}")]
         public List<Model.Model.SongAndPodcast> Recommend(int id)
         {
             return _service.Recommend(id);
-        }
+        }*/
     }
 }

@@ -61,7 +61,6 @@ namespace PerfectSound.WinForms
         {
             try
             {
-
                 return await $"{endpoint}{_resource}/{"Login"}"
                     .WithBasicAuth(username, password)
                     .GetJsonAsync<T>();
@@ -70,8 +69,6 @@ namespace PerfectSound.WinForms
             {
                 if (ex.StatusCode == 401)
                     MessageBox.Show("Incorrect username or password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
-                    MessageBox.Show("An error has occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return default(T);
             }

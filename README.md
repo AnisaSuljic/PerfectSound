@@ -4,6 +4,14 @@
 
 -Read more about [PerfectSound](https://edufit-my.sharepoint.com/:b:/g/personal/anisa_suljic_edu_fit_ba/EeRZ9t7B3NRCuuT7vkYrd70Bja-6C0N3_9x3qmSUJ1gXOg?e=41VySf)
 
+## Credentials:
+#### Desktop user: 
+      username: desktop
+      password: test
+#### Mobile user: 
+      username: mobile
+      password: test
+   
 
 ## Documentation:
 

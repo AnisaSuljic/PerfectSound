@@ -1,10 +1,14 @@
 
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/helper/constants.dart';
 import 'package:perfect_sound_mobile/models/Artists.dart';
 import 'package:perfect_sound_mobile/models/SAP.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
+
+import 'SongAndPodcasts/SongAndPodcastDetails.dart';
 
 class Feelings extends StatefulWidget {
   const Feelings({Key? key}) : super(key: key);
@@ -28,6 +32,8 @@ class _FeelingsState extends State<Feelings> {
 
   List<Artists> _artList =[];
   List<int> _yearList =[];
+  var _feelList =[];
+
   int? art_id;
   var artistsValueChoose;
   var feelValueChoose;
@@ -37,13 +43,17 @@ class _FeelingsState extends State<Feelings> {
   Future<void> fetchData() async {
     _artList=await GetArtists();
     _yearList=await GetAllYears();
+    _feelList=feelingList.values;
   }
 
   @override
   void initState() {
     super.initState();
-    fetchData().then((result) {
-      setState(() {});
+    fetchData()
+        .then((result) {
+          setState(() {
+            bodyWidget();
+          });
     });
   }
 
@@ -100,12 +110,12 @@ class _FeelingsState extends State<Feelings> {
                         iconSize: 36,
                         onChanged: (value)=>setState(()
                         {
-                          feelingList.values.forEach((element) {
+                          _feelList.forEach((element) {
                             if(element.index==value)
                               feelValueChoose=element.index;
                           });
                         }),
-                        items:feelingList.values.map((val) => DropdownMenuItem(
+                        items:_feelList.map((val) => DropdownMenuItem(
                           value: val.index,
                           child: Text(val.toString().split('.').last),
                           enabled: true,
@@ -189,7 +199,7 @@ class _FeelingsState extends State<Feelings> {
       builder: (BuildContext context, AsyncSnapshot<List<SAP>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Text('Loading...'),
+            child: CircularProgressIndicator(color: PrimaryColor,),
           );
         } else if (snapshot.hasError) {
           return Center(
@@ -199,6 +209,7 @@ class _FeelingsState extends State<Feelings> {
           if(snapshot.data!.length==0)
             return Text("No matches");
           return ListView(
+            physics: ClampingScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             children: snapshot.data!.map((e) => SAPList(e)).toList(),
@@ -213,20 +224,33 @@ class _FeelingsState extends State<Feelings> {
       Card(
         child: Container(
           height: 80,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                image: MemoryImage(e.poster as Uint8List),
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
+              )
+          ),
+          child: TextButton(
+            onPressed: () {
+              Navigator.push(
+                context, MaterialPageRoute(builder: (context) =>
+                  SongAndPodcastDetails(songAndPodcast: e)),
+              );
+            },
             child: Column(
               children: [
                 Flexible(
-                  child: Text(e.title.toString(),
-                      style: TextStyle(color: PrimaryColor,)),
+                  child: Text(e.title.toString(), style: TextStyle(color: Colors.black,
+                      fontSize: 18, fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.white.withOpacity(0.8))),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Flexible(
-                  child: Text(nameFormat(e.firstName, e.lastName),
-                      style: TextStyle(color: Colors.black87)),
+                  child: Text(nameFormat(e.firstName,e.lastName), style: TextStyle(color: Colors.black,
+                      backgroundColor: Colors.white.withOpacity(0.8))),
                 ),
               ],
             ),
@@ -277,6 +301,6 @@ Future<List<Artists>> GetArtists() async {
 Future<List<int>> GetAllYears() async {
   var SaPList = await APIService.Get('SongAndPodcast', null);
     var x= SaPList!.map((i) => SAP.fromJson(i).releaseDate!.year).toList();
-    print("xx: "+x.toString());
+    x=x.toSet().toList();
     return x;
 }

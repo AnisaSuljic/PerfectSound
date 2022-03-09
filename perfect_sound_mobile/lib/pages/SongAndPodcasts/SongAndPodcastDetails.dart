@@ -32,21 +32,6 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
   double personalRating = 0.0;
   late double fullRating = this.widget.songAndPodcast.ratingValue as double;
 
-  //List<SAP> listSap1=[];
-
-  /*Future<void> fetchData() async {
-
-    listSap1=await Get_saps();
-    }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchData().then((result) {
-      setState(() {});
-    });
-  }
-*/
   @override
   Widget build(BuildContext context) {
     TextEditingController CommentController = new TextEditingController();
@@ -133,7 +118,6 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                                 SizedBox(width: 10,),
                                 Text(this.widget.songAndPodcast
                                     .productionCompanyName.toString()),
-
                               ],
                             ),
                           ],
@@ -188,7 +172,6 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                             genre: this.widget.songAndPodcast.genre![index]
                                 .genreName.toString(),
                           )
-
                   ),
                 ),
               ),
@@ -204,19 +187,6 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                     ]
                 ),
               ),
-              //recommended
-              /*Padding(
-                  padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Recommended songs or podcasts", style: TextStyle(fontSize: 16)),
-                    SizedBox(height: 15,),
-                    RecommendedHead(listSap1: listSap1)
-                  ],
-                ),
-
-              ),*/
               Padding(padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: CommentRow(context, CommentController),
               ),
@@ -305,13 +275,10 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
   //Get personal rating
   Future<List<Rating>> GetPersonalRating() async {
     Map<String, String>?queryParams;
-
     queryParams = {
       'SongAndPodcastId': this.widget.songAndPodcast.songAndPodcastId
-          .toString(),
-      'UserId': APIService.usersData!.userTypeId.toString()
+          .toString(),'UserId':APIService.usersData!.userId.toString()
     };
-
     var x = await APIService.Get('Rating', queryParams);
     return x!.map((i) => Rating.fromJson(i)).toList();
   }
@@ -451,6 +418,7 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                             requestComment.userId =APIService.usersData!.userId;
                             requestComment.dateTimeOfComment =DateTime.now();
                             requestComment.content = CommentController.text;
+                            print("APIService.usersData!.userId: "+APIService.usersData!.userId.toString());
 
                             await PostComment(requestComment);
 
@@ -483,7 +451,6 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
 
   //Comment post
   Future<void> PostComment(CommentUpsertRequest request) async {
-    print("post: "+ request.content.toString());
     await APIService.Post("Comment", json.encode(request.toJson()));
   }
 
@@ -508,7 +475,7 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
           } else {
             return
               SizedBox(
-                  height: 110,
+                  height: 120,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: listArtist.length,
@@ -543,17 +510,6 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
 
     return listArt;
   }
-/*
-  //Get Recommended
-  Future<List<SAP>> Get_saps() async {
-    int? id=this.widget.songAndPodcast.songAndPodcastId;
-    var sapList = await APIService.Get('Recommended/Recommend/${id}', null);
-    var x = sapList!.toList();
-    var listsp = x.map((i) => SAP.fromJson(i)).toList();
-
-    return listsp;
-  }
-*/
 
   Future<List<SAP?>> GetSongAndPodcastPerson(
       int? personId) async {
@@ -570,34 +526,3 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
     return x;
   }
 }
-/*
-class RecommendedHead extends StatelessWidget {
-  const RecommendedHead({
-    Key? key,
-    required this.listSap1,
-  }) : super(key: key);
-
-  final List<SAP> listSap1;
-
-  @override
-  Widget build(BuildContext context) {
-    print("head: "+ listSap1.length.toString());
-    return SizedBox(
-        height: 110,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: listSap1.length,
-          itemBuilder: (context, index) =>
-              TextButton(
-                  onPressed: () async {
-                    var songpod=listSap1[index];
-                    Navigator.push(
-                      context, MaterialPageRoute(builder: (context) =>
-                        SongAndPodcastDetails(songAndPodcast: songpod)),
-                    );
-                  },
-                  child: RecommHeads(sap_: listSap1[index])),
-        )
-    );
-  }
-}*/

@@ -101,6 +101,7 @@ namespace PerfectSound.WinForms.Forms
             frmUserAdd frm = new frmUserAdd(U);
             frm.WindowState = FormWindowState.Normal;
             frm.Show();
+            //this.Close();
         }
 
        

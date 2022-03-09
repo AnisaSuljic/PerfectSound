@@ -48,7 +48,6 @@ class SAP {
         genreList.add(new Genre.fromJson(v));
       });
     }
-
     songAndPodcastId = json['songAndPodcastId'];
     title = json['title'];
     text = json['text'];
@@ -61,10 +60,10 @@ class SAP {
     isPodcast = json['isPodcast'];
     if(json['ratingValue'].runtimeType==int){
       int value=json['ratingValue'];
-      ratingValue=value.toDouble();
+      ratingValue=num.parse(value.toDouble().toStringAsFixed(2)) as double?;
     }
     else
-      ratingValue = json['ratingValue'];
+      ratingValue =num.parse(json['ratingValue'].toStringAsFixed(2)) as double?;
     if(json['ratingValue']==null)
       ratingValue=0.0;
     firstName = json['firstName'];

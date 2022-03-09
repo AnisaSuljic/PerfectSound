@@ -186,22 +186,26 @@ namespace PerfectSound.WinForms.Forms
             frmlogin.Show();
         }
 
-        private void versesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmVerseAdd frmVerse = new frmVerseAdd();
-            frmVerse.ShowDialog();
-        }
+        
 
         private void addUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmUserAdd newuser = new frmUserAdd();
+            newuser.MdiParent = this;
             newuser.Show();
         }
 
         private void allUsersToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmUserSearch allusers = new frmUserSearch();
+            allusers.MdiParent = this;
             allusers.Show();
+        }
+
+        private void versesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVerseAdd frmVerse = new frmVerseAdd();
+            frmVerse.ShowDialog();
         }
     }
 }

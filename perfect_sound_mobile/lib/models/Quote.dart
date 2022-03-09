@@ -1,7 +1,5 @@
 import 'package:perfect_sound_mobile/models/SAP.dart';
 
-import 'SongAndPodcasts.dart';
-
 class Quote {
   final quoteId;
   final int? songAndPodcastId;

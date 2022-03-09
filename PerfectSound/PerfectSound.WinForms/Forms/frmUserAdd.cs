@@ -21,6 +21,8 @@ namespace PerfectSound.WinForms.Forms
 
         private User _user;
         bool isEdit;
+        bool isLogged = false;
+
 
         public frmUserAdd(User user=null)
         {
@@ -31,7 +33,8 @@ namespace PerfectSound.WinForms.Forms
                 isEdit = true;
                 btnAddUser.Text = "Update";
                 btnDelete.Visible = true;
-
+                if (user.UserName == APIService.username)
+                    isLogged = true;
             }
             else
                 isEdit = false;
@@ -50,11 +53,6 @@ namespace PerfectSound.WinForms.Forms
             txtUsername.Text = _user.UserName;
             txtEmail.Text = _user.Email;
             txtPhone.Text = _user.Phone;
-            txtPassword.Enabled = false;
-            checkPassword.Enabled = false;
-            txtPasswordConfirm.Enabled = false;
-            checkPasswordConfirm.Enabled = false;
-            lblGeneratePass.Visible = false;
             cbUserType.SelectedValue = _user.UserTypeId;
         }
 
@@ -77,12 +75,20 @@ namespace PerfectSound.WinForms.Forms
                         LastName = txtLastname.Text,
                         UserName = txtUsername.Text,
                         Email = txtEmail.Text,
-                        Password = txtPassword.Text,
-                        PasswordConfirm = txtPasswordConfirm.Text,
                         Phone = txtPhone.Text
                     };
-
                     var idType = cbUserType.SelectedValue;
+
+                    if (txtPassword.Text != "" && txtPasswordConfirm.Text != "")
+                    {
+                        request.Password = txtPassword.Text;
+                        request.PasswordConfirm = txtPasswordConfirm.Text;
+                    }
+                    else
+                    {
+                        request.Password = APIService.password;
+                        request.PasswordConfirm = APIService.password;
+                    }
 
                     if (int.TryParse(idType.ToString(), out int typeId))
                     {
@@ -107,9 +113,18 @@ namespace PerfectSound.WinForms.Forms
                             MessageBox.Show("Successfully updated.");
                             DialogResult = DialogResult.OK;
                             Close();
-                            frmUserSearch frm = new frmUserSearch();
-                            frm.MdiParent = frmHome.ActiveForm;
-                            frm.Show();
+                            if (isLogged == true && (txtPassword.Text != "" || txtUsername.Text != _user.UserName))
+                            {
+                                frmHome.ActiveForm.Hide();
+                                frmLogin frmlogin = new frmLogin();
+                                frmlogin.Show();
+                            }
+                            else
+                            {
+                                frmUserSearch frm = new frmUserSearch();
+                                frm.MdiParent = frmHome.ActiveForm;
+                                frm.Show();
+                            }
                         }
                     }
                     catch
@@ -129,12 +144,17 @@ namespace PerfectSound.WinForms.Forms
         private bool ErrorCheck()
         {
             if (!ErrorHandler.RequiredFiled(txtFirstName, errorUser) ||
-                !ErrorHandler.RequiredFiled(txtLastname, errorUser)||
-                !ErrorHandler.RequiredFiled(txtUsername, errorUser) || 
+                !ErrorHandler.RequiredFiled(txtLastname, errorUser) ||
+                !ErrorHandler.RequiredFiled(txtUsername, errorUser) ||
                 !ErrorHandler.RequiredFiled(txtEmail, errorUser) ||
-                !ErrorHandler.CheckFormatOfEmail(txtEmail,errorUser, ErrorHandler.FormatChecker) ||
+                !ErrorHandler.CheckFormatOfEmail(txtEmail, errorUser, ErrorHandler.FormatChecker) ||
                 !ErrorHandler.RequiredFiled(txtPhone, errorUser))
                 return false;
+            if (txtPassword.Text != "")
+            {
+                if (!ErrorHandler.RequiredFiled(txtPasswordConfirm, errorUser) || !ErrorHandler.CheckIfPassEqual(txtPassword, txtPasswordConfirm, errorUser, ErrorHandler.FormatChecker))
+                    return false;
+            }
             if (isEdit != true)
             {
                 if (!ErrorHandler.RequiredFiled(txtEmail, errorUser) ||
@@ -175,12 +195,24 @@ namespace PerfectSound.WinForms.Forms
         {
             try
             {
+                bool delLogged = false;
+                if (isLogged == true)
+                    delLogged = true;
                 var U = await _UserService.Delete<User>(_user.UserId);
                 MessageBox.Show("Successfully deleted.");
                 this.Hide();
-                frmUserSearch frm = new frmUserSearch();
-                frm.MdiParent = frmHome.ActiveForm;
-                frm.Show();
+                if(delLogged==true)
+                {
+                    ActiveForm.Hide();
+                    frmLogin frmlogin = new frmLogin();
+                    frmlogin.Show();
+                }
+                else
+                {
+                    frmUserSearch frm = new frmUserSearch();
+                    frm.MdiParent = frmHome.ActiveForm;
+                    frm.Show();
+                }
             }
             catch
             {

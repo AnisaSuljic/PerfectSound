@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using PerfectSound.Interfaces;
 using PerfectSound.Model.Model;
 using PerfectSound.Model.Requests.SongAndPodcast;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 namespace PerfectSound.Services
 {
     public class SongAndPodcastService : BaseCRUDService<SongAndPodcast, SongAndPodcastSearchRequest,
-                                    SongAndPodcastUpsertRequest, SongAndPodcastUpsertRequest, Database.SongAndPodcast>
+                                    SongAndPodcastUpsertRequest, SongAndPodcastUpsertRequest, Database.SongAndPodcast>,ISongAndPodcsatsService
     {
         public SongAndPodcastService(Database.PerfectSoundContext context, IMapper mapper) : base(context, mapper)
         {
@@ -125,5 +126,19 @@ namespace PerfectSound.Services
             return _mapper.Map<SongAndPodcast>(entity);
         }
 
+        public List<SongAndPodcast> GetLast3()
+        {
+            var _searchSet = _context.SongAndPodcasts
+                .Include(x => x.ProductionCompany)
+                .Include(x => x.SongAndPodcastGenres)
+                .ThenInclude(x => x.Genre)
+                .Include(x => x.SongAndPodcastPeople)
+                .ThenInclude(x => x.Person)
+                .Include(x => x.Ratings)
+                .Take(3)
+                .AsQueryable();
+
+            return _mapper.Map<List<SongAndPodcast>>(_searchSet);
+        }
     }
 }

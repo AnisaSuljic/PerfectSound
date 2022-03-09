@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:perfect_sound_mobile/helper/components.dart';
+import 'package:perfect_sound_mobile/helper/constants.dart';
 import 'package:perfect_sound_mobile/models/SAP.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
@@ -23,7 +24,7 @@ class _RecommendedState extends State<Recommended> {
       body: SingleChildScrollView(
           child: Column(
             children: [
-              PageTitle(title: "Top rated"),
+              PageTitle(title: "Recommended"),
               LineSeparator(height: 6,width: 40),
               SizedBox(height: 15,),
               bodyWidget(context),
@@ -41,7 +42,7 @@ class _RecommendedState extends State<Recommended> {
           AsyncSnapshot<List<SAP>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Text('Loading...'),
+            child: CircularProgressIndicator(color: PrimaryColor,),
           );
         } else if (snapshot.hasError) {
           return Center(
@@ -51,6 +52,7 @@ class _RecommendedState extends State<Recommended> {
           if(snapshot.data!.length==0)
             return Text("No recommended songs or podcasts");
           return ListView(
+            physics: ClampingScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             children: snapshot.data!
@@ -100,7 +102,7 @@ class _RecommendedState extends State<Recommended> {
 
 //METHOD GET SAP
 Future<List<SAP>> getRecommendedSongAndPodcast() async {
-  var x= await APIService.Get('Recommended/Similar/${APIService.userID}',null);
+  var x= await APIService.Get('Recommended/Similar/${APIService.usersData!.userId}',null);
   var y= x!.map((e) => SAP.fromJson(e)).toList();
 
   return y;

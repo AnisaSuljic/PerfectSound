@@ -51,7 +51,8 @@ namespace PerfectSound.Mapper
                 .ForMember(x => x.GenderName, m => m.MapFrom(src => src.Gender.GenderName)).ReverseMap();
             CreateMap<Model.Requests.Person.PersonUpsertRequest, Person>().ReverseMap();
 
-            CreateMap<SongAndPodcastPerson, Model.Model.SongAndPodcastPerson>().ReverseMap();
+            CreateMap<SongAndPodcastPerson, Model.Model.SongAndPodcastPerson>()
+                .ReverseMap();
             CreateMap<Model.Requests.SongAndPodcastPerson.SongAndPodcastPersonUpsertRequest, Database.SongAndPodcastPerson>().ReverseMap();
 
             CreateMap<Quote, Model.Model.Quote>()

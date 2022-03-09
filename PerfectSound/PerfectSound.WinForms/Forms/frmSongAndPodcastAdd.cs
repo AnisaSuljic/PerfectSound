@@ -43,9 +43,16 @@ namespace PerfectSound.WinForms.Forms
 
                 btnBack.Visible = true;
                 if (SAP.IsPodcast == true)
+                {
                     btnSeasonEpisodeSetting.Visible = true;
+                    btnArtists.Visible = false;
+                }
                 else
+                {
                     btnSeasonEpisodeSetting.Visible = false;
+                    btnArtists.Visible = true;
+
+                }
 
             }
             else

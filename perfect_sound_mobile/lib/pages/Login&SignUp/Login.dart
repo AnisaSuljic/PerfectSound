@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/helper/constants.dart';
-import 'package:perfect_sound_mobile/models/News.dart';
 import 'package:perfect_sound_mobile/models/User/Users.dart';
 import 'package:perfect_sound_mobile/pages/Login&SignUp/SignUp.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
@@ -35,7 +34,7 @@ class _LoginState extends State<Login> {
               Center(child: Text('LOGIN',style: TextStyle(fontWeight: FontWeight.bold))),
               Image(width: size.width * 0.7, image: AssetImage('assets/images/login.png')),
               TextFieldContainer(hintText: "Your username", icon: Icons.person_outline_outlined,onChanged: (value){},obscureText: false, txtController: usernameController,),
-              TextFieldContainer(hintText: "Password", icon: Icons.lock_outline_rounded,onChanged: (value){},suffixIcon: Icons.visibility_outlined,obscureText: true,txtController: passwordController,),
+              TextFieldContainer(hintText: "Password", icon: Icons.lock_outline_rounded,onChanged: (value){},obscureText: true,txtController: passwordController,),
               SizedBox(height: size.height * 0.02),
               RoundedButton(text: "LOGIN", press: () async { await loginPress(context);}),
               SizedBox(height: size.height * 0.01,),
@@ -58,6 +57,7 @@ class _LoginState extends State<Login> {
   //GET USER METHOD
   Future<void> getUser()async{
     loggedUser = await APIService.Login(false,null);
+    print("logg: "+ loggedUser!.userId.toString());
   }
 
   //SHOW DIALOG Widget
@@ -96,7 +96,6 @@ class _LoginState extends State<Login> {
 
     if(loggedUser!=null){
       if(loggedUser!.userTypeId==2){
-        await getUserID(usernameController.text);
         APIService.usersData=loggedUser;
 
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
@@ -117,6 +116,5 @@ class _LoginState extends State<Login> {
     queryParams = {'User': username};
   }
   var result1 = await APIService.Get('User',queryParams);
-  APIService.userID= result1!.map((i) => Users.fromJson(i)).toList().first.userId;
 }
 

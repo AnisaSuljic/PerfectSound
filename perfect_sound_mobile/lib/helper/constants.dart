@@ -17,7 +17,7 @@ String dateFormatConverter(DateTime? date){
 }
 
 String nameFormat(String? firstName, String? lastName){
-  return firstName !=null && lastName!=null?firstName + " "+ lastName:'Unknown performer';
+  return firstName !=null && lastName!=null?firstName + " "+ lastName:'More than one performer';
 }
 
 String timeFormat(String? time){

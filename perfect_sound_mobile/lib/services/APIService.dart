@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:perfect_sound_mobile/models/User/Users.dart';
 
 class APIService{
   static String? username;
   static String? password;
-  static int? userID;
   static Users? usersData;
 
 

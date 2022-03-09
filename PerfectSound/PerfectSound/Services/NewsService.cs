@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using PerfectSound.Interfaces;
 using PerfectSound.Model.Model;
 using PerfectSound.Model.Requests.News;
 
 namespace PerfectSound.Services
 {
-    public class NewsService : BaseCRUDService<News, NewsSearchRequest, NewsUpsertRequest, NewsUpsertRequest, Database.News>
+    public class NewsService : BaseCRUDService<News, NewsSearchRequest, NewsUpsertRequest, NewsUpsertRequest, Database.News>, INewsService
     {
         public NewsService(Database.PerfectSoundContext context, IMapper mapper) : base(context, mapper)
         {
@@ -28,6 +29,13 @@ namespace PerfectSound.Services
                 x.PublicationDate.Value.Month==search.PublicationDate.Value.Month && x.PublicationDate.Value.Day==search.PublicationDate.Value.Day);
             }
             
+            return _mapper.Map<List<News>>(_searchSet.ToList());
+        }
+
+        public List<News> GetLast3()
+        {
+            var _searchSet = _context.News.Take(3).AsQueryable();
+
             return _mapper.Map<List<News>>(_searchSet.ToList());
         }
     }

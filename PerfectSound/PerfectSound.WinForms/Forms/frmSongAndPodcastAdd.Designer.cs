@@ -256,7 +256,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnSeasonEpisodeSetting.BackColor = System.Drawing.Color.SlateBlue;
             this.btnSeasonEpisodeSetting.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnSeasonEpisodeSetting.Location = new System.Drawing.Point(745, 407);
+            this.btnSeasonEpisodeSetting.Location = new System.Drawing.Point(745, 395);
             this.btnSeasonEpisodeSetting.Name = "btnSeasonEpisodeSetting";
             this.btnSeasonEpisodeSetting.Size = new System.Drawing.Size(166, 35);
             this.btnSeasonEpisodeSetting.TabIndex = 22;
@@ -268,7 +268,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             this.btnArtists.BackColor = System.Drawing.Color.SlateBlue;
             this.btnArtists.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnArtists.Location = new System.Drawing.Point(745, 448);
+            this.btnArtists.Location = new System.Drawing.Point(745, 443);
             this.btnArtists.Name = "btnArtists";
             this.btnArtists.Size = new System.Drawing.Size(166, 35);
             this.btnArtists.TabIndex = 23;

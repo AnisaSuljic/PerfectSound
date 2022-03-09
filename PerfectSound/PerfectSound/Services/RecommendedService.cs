@@ -144,7 +144,7 @@ namespace PerfectSound.Services
                 ratingsOther.Clear();
             }
 
-            return recomendedSaps.Take(6).ToList();
+            return recomendedSaps.ToList();
         }
 
         private double GetSimilarity(List<Rating> ratings1, List<Rating> ratings2)

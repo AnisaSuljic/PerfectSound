@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/helper/constants.dart';
 import 'package:perfect_sound_mobile/models/Artists.dart';
 import 'package:perfect_sound_mobile/models/SAP.dart';
-import 'package:perfect_sound_mobile/models/SongAndPodcastPerson.dart';
 import 'package:perfect_sound_mobile/pages/SongAndPodcasts/SongAndPodcastDetails.dart';
 import 'package:perfect_sound_mobile/services/APIService.dart';
 
@@ -20,21 +18,7 @@ class ArtistDetails extends StatefulWidget {
 
 class _ArtistDetailsState extends State<ArtistDetails> {
   List<SAP?> listSap=[];
-  List<String> listSap1=['No song and/or podcasts yet'];
-
-  Future<void> fetchData() async {
-    listSap=await GetSongAndPodcastPerson(this.widget.artists.personId);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchData()
-    .then((result) {
-    setState(() {});
-    });
-  }
-
+  bool isDesc=true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -163,7 +147,8 @@ class _ArtistDetailsState extends State<ArtistDetails> {
                                 IconButton(
                                   onPressed: () {
                                    setState(() {
-                                      sortUp();
+                                     this.isDesc=false;
+                                      //sortUp();
                                     });
                                   },
                                   icon:Icon(Icons.arrow_upward),
@@ -172,7 +157,8 @@ class _ArtistDetailsState extends State<ArtistDetails> {
                                 IconButton(
                                   onPressed: () {
                                     setState(() {
-                                      sortDown();
+                                      this.isDesc=true;
+                                      //sortDown();
                                     });
                                   },
                                   icon:Icon(Icons.arrow_downward),
@@ -183,13 +169,7 @@ class _ArtistDetailsState extends State<ArtistDetails> {
                           ],
                         ),
                       ),
-                      ListView(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        children:
-                            listSap.length==0?listSap1.map((e) => Center(child: Text(e))).toList():
-                        listSap.map((e) => SongAndPodcastPersonListWidget(e)).toList(),
-                      )
+                      SAPlistWidget()
                   ]
                 )
             )
@@ -204,27 +184,62 @@ class _ArtistDetailsState extends State<ArtistDetails> {
         .compareTo(a!.releaseDate as DateTime));
   }
 
-  Widget SongAndPodcastPersonListWidget(SAP? e,) {
-    if(e==null)
-      return Text("No news yet");
+  Widget SAPlistWidget() {
+    return FutureBuilder<List<SAP?>>(
+      future: GetSongAndPodcastPerson(this.widget.artists.personId),
+      builder: (BuildContext context, AsyncSnapshot<List<SAP?>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(color: PrimaryColor,),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('${snapshot.error}'),
+          );
+        } else {
+          listSap=snapshot.data!;
+          this.isDesc?sortDown():sortUp();
+          if(listSap.length==0)
+            return Center(child: Text('No song and/or podcasts yet'));
+          return ListView(
+          physics: ClampingScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          children: listSap.map((e) => SongAndPodcastPersonListWidget(e!)).toList(),
+          );
+        }
+      },
+    );
+  }
+
+  Widget SongAndPodcastPersonListWidget(SAP e,) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: TextButton(
-          onPressed: (){
-            Navigator.push(
-              context, MaterialPageRoute(builder: (context) =>
-                SongAndPodcastDetails(songAndPodcast: e,)),
-            );
-          },
-          child: Container(
-            height: 80,
+      child: TextButton(
+        onPressed: (){
+          Navigator.push(
+            context, MaterialPageRoute(builder: (context) =>
+              SongAndPodcastDetails(songAndPodcast: e,)),
+          );
+        },
+        child: Container(
+          height: 80,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                image: MemoryImage(e.poster as Uint8List),
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
+              )
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(e.title.toString(),
-                    style:TextStyle(color: PrimaryColor, fontSize: 16)),
-                Text(dateFormatConverter(e.releaseDate),style:TextStyle(color: PrimaryColor,)),
+                Text(e.title.toString(), style: TextStyle(color: Colors.black,
+                    fontSize: 16, fontWeight: FontWeight.bold,
+                    backgroundColor: Colors.white.withOpacity(0.8))),
+                Text(dateFormatConverter(e.releaseDate), style: TextStyle(color: Colors.black,
+                    backgroundColor: Colors.white.withOpacity(0.8))),
               ],
             ),
           ),
@@ -233,18 +248,12 @@ class _ArtistDetailsState extends State<ArtistDetails> {
     );
   }
 
-  Future<List<SAP?>> GetSongAndPodcastPerson(
-      int? personId) async {
+  Future<List<SAP>> GetSongAndPodcastPerson(int? personId) async {
     Map<String, String>? querryParams;
     if (personId != null) {
-      querryParams = {'personId': personId.toString()};
+      querryParams = {'ArtistId': personId.toString()};
     }
-    var SongAndPodcastPersonList =
-    await APIService.Get('SongAndPodcastPerson', querryParams);
-
-    List<SAP?> x = SongAndPodcastPersonList!
-        .map((i) => SongAndPodcastPerson.fromJson(i).songAndPodcast)
-        .toList();
-    return x;
+    var x=await APIService.Get('SongAndPodcast', querryParams);
+    return x!.map((i) => SAP.fromJson(i)).toList();
   }
 }

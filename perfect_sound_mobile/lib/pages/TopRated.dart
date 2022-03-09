@@ -47,7 +47,7 @@ Widget filterWidget() {
       builder: (BuildContext context, AsyncSnapshot<List<Genre>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Text('Loading...'),
+            child: CircularProgressIndicator(color: PrimaryColor,),
           );
         } else if (snapshot.hasError) {
           return Center(
@@ -111,7 +111,7 @@ Widget filterWidget() {
           AsyncSnapshot<List<SAP>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Text('Loading...'),
+            child: CircularProgressIndicator(color: PrimaryColor,),
           );
         } else if (snapshot.hasError) {
           return Center(
@@ -121,6 +121,7 @@ Widget filterWidget() {
           if(snapshot.data!.length==0)
             return Text("No content yet");
           return ListView(
+            physics: ClampingScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             children: snapshot.data!

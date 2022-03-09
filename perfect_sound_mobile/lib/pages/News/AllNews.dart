@@ -113,7 +113,7 @@ class _AllNewsState extends State<AllNews> {
         builder: (BuildContext context, AsyncSnapshot<List<News>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Text('Loading...'),
+            child: CircularProgressIndicator(color: PrimaryColor,),
           );
         } else if (snapshot.hasError) {
           return Center(
@@ -123,6 +123,7 @@ class _AllNewsState extends State<AllNews> {
           if(snapshot.data!.length==0)
             return Text("No news yet");
           return ListView(
+            physics: ClampingScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             children: snapshot.data!.map((e) => NewsWidget(e)).toList(),

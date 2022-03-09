@@ -20,6 +20,7 @@ namespace PerfectSound.Services
                 .Include(x=>x.Role)
                 .Include(x => x.Person).ThenInclude(x=>x.Gender)
                 .Include(x => x.SongAndPodcast).ThenInclude(x=>x.ProductionCompany)
+                .Include(x => x.SongAndPodcast).ThenInclude(x => x.Ratings)
                 .AsQueryable();
 
             if (search?.PersonId!=null && search.PersonId != 0)

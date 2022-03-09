@@ -160,7 +160,8 @@ class _UserProfileState extends State<UserProfile> {
 
   //PUT USER METHOD
   Future<void> PutUser(UserUpsertRequest request) async {
-    var x=await APIService.Put("User",APIService.userID, json.encode(updateData.toJson()));
+    //var x=await APIService.Put("User",APIService.userID, json.encode(updateData.toJson()));
+    var x=await APIService.Put("User",APIService.usersData!.userId, json.encode(updateData.toJson()));
     usersData=Users.fromJson(x);
   }
 }

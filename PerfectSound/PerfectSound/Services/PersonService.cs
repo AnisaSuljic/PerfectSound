@@ -6,10 +6,11 @@ using PerfectSound.Model.Requests.Person;
 using PerfectSound.Model.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using PerfectSound.Interfaces;
 
 namespace PerfectSound.Services
 {
-    public class PersonService : BaseCRUDService<Person, PersonSearchRequest, PersonUpsertRequest, PersonUpsertRequest, Database.Person>
+    public class PersonService : BaseCRUDService<Person, PersonSearchRequest, PersonUpsertRequest, PersonUpsertRequest, Database.Person>,IArtistsService
     {
         public PersonService(Database.PerfectSoundContext context, IMapper mapper) : base(context, mapper)
         {
@@ -43,5 +44,11 @@ namespace PerfectSound.Services
             return _mapper.Map<Person>(entity);
         }
 
+        public List<Person> GetLast3()
+        {
+            var _searchSet = _context.People.Include(x => x.Gender).Take(3).AsQueryable();
+            return _mapper.Map<List<Person>>(_searchSet.ToList());
+
+        }
     }
 }

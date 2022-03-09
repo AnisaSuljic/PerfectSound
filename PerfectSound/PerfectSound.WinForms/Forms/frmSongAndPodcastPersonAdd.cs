@@ -207,9 +207,18 @@ namespace PerfectSound.WinForms.Forms
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd(_sap);
-            frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;
-            frmAddSeasonEpisode.Show();
+            if (_sap.IsPodcast == true)
+            {
+                frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd(_sap);
+                frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;
+                frmAddSeasonEpisode.Show();
+            }
+            else
+            {
+                frmSongAndPodcastAdd frmsapadd = new frmSongAndPodcastAdd(_sap);
+                frmsapadd.MdiParent = frmHome.ActiveForm;
+                frmsapadd.Show();
+            }
         }
 
         private void btnFinish_Click(object sender, EventArgs e)

@@ -39,7 +39,7 @@ class AllSongsAndPodcasts extends StatelessWidget {
           AsyncSnapshot<List<SAP>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Text('Loading...'),
+            child: CircularProgressIndicator(color: PrimaryColor,),
           );
         } else if (snapshot.hasError) {
           return Center(
@@ -49,6 +49,7 @@ class AllSongsAndPodcasts extends StatelessWidget {
           if(snapshot.data!.length==0)
             return Text("No content");
           return ListView(
+            physics: ClampingScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             children: snapshot.data!

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PerfectSound.Model.Requests.Person;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,7 +20,6 @@ namespace PerfectSound.Model.Model
 
 
         public Gender Gender { get; set; }
-
 
     }
 }

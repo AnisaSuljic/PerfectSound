@@ -47,7 +47,7 @@ class AllArtists extends StatelessWidget {
           AsyncSnapshot<List<Artists>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Text('Loading...'),
+            child: CircularProgressIndicator(color: PrimaryColor,),
           );
         } else if (snapshot.hasError) {
           return Center(
@@ -55,6 +55,7 @@ class AllArtists extends StatelessWidget {
           );
         } else {
           return ListView(
+            physics: ClampingScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             children: snapshot.data!

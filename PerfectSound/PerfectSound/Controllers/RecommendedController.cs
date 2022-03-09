@@ -22,6 +22,7 @@ namespace PerfectSound.Controllers
             _service = service;
             _mapper = mapper;
         }
+
         [AllowAnonymous]
         [HttpGet("Similar/{id}")]
         public List<Model.Model.SongAndPodcast> LoadSimilar(int id)
@@ -29,11 +30,6 @@ namespace PerfectSound.Controllers
             return _mapper.Map< List < Model.Model.SongAndPodcast >>( _service.LoadSimilar(id));
 
         }
-        /*[AllowAnonymous]
-        [HttpGet("Recommend/{id}")]
-        public List<Model.Model.SongAndPodcast> Recommend(int id)
-        {
-            return _service.Recommend(id);
-        }*/
+        
     }
 }

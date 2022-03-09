@@ -39,8 +39,18 @@ class _HomeState extends State<Home> {
               Expanded(
                 flex: 1,
                   child: Container(
-                    width: size.width,
-                    child: quoteWidget(),
+                      margin: EdgeInsets.all(10),
+                      child:
+                      Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10,0,10,0),
+                              child:Align(alignment: Alignment.centerLeft, child: Text('Quote of the day : ', style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
+                            ),
+                            SizedBox(height: 5,),
+                            quoteWidget()
+                          ]
+                      )
                   )
               ),
               LineSeparator(height: 3,width: size.width/2),
@@ -93,44 +103,16 @@ Future<Quote> getQuote() async {
 
 //METHOD GET TOP 3 NEWS
 Future<List<News>> get3News() async {
-  var newsList = await APIService.Get('News',null);
+  var newsList = await APIService.Get('News/Last3',null);
   List<News> x=newsList!.map((i) => News.fromJson(i)).toList();
-  List<News> top3=[];
-
-  if(x.length>3){
-    for(int i =x.length-1;i>0;i--){
-      if(top3.length==3)
-        return top3;
-      else
-        top3.add(x[i]);
-    }
-  }
-  else{
-    top3=x;
-  }
-
-  return top3;
+  return x;
 }
 
 //METHOD GET TOP 3 SAP
 Future<List<SAP>> get3SaP() async {
-  var songAndPodcastList = await APIService.Get('SongAndPodcast',null);
+  var songAndPodcastList = await APIService.Get('SongAndPodcast/Last3',null);
   List<SAP> x=songAndPodcastList!.map((i) => SAP.fromJson(i)).toList();
-  List<SAP> top3=<SAP>[];
-
-  if(x.length>3){
-    for(int i =x.length-1;i>0;i--){
-      if(top3.length==3)
-        return top3;
-      else{
-        top3.add(x[i]);
-      }
-    }
-  }
-  else{
-    top3=x;
-  }
-  return top3;
+  return x;
 
 }
 
@@ -138,20 +120,21 @@ Future<List<SAP>> get3SaP() async {
 //UI
 Widget quoteOfTheDay(Quote? x,BuildContext context){
   return Padding(
-    padding: const EdgeInsets.fromLTRB(20,10,20,0),
+    padding: const EdgeInsets.only(right: 10,left: 10),
     child: Column(
       children: [
-        Align(alignment: Alignment.centerLeft, child: Text('Quote of the day : ', style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
-        SizedBox(height: 8,),
         Text(x!.quoteText.toString(),style: TextStyle(fontSize: 14)),
-        TextButton(
-        onPressed: () async{
-          Navigator.push(
-            context, MaterialPageRoute(builder: (context) =>
-              SongAndPodcastDetails(songAndPodcast: x.songAndPodcast as SAP)),
-          );
-        }
-        ,child: Align(alignment: Alignment.centerRight, child: Text(x.songAndPodcast!.title.toString()+'-'+x.artistName.toString(), style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: PrimaryColor))))
+        SizedBox(
+          height: 30,
+          child: TextButton(
+          onPressed: () async{
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) =>
+                SongAndPodcastDetails(songAndPodcast: x.songAndPodcast as SAP)),
+            );
+          }
+          ,child: Text(x.songAndPodcast!.title.toString()+'-'+x.artistName.toString(), style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: PrimaryColor))),
+        )
       ],
     ),
   );

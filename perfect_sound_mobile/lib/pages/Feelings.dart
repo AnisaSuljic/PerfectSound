@@ -18,11 +18,14 @@ class Feelings extends StatefulWidget {
 }
 
 enum feelingList {
-  Happy,
+  Relaxed ,
+  Angry,
   Sad,
-  Calm,
-  Energetic,
-  Depression
+  Mellow,
+  Gleeful,
+  Frantic,
+  Depression,
+  Happy
 }
 
 class _FeelingsState extends State<Feelings> {

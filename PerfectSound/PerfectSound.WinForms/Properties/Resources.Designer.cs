@@ -61,7 +61,7 @@ namespace PerfectSound.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8000/api/.
+        ///   Looks up a localized string similar to http://localhost:5010/api/.
         /// </summary>
         internal static string ApiUrl {
             get {

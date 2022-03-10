@@ -57,7 +57,6 @@ class _LoginState extends State<Login> {
   //GET USER METHOD
   Future<void> getUser()async{
     loggedUser = await APIService.Login(false,null);
-    print("logg: "+ loggedUser!.userId.toString());
   }
 
   //SHOW DIALOG Widget

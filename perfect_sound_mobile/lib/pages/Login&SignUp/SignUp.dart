@@ -58,7 +58,7 @@ class _SignUpState extends State<SignUp> {
                           FormFieldBuild(label: "Your username", obscure: false,txtController: usernameController,msgRequiredField: msgRequiredField,msgFormat: null,regex: null,),
                           FormFieldBuild(label: "Email", obscure: false,txtController: emailController,msgRequiredField: msgRequiredField,msgFormat: msgEmailFormatField,regex: emailRegex,),
                           FormFieldBuild(label: "Password", obscure: true,txtController: passwordController,msgRequiredField: msgRequiredField,msgFormat: null,regex: null,),
-                          FormFieldBuild(label: "Confirm password", obscure: true,txtController: confirmPasswordController,msgRequiredField: msgRequiredField,msgFormat: null,regex: null,),
+                          FormFieldBuild(label: "Confirm password", obscure: true,txtController: confirmPasswordController,msgRequiredField: msgRequiredField,msgFormat: null,regex: null,txtController2: passwordController,),
                           FormFieldBuild(label: "Phone", obscure: false,txtController: phoneController,msgRequiredField: msgRequiredField,msgFormat: msgPhoneFormatField,regex: phoneRegex,),
                         ],
                       ),

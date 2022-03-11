@@ -292,6 +292,8 @@ class _FeelingsState extends State<Feelings> {
         'year':yearValueChoose==null?'0':yearValueChoose.toString()};
     var x= await APIService.Get('SongAndPodcast',queryParams);
     searchResponse=x!.map((i) => SAP.fromJson(i)).toList();
+    searchResponse.sort((a,b)=>b.ratingValue!.compareTo(a.ratingValue!.round()));
+
     return searchResponse;
   }
 }
@@ -304,6 +306,7 @@ Future<List<Artists>> GetArtists() async {
 Future<List<int>> GetAllYears() async {
   var SaPList = await APIService.Get('SongAndPodcast', null);
     var x= SaPList!.map((i) => SAP.fromJson(i).releaseDate!.year).toList();
+    x.sort();
     x=x.toSet().toList();
     return x;
 }

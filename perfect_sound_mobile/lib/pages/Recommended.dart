@@ -104,6 +104,7 @@ class _RecommendedState extends State<Recommended> {
 Future<List<SAP>> getRecommendedSongAndPodcast() async {
   var x= await APIService.Get('Recommended/Similar/${APIService.usersData!.userId}',null);
   var y= x!.map((e) => SAP.fromJson(e)).toList();
+  y.sort((a,b)=>b.ratingValue!.compareTo(a.ratingValue!.round()));
 
   return y;
 }

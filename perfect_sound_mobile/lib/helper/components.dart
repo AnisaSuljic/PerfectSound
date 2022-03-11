@@ -139,6 +139,7 @@ class TextFormFieldContainer extends StatelessWidget {
 
 class FormFieldBuild extends StatelessWidget {
   final TextEditingController txtController;
+  final TextEditingController? txtController2;
   final String msgRequiredField;
   final String label;
   final String? msgFormat;
@@ -148,7 +149,7 @@ class FormFieldBuild extends StatelessWidget {
   const FormFieldBuild({
     Key? key,
     required this.txtController,
-    required this.msgRequiredField, required this.label, required this.obscure, this.msgFormat, this.regex,
+    required this.msgRequiredField, required this.label, required this.obscure, this.msgFormat, this.regex, this.txtController2,
   }) : super(key: key);
 
   @override
@@ -163,6 +164,13 @@ class FormFieldBuild extends StatelessWidget {
         if(regex!=null){
           if(!RegExp(regex!).hasMatch(value))
             return msgFormat;
+        }
+        if(label=="Confirm password"){
+          print("x");
+          if(txtController2!=null){
+            if(txtController.text!=txtController2!.text)
+              return "Passwords do not match";
+          }
         }
         return null;
       },

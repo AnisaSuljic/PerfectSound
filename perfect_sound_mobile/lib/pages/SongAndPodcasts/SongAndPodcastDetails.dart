@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:perfect_sound_mobile/helper/components.dart';
 import 'package:perfect_sound_mobile/helper/constants.dart';
@@ -302,28 +303,27 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
       Card(
         child: Container(
           height: 80,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    Flexible(
-                      child: Text("By : " + e.user!.userName.toString(),
-                          style: TextStyle(color: PrimaryColor)),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Flexible(
-                      child: Text(e.content as String,
-                          style: TextStyle(color: Colors.black87)),
-                    ),
-                  ],
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("By : " + e.user!.userName.toString(),
+                      style: TextStyle(color: PrimaryColor)),
                 ),
-              )
-            ],
+                SizedBox(
+                  height: 10,
+                ),
+                Flexible(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(e.content as String,
+                      style: TextStyle(color: Colors.black87),maxLines: 2,),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -397,6 +397,9 @@ class _SongAndPodcastDetailsState extends State<SongAndPodcastDetails> {
                   AlertDialog(
                     title: Text("Your comment: "),
                     content: TextField(
+                        inputFormatters: [
+                          new LengthLimitingTextInputFormatter(70),
+                        ],
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Enter a comment',

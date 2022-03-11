@@ -11,7 +11,7 @@ class APIService{
 
 
   String? route;
-  //static String? urlApi='http://192.168.0.11:45464/api';
+  //static String? urlApi='http://192.168.0.11:45457/api/';
   static String? urlApi='http://10.0.2.2:5010/api/';
 
   APIService({this.route });

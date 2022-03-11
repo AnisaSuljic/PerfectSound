@@ -11,6 +11,11 @@
 #### Mobile user: 
       username: mobile
       password: test
+      
+### Flutter
+      flutter pub get
+      flutter emulators --launch Nexus_6_API_30_2
+      flutter run
    
 
 ## Documentation:

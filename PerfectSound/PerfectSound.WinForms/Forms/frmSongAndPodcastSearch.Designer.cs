@@ -132,6 +132,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             // cbGenreSearch
             // 
+            this.cbGenreSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGenreSearch.FormattingEnabled = true;
             this.cbGenreSearch.Location = new System.Drawing.Point(312, 97);
             this.cbGenreSearch.Name = "cbGenreSearch";

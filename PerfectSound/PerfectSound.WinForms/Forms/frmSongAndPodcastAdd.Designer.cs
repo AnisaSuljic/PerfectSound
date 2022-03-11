@@ -200,6 +200,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             // cbProdCompany
             // 
+            this.cbProdCompany.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProdCompany.FormattingEnabled = true;
             this.cbProdCompany.Location = new System.Drawing.Point(263, 265);
             this.cbProdCompany.Name = "cbProdCompany";

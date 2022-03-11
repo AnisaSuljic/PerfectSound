@@ -69,6 +69,30 @@ namespace PerfectSound.WinForms.Helper
             
 
         }
+        public static bool CheckType(Control control, ErrorProvider err, string message = txtfield)
+        {
+            string numCheck = "^[0-9]";
+            if (!Regex.IsMatch(control.Text, numCheck))
+            {
+                err.SetError(control, message);
+                return false;
+            }
+            err.Clear();
+            return true;
+        }
+
+        public static bool PhoneCheck(Control control, ErrorProvider err, string message = txtfield)
+        {
+            string phoneCheck = "^(?:[+0]9)?[0-9]{9,10}$";
+            if (!Regex.IsMatch(control.Text, phoneCheck))
+            {
+                err.SetError(control, message);
+                return false;
+            }
+            err.Clear();
+            return true;
+        }
+
         public static bool CheckIfPassEqual(Control control, Control control1, ErrorProvider err, string message = txtfield)
         {
             if (control1.Text == control.Text)

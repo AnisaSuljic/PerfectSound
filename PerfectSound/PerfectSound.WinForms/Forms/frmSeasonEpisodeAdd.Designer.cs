@@ -150,6 +150,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             // cbSeason
             // 
+            this.cbSeason.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSeason.FormattingEnabled = true;
             this.cbSeason.Location = new System.Drawing.Point(39, 94);
             this.cbSeason.Name = "cbSeason";
@@ -274,6 +275,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             // cbSeasonSearch
             // 
+            this.cbSeasonSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSeasonSearch.FormattingEnabled = true;
             this.cbSeasonSearch.Location = new System.Drawing.Point(37, 78);
             this.cbSeasonSearch.Name = "cbSeasonSearch";

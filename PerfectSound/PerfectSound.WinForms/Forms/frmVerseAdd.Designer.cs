@@ -69,6 +69,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             // comboBoxSAPforVerse
             // 
+            this.comboBoxSAPforVerse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSAPforVerse.FormattingEnabled = true;
             this.comboBoxSAPforVerse.Location = new System.Drawing.Point(12, 147);
             this.comboBoxSAPforVerse.Name = "comboBoxSAPforVerse";

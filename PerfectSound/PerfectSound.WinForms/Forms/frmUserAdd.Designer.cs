@@ -185,6 +185,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             // cbUserType
             // 
+            this.cbUserType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbUserType.FormattingEnabled = true;
             this.cbUserType.Location = new System.Drawing.Point(323, 470);
             this.cbUserType.Name = "cbUserType";

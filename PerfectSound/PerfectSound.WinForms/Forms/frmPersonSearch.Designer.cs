@@ -184,6 +184,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             // cbGenderSearch
             // 
+            this.cbGenderSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGenderSearch.FormattingEnabled = true;
             this.cbGenderSearch.Location = new System.Drawing.Point(312, 154);
             this.cbGenderSearch.Name = "cbGenderSearch";

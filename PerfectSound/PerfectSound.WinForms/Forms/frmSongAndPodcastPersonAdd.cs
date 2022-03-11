@@ -33,7 +33,8 @@ namespace PerfectSound.WinForms.Forms
             dgwAllArtists.AutoGenerateColumns = false;
             dgwArtists.AutoGenerateColumns = false;
             _sap = sap;
-            SongPodcastID = _sap.SongAndPodcastId;
+            if(_sap!=null)
+                SongPodcastID = _sap.SongAndPodcastId;
         }
 
         private async void frmSongAndPodcastPersonAdd_Load(object sender, EventArgs e)

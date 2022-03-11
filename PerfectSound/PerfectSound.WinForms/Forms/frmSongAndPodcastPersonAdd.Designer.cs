@@ -167,6 +167,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             // cbRoles
             // 
+            this.cbRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRoles.FormattingEnabled = true;
             this.cbRoles.Location = new System.Drawing.Point(37, 510);
             this.cbRoles.Name = "cbRoles";
@@ -245,7 +246,6 @@ namespace PerfectSound.WinForms.Forms
             this.dgwAllArtists.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwAllArtists.Size = new System.Drawing.Size(417, 420);
             this.dgwAllArtists.TabIndex = 46;
-            
             // 
             // ArtistsName
             // 
@@ -291,6 +291,7 @@ namespace PerfectSound.WinForms.Forms
             // 
             // cbSearchRoles
             // 
+            this.cbSearchRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSearchRoles.FormattingEnabled = true;
             this.cbSearchRoles.Location = new System.Drawing.Point(255, 60);
             this.cbSearchRoles.Name = "cbSearchRoles";

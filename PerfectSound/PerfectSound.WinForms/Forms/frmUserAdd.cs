@@ -148,7 +148,9 @@ namespace PerfectSound.WinForms.Forms
                 !ErrorHandler.RequiredFiled(txtUsername, errorUser) ||
                 !ErrorHandler.RequiredFiled(txtEmail, errorUser) ||
                 !ErrorHandler.CheckFormatOfEmail(txtEmail, errorUser, ErrorHandler.FormatChecker) ||
-                !ErrorHandler.RequiredFiled(txtPhone, errorUser))
+                !ErrorHandler.RequiredFiled(txtPhone, errorUser) || 
+                !ErrorHandler.PhoneCheck(txtPhone, errorUser, ErrorHandler.FormatChecker)
+                )
                 return false;
             if (txtPassword.Text != "")
             {

@@ -186,10 +186,19 @@ namespace PerfectSound.WinForms.Forms
                                 var a = all.Last();
 
                                 SongAndPodcast obj = await _SongAndPodcastService.GetById<SongAndPodcast>(a.SongAndPodcastId);
+                                if ((bool)obj.IsPodcast)
+                                { 
+                                    frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd(obj);
+                                    frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;
+                                    frmAddSeasonEpisode.Show();
+                                }
+                                else
+                                {
+                                    frmSongAndPodcastPersonAdd frmpersonsap = new frmSongAndPodcastPersonAdd(obj);
+                                    frmpersonsap.MdiParent = frmHome.ActiveForm;
+                                    frmpersonsap.Show();
+                                }
 
-                                frmSeasonEpisodeAdd frmAddSeasonEpisode = new frmSeasonEpisodeAdd(obj);
-                                frmAddSeasonEpisode.MdiParent = frmHome.ActiveForm;
-                                frmAddSeasonEpisode.Show();
                             }
                             catch
                             {
@@ -343,12 +352,7 @@ namespace PerfectSound.WinForms.Forms
                         !ErrorHandler.RequiredFiled(richtxtSong, ErrorSoundAndPodcastAdd))
                         return false;
                 }
-                GenreListOfID = GenreListCount().Count;
-                if (GenreListOfID == 0)
-                {
-                    if (!ErrorHandler.RequiredFiled(clbGenre, ErrorSoundAndPodcastAdd, ErrorHandler.CheckedListBoxfield))
-                        return false;
-                }
+                
             }
             else
             {
@@ -356,6 +360,14 @@ namespace PerfectSound.WinForms.Forms
                 !ErrorHandler.RequiredFiled(txtTitle, ErrorSoundAndPodcastAdd))
                     return false;
             }
+            GenreListOfID = GenreListCount().Count;
+            if (GenreListOfID == 0)
+            {
+                if (!ErrorHandler.RequiredFiled(clbGenre, ErrorSoundAndPodcastAdd, ErrorHandler.CheckedListBoxfield))
+                    return false;
+            }
+            if (!ErrorHandler.CheckType(txtBudget, ErrorSoundAndPodcastAdd, "Only numbers are allowed"))
+                return false;
             return true;
             
         }

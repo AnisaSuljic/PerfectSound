@@ -43,6 +43,18 @@ class _PodcastMoreDetailsState extends State<PodcastMoreDetails> {
             child: Text('${snapshot.error}'),
           );
         } else {
+          if(snapshot.data!.length==0)
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text("No season yet"),
+                    Text("Be patient, they are coming soon...")
+                  ],
+                ),
+              ),
+            );
           return ListView(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,

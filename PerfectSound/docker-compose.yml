@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - ConnectionStrings:DefaultConnection=Server=perfectsound-sql,1433;Database=perfectsoundDb3;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+      - ConnectionStrings:DefaultConnection=Server=perfectsound-sql,1433;Database=perfectsoundDb;User=sa;Password=QWElkj132!;ConnectRetryCount=0
     ports:
       - 5010:5010
     networks:

@@ -840,6 +840,42 @@ namespace PerfectSound.Database
                     PodcastSeasonId = 4,
                     SeasonName = "Season pilot 0",
                     SongAndPodcastId = 11
+                },
+                new PodcastSeason()
+                {
+                    PodcastSeasonId = 5,
+                    SeasonName = "Season 01",
+                    SongAndPodcastId = 8
+                },
+                new PodcastSeason()
+                {
+                    PodcastSeasonId = 6,
+                    SeasonName = "Season 02",
+                    SongAndPodcastId = 8
+                },
+                new PodcastSeason()
+                {
+                    PodcastSeasonId = 7,
+                    SeasonName = "AllSongsConsidered Season1",
+                    SongAndPodcastId = 9
+                },
+                new PodcastSeason()
+                {
+                    PodcastSeasonId = 8,
+                    SeasonName = "Song Travel Express S1",
+                    SongAndPodcastId = 10
+                },
+                new PodcastSeason()
+                {
+                    PodcastSeasonId = 9,
+                    SeasonName = "MountainStage-S1",
+                    SongAndPodcastId = 11
+                },
+                new PodcastSeason()
+                {
+                    PodcastSeasonId = 10,
+                    SeasonName = "MountainStage-S2",
+                    SongAndPodcastId = 11
                 }
              );
 
@@ -886,6 +922,78 @@ namespace PerfectSound.Database
                     EpisodeName = "Episode 1",
                     EpisodeNumber = 2,
                     PodcastSeasonId = 4
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 7,
+                    EpisodeName = "RollingStone E1",
+                    EpisodeNumber = 1,
+                    PodcastSeasonId = 5
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 8,
+                    EpisodeName = "RollingStone E2",
+                    EpisodeNumber = 2,
+                    PodcastSeasonId = 5
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 9,
+                    EpisodeName = "RollingStone E3",
+                    EpisodeNumber = 3,
+                    PodcastSeasonId = 5
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 10,
+                    EpisodeName = "AllSongs Episode 1",
+                    EpisodeNumber = 1,
+                    PodcastSeasonId = 7
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 11,
+                    EpisodeName = "AllSongs Episode 2",
+                    EpisodeNumber = 2,
+                    PodcastSeasonId = 7
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 12,
+                    EpisodeName = "Travels e1",
+                    EpisodeNumber = 1,
+                    PodcastSeasonId = 8
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 13,
+                    EpisodeName = "Travels e2",
+                    EpisodeNumber = 2,
+                    PodcastSeasonId = 8
+                }
+
+                ,
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 14,
+                    EpisodeName = "MountainStage_Ep1",
+                    EpisodeNumber = 1,
+                    PodcastSeasonId = 9
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 15,
+                    EpisodeName = "MountainStage_Ep2",
+                    EpisodeNumber = 2,
+                    PodcastSeasonId = 9
+                },
+                new PodcastSeasonEpisode()
+                {
+                    PodcastSeasonEpisodeId = 16,
+                    EpisodeName = "MountainStage_Ep1",
+                    EpisodeNumber = 1,
+                    PodcastSeasonId = 10
                 }
             );
 
@@ -907,7 +1015,7 @@ namespace PerfectSound.Database
                 {
                     SongAndPodcastGenreId = 3,
                     SongAndPodcastId = 2,
-                    GenreId = 5
+                    GenreId = 6
                 },
                 new SongAndPodcastGenre()
                 {
@@ -919,7 +1027,7 @@ namespace PerfectSound.Database
                 {
                     SongAndPodcastGenreId = 5,
                     SongAndPodcastId = 3,
-                    GenreId = 1
+                    GenreId = 7
                 },
                 new SongAndPodcastGenre()
                 {
@@ -961,7 +1069,7 @@ namespace PerfectSound.Database
                 {
                     SongAndPodcastGenreId = 12,
                     SongAndPodcastId = 8,
-                    GenreId = 3
+                    GenreId = 8
                 },
                 new SongAndPodcastGenre()
                 {
@@ -979,13 +1087,19 @@ namespace PerfectSound.Database
                 {
                     SongAndPodcastGenreId = 15,
                     SongAndPodcastId = 10,
-                    GenreId = 2
+                    GenreId = 6
                 },
                 new SongAndPodcastGenre()
                 {
                     SongAndPodcastGenreId = 16,
                     SongAndPodcastId = 11,
                     GenreId = 2
+                },
+                new SongAndPodcastGenre()
+                {
+                    SongAndPodcastGenreId = 17,
+                    SongAndPodcastId = 11,
+                    GenreId = 7
                 }
             );
 
